@@ -1,4 +1,4 @@
-package modul;
+package module;
 
 public class Person
 {
@@ -6,6 +6,6 @@ public class Person
 
   public static void main(String[] args)
   {
-    System.out.println("hm");
+    System.out.println("hm mmm");
   }
 }
