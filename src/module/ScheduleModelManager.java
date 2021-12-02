@@ -1,4 +1,4 @@
-package modul;
+package module;
 
 public class ScheduleModelManager
 {
