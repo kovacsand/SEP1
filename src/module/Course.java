@@ -106,6 +106,14 @@ public class Course implements Serializable
   }
 
   /**
+   * Returns the ID of the course.
+   * @return name, semester, group
+   */
+  public String getId(){
+    return name+semester+group;
+  }
+
+  /**
    * Adds the given student to the studentList of the class.
    * @param student
    */
