@@ -47,7 +47,7 @@ public class Class implements Serializable
   /**
    * Returns the student with the given id from the studentList.
    * @param id
-   * @return
+   * @return found
    */
   public Student getStudent(String id){
     Student found=null;
@@ -120,7 +120,7 @@ public class Class implements Serializable
    * Returns false if the semester of the given class does not equal to the semester of the original class.
    * Returns false if the group of the given class does not equal to the group of the original class.
    * @param obj
-   * @return
+   * @return true or false
    */
   public boolean equals(Object obj){
     if(!(obj instanceof Class)){
