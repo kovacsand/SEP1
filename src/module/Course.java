@@ -106,6 +106,14 @@ public class Course implements Serializable
   }
 
   /**
+   * Returns the ID of the course.
+   * @return name, semester, group
+   */
+  public String getId(){
+    return name+semester+group;
+  }
+
+  /**
    * Adds the given student to the studentList of the class.
    * @param student
    */
@@ -180,8 +188,9 @@ public class Course implements Serializable
   }
 
   /**
-   * Creates a new Course object.
-   * @return new Course
+   * Creates a copy object of the Course object.
+   * Creates a new object with the same values.
+   * @return new Course(name, semester, group, ects, teacher)
    */
   public Course copy(){
     return new Course(name,semester,group,ects,teacher);
