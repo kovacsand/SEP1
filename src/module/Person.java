@@ -7,5 +7,6 @@ public class Person
   public static void main(String[] args)
   {
     System.out.println("hm mmm");
+    System.out.println("uaaaaa");
   }
 }
