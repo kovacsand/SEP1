@@ -278,7 +278,7 @@ public class ScheduleModelManager
 
     for (int i = 0; i < allSessions.size(); i++)
     {
-      if(!(allSessions.getSession(i).getId.equals(session)))
+      if(!(allSessions.getSession(i).getId().equals(session)))
       {
         newList.addSession(allSessions.getSession(i));
       }
@@ -341,7 +341,7 @@ public class ScheduleModelManager
 
     try
     {
-      allClassrooms = (ClassroomList)MyFileHandler.readArrayFromBinaryFile("classrooms.bin");
+      allClassrooms = (ClassroomList)MyFileHandler.readFromBinaryFile("classrooms.bin");
     }
     catch (FileNotFoundException e)
     {
@@ -358,7 +358,47 @@ public class ScheduleModelManager
     return allClassrooms;
   }
 
+  public ClassroomList getAllClassroomsByCapacity(int capacity)
+  {
+//  !!!!come back to this later (capacity)
+    ClassroomList allClassrooms = getAllClassrooms();
+    ClassroomList newList = new ClassroomList();
 
+    for (int i = 0; i < allClassrooms.size(); i++)
+    {
+      if(allClassrooms.get(i).getCapacity() >= capacity)
+      {
+        newList.add(allClassrooms.get(i));
+      }
+    }
+    return newList;
+  }
+
+  public void removeClassroom(String name)
+  {
+    ClassroomList allClassrooms = getAllClassrooms();
+    ClassroomList newList = new ClassroomList();
+
+    for (int i = 0; i < allClassrooms.size(); i++)
+    {
+      if(!(allClassrooms.get(i).getName().equals(name)))
+      {
+        newList.add(allClassrooms.get(i));
+      }
+    }
+    try
+    {
+      MyFileHandler.writeToBinaryFile("classrooms.bin", newList);
+    }
+    catch(FileNotFoundException e)
+    {
+      System.out.println("File not found");
+    }
+    catch (IOException e)
+    {
+      System.out.println("IO Error writing to a file");
+    }
+  }
 }
 
 
