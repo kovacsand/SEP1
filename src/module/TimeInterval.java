@@ -44,8 +44,8 @@ public class TimeInterval
 
   /**
    * Compares two TimeInterval objects.
-   * @param obj the MyDate we want to compare with
-   * @return true if they are equal, false otherwise
+   * @param obj the MyDate we want to compare with.
+   * @return true if they are equal, false otherwise.
    */
   public boolean equals(Object obj)
   {
@@ -56,7 +56,7 @@ public class TimeInterval
   }
 
   /**
-   * Converts TimeInterval into a String
+   * Converts TimeInterval into a String.
    * @return the String format (example: 08:00 - 09:20, or: 16:30 - 17:45)
    */
   public String toString()
@@ -69,7 +69,7 @@ public class TimeInterval
   }
 
   /**
-   * Copies a TimeInterval object
+   * Copies a TimeInterval object.
    * @return the newly created TimeInterval object, which has the same values
    */
   public TimeInterval copy()

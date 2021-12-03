@@ -1,5 +1,12 @@
 package module;
 
+/**
+ * A class for storing data about sessions.
+ * @author Hi-Phi
+ * @version 1.0
+ */
+
+
 public class Session
 {
   private MyDate date;
