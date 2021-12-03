@@ -104,7 +104,12 @@ public class StudentList
 
   public StudentList copy()
   {
-    return new StudentList();
+    StudentList studentList=new StudentList();
+    for (int i=0;i<students.size();i++)
+    {
+      studentList.addStudent(students.get(i));
+    }
+    return studentList;
   }
 
 }

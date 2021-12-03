@@ -75,7 +75,12 @@ public class TeacherList
 
   public TeacherList copy()
   {
-    return new TeacherList();
+    TeacherList teacherList=new TeacherList();
+    for (int i=0;i<teachers.size();i++)
+    {
+      teacherList.addTeacher(teachers.get(i));
+    }
+    return teacherList;
   }
 
 
