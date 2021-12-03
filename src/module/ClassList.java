@@ -16,10 +16,10 @@ public class ClassList
 
   /**
    * Adds the class given as a parameter to the classes list.
-   * @param aClass
+   * @param Class
    */
-  public void addClass(Class aClass){
-    classes.add(aClass);
+  public void addClass(Class Class){
+    classes.add(Class);
   }
 
   /**
