@@ -83,8 +83,8 @@ public class CourseList
 
   /**
    * Displays all the data stored in the course list.
-   * Displays the semester and group of each class in the class list. !!!!!!!!!!!!!!!!!!!!
-   * @return classes.get(i).getSemester(), classes.get(i).getGroup()
+   * Displays the name,semester, group, ects and teacher of each course in the course list.
+   * @return courses.get(i).getName(), courses.get(i).getSemester(), courses.get(i).getGroup(), courses.get(i).getEcts(), courses.get(i).getTeacher("")
    */
   public String toString(){
     String str="";
@@ -99,7 +99,7 @@ public class CourseList
    * Creates a new object with the same values.
    * @return new ClassList()
    */
-  public ClassList copy(){
+  public CourseList copy(){
     return new CourseList();
   }
 
