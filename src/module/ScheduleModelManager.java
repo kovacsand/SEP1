@@ -259,19 +259,9 @@ public class ScheduleModelManager
 
   public Session getSession(String id)
   {
-    Session session = new Session();
-
     SessionList allSessions = getAllSessions();
 
-    for (int i = 0; i < allSessions.size(); i++)
-    {
-      if(allSessions.getSession(i).getId.equals(id);
-      {
-        session = allSessions.get(i);
-        break;
-      }
-    }
-    return session;
+    return allSessions.getSession(id);
   }
 
   /**
@@ -282,18 +272,12 @@ public class ScheduleModelManager
   public void removeSession(Session session)
   {
     SessionList allSessions = getAllSessions();
-    SessionList newList = new SessionList();
 
-    for (int i = 0; i < allSessions.size(); i++)
-    {
-      if(!(allSessions.getSession(i).getId().equals(session)))
-      {
-        newList.addSession(allSessions.getSession(i));
-      }
-    }
+    allSessions.removeSession(session.getId());
+
     try
     {
-      MyFileHandler.writeToBinaryFile("sessions.bin", newList);
+      MyFileHandler.writeToBinaryFile("sessions.bin", allSessions);
     }
 
     catch(FileNotFoundException e)
@@ -312,8 +296,7 @@ public class ScheduleModelManager
    */
   public void removeAllSessions(SessionList sessionList)
   {
-    SessionList allSessions = getAllSessions();
-    allSessions.remove(sessionList);
+    SessionList allSessions = new SessionList();
 
     try
     {
