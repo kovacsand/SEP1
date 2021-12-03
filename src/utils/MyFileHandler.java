@@ -20,7 +20,8 @@ public class MyFileHandler
 
   // writeToTextFile and appendToTextFile are almost identical - only the boolean in the constructor
   // of the FileOutputStream differs. So I made this private method that both methods call
-  private static void writeText(String fileName, String str, boolean append) throws FileNotFoundException
+  private static void writeText(String fileName, String str, boolean append)
+      throws FileNotFoundException
   {
     PrintWriter writeToFile = null;
 
@@ -46,14 +47,16 @@ public class MyFileHandler
   }
 
   // Appends the strings in the given array to a file with the given file name
-  public static void appendArrayToTextFile(String fileName, String[] strs) throws FileNotFoundException
+  public static void appendArrayToTextFile(String fileName, String[] strs)
+      throws FileNotFoundException
   {
     writeText(fileName, strs, true);
   }
 
   // Again, the writeArrayToTextFile and appendArrayToTextFile methods are almost identical.
   // So I made this private method that both methods call
-  private static void writeText(String fileName, String[] strs, boolean append) throws FileNotFoundException
+  private static void writeText(String fileName, String[] strs, boolean append)
+      throws FileNotFoundException
   {
     PrintWriter writeToFile = null;
 
@@ -126,7 +129,6 @@ public class MyFileHandler
     return strs.toArray(strsArray);
   }
 
-
   // Writes the given object to a file with the given file name
   public static void writeToBinaryFile(String fileName, Object obj) throws FileNotFoundException, IOException
   {
@@ -156,7 +158,8 @@ public class MyFileHandler
   }
 
   // Writes the objects in the given array to a file with the given file name
-  public static void writeArrayToBinaryFile(String fileName, Object[] objs) throws FileNotFoundException, IOException
+  public static void writeArrayToBinaryFile(String fileName, Object[] objs)
+      throws FileNotFoundException, IOException
   {
     ObjectOutputStream writeToFile = null;
 
@@ -260,8 +263,8 @@ public class MyFileHandler
           System.out.println("IO Error closing file " + fileName);
         }
       }
-    }
 
-    return objs.toArray();
+      return objs.toArray();
+    }
   }
 }
