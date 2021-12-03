@@ -31,7 +31,7 @@ public abstract class Person
   { boolean isFree=false;
     for(int i=0;i<workingHours.size();i++)
     {
-      String time=String.format("%02d%02d%4d%02d%02d",date.getDay(),date.getMonth(),date.getYear(),timeInterval.getStartTime(),timeInterval.getEndTime());
+      String time=String.format("%02d%02d%02d%04d%04d",date.getDay(),date.getMonth(),date.getYear()%100,timeInterval.getStartTime(),timeInterval.getEndTime());
       if(workingHours.get(i).equals(time))
       {
         isFree=false;
@@ -46,7 +46,7 @@ public abstract class Person
 
   public void addWorkingHours(MyDate date,TimeInterval timeInterval)
   {
-    String time=String.format("%02d%02d%4d%02d%02d",date.getDay(),date.getMonth(),date.getYear(),timeInterval.getStartTime(),timeInterval.getEndTime());
+    String time=String.format("%02d%02d%02d%04d%04d",date.getDay(),date.getMonth(),date.getYear()%100,timeInterval.getStartTime(),timeInterval.getEndTime());
     workingHours.add(time);
   }
 
@@ -54,7 +54,7 @@ public abstract class Person
   {
     for (int i=0;i<workingHours.size();i++)
     {
-      String time=String.format("%02d%02d%4d%02d%02d",date.getDay(),date.getMonth(),date.getYear(),timeInterval.getStartTime(),timeInterval.getEndTime());
+      String time=String.format("%02d%02d%02d%04d%04d",date.getDay(),date.getMonth(),date.getYear()%100,timeInterval.getStartTime(),timeInterval.getEndTime());
       if(workingHours.get(i).equals(time))
       {
         workingHours.remove(time);
