@@ -25,6 +25,7 @@ public class ScheduleModelManager
    * Method to import the student, classroom, teacher, and course data from .txt files.
    * Saves to .bin files.
    */
+
   public void importData()
   {
     StudentList students = new StudentList();
@@ -242,7 +243,9 @@ public class ScheduleModelManager
   }
 
   /**
-   * Get one session
+   * Get one specific session that matches the id (Ex: 03122110001100SDJ1X)
+   * @param id the id of the session
+   * @return the Session that matches the id given
    */
 
   public Session getSession(String id)
@@ -253,13 +256,101 @@ public class ScheduleModelManager
 
     for (int i = 0; i < allSessions.size(); i++)
     {
-      if(allSessions.get(i).getSession.getId.equals(id);
+      if(allSessions.getSession(i).getId.equals(id);
       {
         session = allSessions.get(i);
       }
     }
     return session;
   }
+
+  public void removeSession(Session session)
+  {
+    SessionList allSessions = getAllSessions();
+    SessionList newList = new SessionList();
+
+    for (int i = 0; i < allSessions.size(); i++)
+    {
+      if(!(allSessions.getSession(i).getId.equals(session)))
+      {
+        newList.addSession(allSessions.getSession(i));
+      }
+    }
+    try
+    {
+      MyFileHandler.writeToBinaryFile("sessions.bin", newList);
+    }
+
+    catch(FileNotFoundException e)
+    {
+      System.out.println("File not found");
+    }
+    catch(IOException e)
+    {
+      System.out.println("IO Error writing to a file");
+    }
+  }
+
+  /**
+   * Removing all sessions from the list
+   * @param sessionList matching the sessions that will be deleted
+   */
+  public void removeAllSessions(SessionList sessionList)
+  {
+    SessionList allSessions = getAllSessions();
+    allSessions.remove(sessionList);
+  }
+
+  /**
+   * Adding one session to the SessionList
+   * @param session object added to the SessionList
+   */
+  public void addSession(Session session)
+  {
+    SessionList allSessions = getAllSessions();
+    allSessions.add(session);
+
+    try
+    {
+      MyFileHandler.writeToBinaryFile("sessions.bin", allSessions);
+    }
+    catch (FileNotFoundException e)
+    {
+      System.out.println("File not found");
+    }
+    catch (IOException e)
+    {
+      System.out.println("IO Error writing to a file");
+    }
+  }
+
+  /**
+   * Getting a classroom list
+   * @return ClassroomList containing all classrooms
+   */
+  public ClassroomList getAllClassrooms()
+  {
+    ClassroomList allClassrooms = new ClassroomList();
+
+    try
+    {
+      allClassrooms = (ClassroomList)MyFileHandler.readArrayFromBinaryFile("classrooms.bin");
+    }
+    catch (FileNotFoundException e)
+    {
+      System.out.println("File not found");
+    }
+    catch (ClassNotFoundException e)
+    {
+      System.out.println("Class not found");
+    }
+    catch (IOException e)
+    {
+      System.out.println("IO Error reading a file");
+    }
+    return allClassrooms;
+  }
+
 
 }
 
