@@ -16,7 +16,7 @@ public class ClassroomList
     classrooms.add(classroom);
   }
 
-  public void removeSession(String name)
+  public void removeClassroom(String name)
   {
     for (int i = 0; i < classrooms.size(); i++)
       if (classrooms.get(i).getName().equals(name))
