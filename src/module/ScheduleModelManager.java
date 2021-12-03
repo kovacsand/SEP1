@@ -32,7 +32,7 @@ public class ScheduleModelManager
     StudentList students = new StudentList();
     ClassroomList classrooms = new ClassroomList();
     TeacherList teachers = new TeacherList();
-    CourseList courses = new Courselist();
+    CourseList courses = new CourseList();
 
     String[] studentArray = null;
     String[] classroomArray = null;
@@ -173,6 +173,8 @@ public class ScheduleModelManager
     {
       courseArray = MyFileHandler.readArrayFromTextFile("courses.txt");
 
+      Teacher teacher = null;
+
       for (int i = 0; i < courseArray.length; i++)
       {
         String temp = courseArray[i];
@@ -181,9 +183,16 @@ public class ScheduleModelManager
         String group = tempArr[1];
         String name = tempArr[2];
         String teacherId = tempArr[3];
+          for (int j = 0; j < teachers.getSize(); j++)
+          {
+            if(teachers.getAllTeachers().get(j).getId().equals(teacherId))
+            {
+              teacher = new Teacher(teachers.getAllTeachers().get(j).getName(), teacherId);
+            }
+          }
         String ects = tempArr[4];
 
-        courses.add(new Course(semester, group, name, teacherId, ects));
+        courses.addCourse(new Course(name, Integer.parseInt(semester), group, Integer.parseInt(ects), teacher));
       }
     }
 
@@ -221,7 +230,7 @@ public class ScheduleModelManager
    */
   public void export()
   {
-
+//TODO!!!!!!!!!!!!!!!!!!!
   }
 
   /**
@@ -370,7 +379,7 @@ public class ScheduleModelManager
    */
   public ClassroomList getAllClassroomsByCapacity(int capacity)
   {
-//  !!!!come back to this later (capacity)
+//  !!!!come back to this later (capacity) TODO!!!!!!!!
     ClassroomList allClassrooms = getAllClassrooms();
     ClassroomList newList = new ClassroomList();
 
@@ -411,13 +420,13 @@ public class ScheduleModelManager
    * Reading the courses from the file and storing them
    * @return CourseList object containing all the courses
    */
-  public CoursesList getAllCourses()
+  public CourseList getAllCourses()
   {
-    CoursesList allCourses = new CoursesList();
+    CourseList allCourses = new CourseList();
 
     try
     {
-      allCourses = (CoursesList)MyFileHandler.readFromBinaryFile("courses.bin");
+      allCourses = (CourseList)MyFileHandler.readFromBinaryFile("courses.bin");
     }
     catch (FileNotFoundException e)
     {
@@ -441,14 +450,13 @@ public class ScheduleModelManager
    */
   public Course getCourse(String id)
   {
-    CoursesList allCourses = getAllCourses();
+    CourseList allCourses = getAllCourses();
     Course course = null;
-
-    for (int i = 0; i < allCourses.size(); i++)
+    for (int i = 0; i < allCourses.getSize(); i++)
     {
-      if(allCourses.get(i).getId.equals(id))
+      if(allCourses.getAllCourses().get(i).equals(id))
       {
-        course = allCourses.get(i);
+        course = allCourses.getAllCourses().get(i);
         break;
       }
     }
@@ -461,19 +469,11 @@ public class ScheduleModelManager
    */
   public void removeCourse(Course course)
   {
-    CoursesList allCourses = getAllCourses();
-    CoursesList newList = new CourseList();
-
-    for (int i = 0; i < allCourses.size(); i++)
-    {
-      if(!(allCourses.getCourses(i).getId().equals(course)))
-      {
-        newList.add(allCourses.getCourses(i));
-      }
-    }
+    CourseList allCourses = getAllCourses();
+    allCourses.removeCourse(course.getName(), course.getSemester(), course.getGroup());
     try
     {
-      MyFileHandler.writeToBinaryFile("courses.bin", newList);
+      MyFileHandler.writeToBinaryFile("courses.bin", allCourses;
     }
     catch (FileNotFoundException e)
     {
@@ -491,8 +491,8 @@ public class ScheduleModelManager
    */
   public void addCourse(Course course)
   {
-    CoursesList allCourses = getAllCourses();
-    allCourses.add(course);
+    CourseList allCourses = getAllCourses();
+    allCourses.addCourse(course);
 
     try
     {
