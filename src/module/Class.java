@@ -151,8 +151,9 @@ public class Class implements Serializable
   }
 
   /**
-   * Creates a new Class object.
-   * @return new Class
+   * Creates a copy object of the Class object.
+   * Creates a new object with the same values.
+   * @return new Class(semester, group)
    */
   public Class copy(){
     return new Class(semester,group);
