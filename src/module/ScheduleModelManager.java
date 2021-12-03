@@ -38,6 +38,8 @@ public class ScheduleModelManager
     String[] teacherArray = null;
     String[] courseArray = null;
 
+    //Importing data for the students
+
     try
     {
       studentArray = MyFileHandler.readArrayFromTextFile("students.txt");
@@ -80,6 +82,8 @@ public class ScheduleModelManager
       System.out.println("IO Error writing to file");
     }
 
+    //Importing data for the teachers
+
     try
     {
       teacherArray = MyFileHandler.readArrayFromTextFile("teachers.txt");
@@ -119,6 +123,8 @@ public class ScheduleModelManager
     {
       System.out.println("IO Error writing to file");
     }
+
+    //Importing data for the classrooms
 
     try
     {
@@ -160,6 +166,7 @@ public class ScheduleModelManager
       System.out.println("IO Error writing to file");
     }
 
+    //Importing data for the courses
 
     try
     {
