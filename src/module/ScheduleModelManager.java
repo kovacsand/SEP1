@@ -271,6 +271,11 @@ public class ScheduleModelManager
     return session;
   }
 
+  /**
+   * Removing a session from the list
+   * @param session matching the session that will be removed
+   */
+
   public void removeSession(Session session)
   {
     SessionList allSessions = getAllSessions();
@@ -358,6 +363,11 @@ public class ScheduleModelManager
     return allClassrooms;
   }
 
+  /**
+   * Get all classrooms by its capacity
+   * @param capacity takes into account the size of the people that must be assigned for the session
+   * @return ClassroomList that contains all the classrooms that are larger or equal in size than the size of the students that are assigned to the course which is assigned to the classroom
+   */
   public ClassroomList getAllClassroomsByCapacity(int capacity)
   {
 //  !!!!come back to this later (capacity)
@@ -374,6 +384,10 @@ public class ScheduleModelManager
     return newList;
   }
 
+  /**
+   * Removing the classroom from the ClassroomList
+   * @param name removing the given classroom by its name
+   */
   public void removeClassroom(String name)
   {
     ClassroomList allClassrooms = getAllClassrooms();
