@@ -10,7 +10,6 @@ public class Class implements Serializable
   private CourseList courseList;
   /**
    * Two-argument constructor initializing the semester, group, studentList and courseList.
-   * @author Klaudia Fanni Balog
    * @param semester,group
    */
   public Class(int semester,String group){
@@ -51,9 +50,9 @@ public class Class implements Serializable
    */
   public Student getStudent(String id){
     Student found=null;
-    for(int i=0;i<studentList.size();i++){
-      if(studentList.students.get(i).id==id){
-        found=studentList.students.get(i);
+    for(int i=0;i<studentList.getSize();i++){
+      if(studentList.getStudent(id).equals(id)){
+        found=studentList.getStudent(id);
       }
     }
     return found;
@@ -68,11 +67,30 @@ public class Class implements Serializable
   }
 
   /**
+   * Returns the course with the given name from the courseList.
+   * @param name
+   * @return found
+   */
+  public Course getCourse(Course name)
+  {
+    Course found = null;
+    for (int i = 0; i < courseList.getSize(); i++)
+    {
+
+      if (courseList.getAllCourses().get(i).getName().equals(name))
+      {
+        found = courseList.getAllCourses().get(i);
+
+      }
+    }
+    return found;
+  }
+  /**
    * Adds the given student to the studentList of the class.
    * @param student
    */
   public void addStudent(Student student){
-    studentList.add(student);
+    studentList.getAllStudents().add(student);
   }
 
   /**
@@ -80,8 +98,8 @@ public class Class implements Serializable
    * @param students
    */
   public void addStudents(StudentList students){
-    for(int i=0;i<students.size();i++){
-      studentList.add(students.get(i));
+    for(int i=0;i<students.getSize();i++){
+      studentList.getAllStudents().add(students.getAllStudents().get(i));
     }
   }
 
@@ -90,7 +108,7 @@ public class Class implements Serializable
    * @param course
    */
   public void addCourse(Course course){
-    studentList.add(course);
+    courseList.getAllCourses().add(course);
   }
 
   /**
@@ -98,8 +116,8 @@ public class Class implements Serializable
    * @param courses
    */
   public void addCourses(CourseList courses){
-    for(int i=0;i<courses.size();i++){
-      courseList.add(courses.get(i));
+    for(int i=0;i<courses.getSize();i++){
+      courseList.getAllCourses().add(courses.getAllCourses().get(i));
     }
   }
 
@@ -108,7 +126,7 @@ public class Class implements Serializable
    * @param student
    */
   public void removeStudent(Student student){
-    studentList.remove(student);
+    studentList.getAllStudents().remove(student);
   }
 
   /**
@@ -127,8 +145,8 @@ public class Class implements Serializable
       return false;
     }
     Class other=(Class) obj;
-    if(studentList.size()!=other.studentList.size()) return false;
-    if(courseList.size()!=other.courseList.size()) return false;
+    if(studentList.getSize()!=other.studentList.getSize()) return false;
+    if(courseList.getSize()!=other.courseList.getSize()) return false;
     return semester==other.semester && group.equals(other.group) &&
         studentList.equals(other.studentList) && courseList.equals(other.courseList);
   }
@@ -140,11 +158,11 @@ public class Class implements Serializable
   public String toString(){
     String studentsSTR="";
     String coursesSTR="";
-    for(int i=0;i<studentList.size();i++){
-      studentsSTR=studentsSTR+studentList.get(i)+"\n";
+    for(int i=0;i<studentList.getSize();i++){
+      studentsSTR=studentsSTR+studentList.getAllStudents().get(i)+"\n";
     }
-    for(int i=0;i<courseList.size();i++){
-      coursesSTR=coursesSTR+courseList.get(i)+"\n";
+    for(int i=0;i<courseList.getSize();i++){
+      coursesSTR=coursesSTR+courseList.getAllCourses.get(i)+"\n";
     }
     return "Semester: "+semester+"\nGroup: "+group+"\nStudents: "+studentsSTR
         +"\nCourses: "+coursesSTR;
