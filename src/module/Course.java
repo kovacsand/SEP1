@@ -10,11 +10,9 @@ public class Course implements Serializable
   private int ects;
   private TeacherList teacherList;
   private StudentList studentList;
-  private Teacher teacher;
 
   /**
-   * Two-argument constructor initializing the name, semester, group, ects, studentList and teacherList.
-   * @author Klaudia Fanni Balog
+   * Two-argument constructor initializing the name, semester, group, ects, studentList and teacherList. Adds the teacher to the teacher list.
    * @param semester,group
    */
   public Course(String name,int semester,String group, int ects,Teacher teacher){
@@ -25,6 +23,7 @@ public class Course implements Serializable
     this.teacher=teacher;
     teacherList=new TeacherList();
     studentList=new StudentList();
+    teacherList.addTeacher(teacher);
   }
 
   /**
@@ -74,9 +73,9 @@ public class Course implements Serializable
    */
   public Teacher getTeacher(String id){
     Teacher found=null;
-    for(int i=0;i<teacherList.size();i++){
-      if(teacherList.teachers.get(i).id==id){
-        found=teacherList.teachers.get(i);
+    for(int i=0;i<teacherList.getSize();i++){
+      if(teacherList.getAllTeachers().get(i).id.equals(id)){
+        found=teacherList.getAllTeachers.get(i);
       }
     }
     return found;
@@ -97,9 +96,9 @@ public class Course implements Serializable
    */
   public Student getStudent(String id){
     Student found=null;
-    for(int i=0;i<studentList.size();i++){
-      if(studentList.students.get(i).id==id){
-        found=studentList.students.get(i);
+    for(int i=0;i<studentList.getSize();i++){
+      if(studentList.getStudent(id).equals(id)){
+        found=studentList.getStudent(id);
       }
     }
     return found;
@@ -114,35 +113,42 @@ public class Course implements Serializable
   }
 
   /**
-   * Adds the given student to the studentList of the class.
+   * Adds the given student to the studentList of the course.
    * @param student
    */
   public void addStudent(Student student){
-    studentList.add(student);
+    studentList.getAllStudents().add(student);
   }
 
   /**
    * Adds the given teacher to the teacherList of the class.
-   * @param student
+   * @param teacher
    */
   public void addTeacher(Teacher teacher){
-    teacherList.add(teacher);
+    teacherList.getAllTeachers().add(teacher);
   }
 
   /**
-   * Removes a student from the studentList of the class.
+   * Removes a student from the studentList of the course.
    * @param student
    */
   public void removeStudent(Student student){
-    studentList.remove(student);
+    studentList.getAllStudents().remove(student);
   }
 
   /**
-   * Removes a teacher from the teacherList of the class.
-   * @param student
+   * Removes a teacher from the teacherList of the course. If there is no teacher a placeholder teacher is given.
+   * @param teacher
    */
   public void removeTeacher(Teacher teacher){
-    teacherList.remove(teacher);
+    if(teacherList.getSize()==1)
+    {
+      teacherList.getAllTeachers().remove(teacher);
+      teacher=new Teacher("-1");
+    }
+    else if(teacherList.getSize()>1){
+      teacherList.getAllTeachers().remove(teacher);
+    }
   }
 
   /**
@@ -163,8 +169,8 @@ public class Course implements Serializable
       return false;
     }
     Course other=(Course) obj;
-    if(studentList.size()!=other.studentList.size()) return false;
-    if(teacherList.size()!=other.teacherList.size()) return false;
+    if(studentList.getSize()!=other.studentList.getSize()) return false;
+    if(teacherList.getSize()!=other.teacherList.getSize()) return false;
     return semester==other.semester && group.equals(other.group) &&
         studentList.equals(other.studentList) && teacherList.equals(other.teacherList)
         && name.equals(other.name) && ects==other.ects;
@@ -177,10 +183,10 @@ public class Course implements Serializable
   public String toString(){
     String studentsSTR="";
     String teachersSTR="";
-    for(int i=0;i<studentList.size();i++){
+    for(int i=0;i<studentList.getSize();i++){
       studentsSTR=studentsSTR+studentList.get(i)+"\n";
     }
-    for(int i=0;i<teacherList.size();i++){
+    for(int i=0;i<teacherList.getSize();i++){
       teachersSTR=teachersSTR+teacherList.get(i)+"\n";
     }
     return "Name: "+name+"\nECTS: "+ects+"\nSemester: "+semester+"\nGroup: "+group+"\nStudents: "+studentsSTR

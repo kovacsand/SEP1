@@ -1,17 +1,25 @@
 package module;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class CourseList
+public class CourseList implements Serializable
 {
   private ArrayList<Course> courses;
 
   /**
    * No-argument constructor initializing the courses ArrayList.
-   * @author Klaudia Fanni Balog
    */
   public CourseList(){
     courses=new ArrayList<>();
+  }
+
+  /**
+   * One-argument constructor initializing the courses ArrayList with the given ArrayList.
+   * @param courses
+   */
+  public CourseList(ArrayList<Course> courses){
+    this.courses=courses;
   }
 
   /**
@@ -97,10 +105,10 @@ public class CourseList
   /**
    * Creates a copy object of the CourseList object.
    * Creates a new object with the same values.
-   * @return new ClassList()
+   * @return new CourseList()
    */
   public CourseList copy(){
-    return new CourseList();
+    return new CourseList(courses);
   }
 
 }
