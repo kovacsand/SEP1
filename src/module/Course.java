@@ -75,7 +75,7 @@ public class Course implements Serializable
     Teacher found=null;
     for(int i=0;i<teacherList.getSize();i++){
       if(teacherList.getAllTeachers().get(i).id.equals(id)){
-        found=teacherList.getAllTeachers.get(i);
+        found=teacherList.getAllTeachers().get(i);
       }
     }
     return found;
@@ -184,10 +184,10 @@ public class Course implements Serializable
     String studentsSTR="";
     String teachersSTR="";
     for(int i=0;i<studentList.getSize();i++){
-      studentsSTR=studentsSTR+studentList.get(i)+"\n";
+      studentsSTR=studentsSTR+studentList.getAllStudents().get(i)+"\n";
     }
     for(int i=0;i<teacherList.getSize();i++){
-      teachersSTR=teachersSTR+teacherList.get(i)+"\n";
+      teachersSTR=teachersSTR+teacherList.getAllTeachers().get(i)+"\n";
     }
     return "Name: "+name+"\nECTS: "+ects+"\nSemester: "+semester+"\nGroup: "+group+"\nStudents: "+studentsSTR
         +"\nTeachers: "+teachersSTR;

@@ -162,7 +162,7 @@ public class Class implements Serializable
       studentsSTR=studentsSTR+studentList.getAllStudents().get(i)+"\n";
     }
     for(int i=0;i<courseList.getSize();i++){
-      coursesSTR=coursesSTR+courseList.getAllCourses.get(i)+"\n";
+      coursesSTR=coursesSTR+courseList.getAllCourses().get(i)+"\n";
     }
     return "Semester: "+semester+"\nGroup: "+group+"\nStudents: "+studentsSTR
         +"\nCourses: "+coursesSTR;
