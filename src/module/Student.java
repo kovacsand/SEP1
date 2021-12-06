@@ -29,10 +29,7 @@ public class Student extends Person
   {
     this.semester=semester;
   }
-  public void setName(String name)
-  {
-    name=name;
-  }
+
   public boolean equals(Object obj)
   {
     if(!(obj instanceof Student))
