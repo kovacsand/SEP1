@@ -20,7 +20,6 @@ public class Course implements Serializable
     this.semester=semester;
     this.group=group;
     this.ects=ects;
-    this.teacher=teacher;
     teacherList=new TeacherList();
     studentList=new StudentList();
     teacherList.addTeacher(teacher);
