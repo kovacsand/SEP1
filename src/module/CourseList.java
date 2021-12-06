@@ -15,14 +15,6 @@ public class CourseList implements Serializable
   }
 
   /**
-   * One-argument constructor initializing the courses ArrayList with the given ArrayList.
-   * @param courses
-   */
-  public CourseList(ArrayList<Course> courses){
-    this.courses=courses;
-  }
-
-  /**
    * Adds the course given as a parameter to the courses list.
    * @param course
    */
@@ -105,10 +97,15 @@ public class CourseList implements Serializable
   /**
    * Creates a copy object of the CourseList object.
    * Creates a new object with the same values.
-   * @return new CourseList()
+   * @return temp
    */
   public CourseList copy(){
-    return new CourseList(courses);
+    CourseList temp=new CourseList();
+    for(int i=0;i<courses.size();i++)
+    {
+      temp.addCourse(courses.get(i));
+    }
+      return temp;
   }
 
 }
