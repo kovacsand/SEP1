@@ -6,14 +6,14 @@ public abstract class Person
 {
   private String name;
   private String id;
-  private ArrayList workingHours;
+  private ArrayList<String> workingHours;
 
 
   public Person(String id, String name)
   {
     this.name=name;
     this.id=id;
-    ArrayList<String> workingHours = new ArrayList<>();
+    workingHours = new ArrayList<>();
   }
 
   public String getId()
@@ -25,7 +25,10 @@ public abstract class Person
     return name;
   }
 
-  public abstract void setName(String name);
+  public void setName(String name)
+  {
+    this.name = name;
+  }
 
   public boolean isFree(MyDate date, TimeInterval timeInterval)
   { boolean isFree=false;
@@ -78,8 +81,4 @@ public abstract class Person
   }
 
   public abstract Person copy();
-
-
-
-
 }

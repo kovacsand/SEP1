@@ -6,10 +6,6 @@ public class Teacher extends Person
   {
     super(id,name);
   }
-  public void setName(String name)
-  {
-    name=name;
-  }
   public boolean equals(Object obj)
   {
     if(!(obj instanceof Teacher))

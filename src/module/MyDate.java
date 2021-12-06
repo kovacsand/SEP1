@@ -24,7 +24,7 @@ public class MyDate
   {
     this.day = day;
     this.month = month;
-    this.year = month;
+    this.year = year;
   }
 
   /**

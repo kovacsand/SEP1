@@ -51,8 +51,8 @@ public class Class implements Serializable
   public Student getStudent(String id){
     Student found=null;
     for(int i=0;i<studentList.getSize();i++){
-      if(studentList.getStudent(id).equals(id)){
-        found=studentList.getStudent(id);
+      if(studentList.getAllStudents().get(i).getId().equals(id)){
+        found=studentList.getAllStudents().get(i);
       }
     }
     return found;
@@ -68,19 +68,17 @@ public class Class implements Serializable
 
   /**
    * Returns the course with the given name from the courseList.
-   * @param name
+   * @param id
    * @return found
    */
-  public Course getCourse(Course name)
+  public Course getCourse(String id)
   {
     Course found = null;
     for (int i = 0; i < courseList.getSize(); i++)
     {
-
-      if (courseList.getAllCourses().get(i).getName().equals(name))
+      if (courseList.getAllCourses().get(i).getId().equals(id))
       {
         found = courseList.getAllCourses().get(i);
-
       }
     }
     return found;
@@ -174,7 +172,16 @@ public class Class implements Serializable
    * @return new Class(semester, group)
    */
   public Class copy(){
-    return new Class(semester,group);
+    Class temp = new Class(semester,group);
+    for (int i = 0; i < studentList.getSize(); i++)
+    {
+      temp.addStudent(studentList.getAllStudents().get(i));
+    }
+    for (int i = 0; i < courseList.getSize(); i++)
+    {
+      temp.addCourse(courseList.getAllCourses().get(i));
+    }
+    return temp;
   }
 
 }
