@@ -382,12 +382,12 @@ public class ScheduleModelManager
 //  !!!!come back to this later (capacity) TODO!!!!!!!!
     ClassroomList allClassrooms = getAllClassrooms();
     ClassroomList newList = new ClassroomList();
-
-    for (int i = 0; i < allClassrooms.size(); i++)
+    ArrayList<Classroom> classrooms = allClassrooms.getClassrooms(capacity);
+    for (int i = 0; i < classrooms.size(); i++)
     {
-      if(allClassrooms.get(i).getCapacity() >= capacity)
+      if(classrooms.get(i).getCapacity() <= capacity)
       {
-        newList.add(allClassrooms.get(i));
+        newList.addClassroom(classrooms.get(i));
       }
     }
     return newList;
@@ -473,7 +473,7 @@ public class ScheduleModelManager
     allCourses.removeCourse(course.getName(), course.getSemester(), course.getGroup());
     try
     {
-      MyFileHandler.writeToBinaryFile("courses.bin", allCourses;
+      MyFileHandler.writeToBinaryFile("courses.bin", allCourses);
     }
     catch (FileNotFoundException e)
     {
@@ -543,8 +543,7 @@ public class ScheduleModelManager
   public ClassList getAllClassBySemester(int semester)
   {
     ClassList allClasses = getAllClasses();
-    ArrayList<Class> classes = new ArrayList<>();
-    classes = allClasses.getAllClassesBySemester(semester);
+    ArrayList<Class> classes = allClasses.getAllClassesBySemester(semester);
     ClassList newList = new ClassList();
 
     for (int i = 0; i < classes.size(); i++)
