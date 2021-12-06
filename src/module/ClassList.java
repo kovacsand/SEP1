@@ -13,13 +13,7 @@ public class ClassList implements Serializable
   public ClassList(){
     classes=new ArrayList<>();
   }
-  /**
-   * One-argument constructor initializing the classes ArrayList with the given ArrayList.
-   * @param courses
-   */
-  public ClassList(ArrayList<Class> classes){
-    this.classes=classes;
-  }
+
   /**
    * Adds the class given as a parameter to the classes list.
    * @param Class
@@ -102,10 +96,15 @@ public class ClassList implements Serializable
   /**
    * Creates a copy object of the ClassList object.
    * Creates a new object with the same values.
-   * @return new ClassList()
+   * @return temp
    */
   public ClassList copy(){
-    return new ClassList(classes);
+    ClassList temp=new ClassList();
+    for(int i=0;i<classes.size();i++)
+    {
+      temp.addClass(classes.get(i));
+    }
+    return temp;
   }
 
 
