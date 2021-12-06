@@ -20,7 +20,6 @@ public class Course implements Serializable
     this.semester=semester;
     this.group=group;
     this.ects=ects;
-    this.teacher=teacher;
     teacherList=new TeacherList();
     studentList=new StudentList();
     teacherList.addTeacher(teacher);
@@ -144,7 +143,7 @@ public class Course implements Serializable
     if(teacherList.getSize()==1)
     {
       teacherList.getAllTeachers().remove(teacher);
-      teacher=new Teacher("-1");
+      teacherList.addTeacher("-1");
     }
     else if(teacherList.getSize()>1){
       teacherList.getAllTeachers().remove(teacher);
