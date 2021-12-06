@@ -1,0 +1,41 @@
+1,X,315233,Agata Rudol
+1,X,239096,Aiga Kalneja
+1,X,315213,Alexandru Vasile Cimpan
+1,X,315240,Alex-Septimius Iortoman
+1,X,315241,András Kovács
+1,X,315217,Andrei Ghiriti
+1,X,315210,Andrejs Davis Umbrovskis
+1,X,315184,Anton Durcak
+1,X,315226,Arturs Silins
+1,X,315186,Beatricia Nagit
+1,X,306411,Bhupas Gautam
+1,X,315170,Catalin Filip
+1,X,315166,Darius-Stefan Piros
+1,X,315227,Darko Goluza
+1,X,315251,David Kocur
+1,X,315163,Diana Antoniuc
+1,X,315280,Filip Bartoszewski
+1,X,315204,Gabriel Horzic
+1,X,315279,Gergo Nador
+1,X,315252,Jakub Nowak
+1,X,315203,James Robert Cullen
+1,X,315232,Jan Rohweder
+1,X,315218,Julia Papiernik
+1,X,315214,Klaudia Fanni Balog
+1,X,315245,Kristians Eglitis
+1,X,315198,Marius Babin
+1,X,315192,Mateusz Damian Zbyslaw
+1,X,315268,Maximillian Marius Wallin
+1,X,315167,Mikkel Bjørn Hansen
+1,X,315275,Natalia Koziara
+1,X,315255,Ondrej Klimek
+1,X,315211,Ouafa Djamal Hammoun
+1,X,315230,Roberts Zustars
+1,X,315278,Siddhartha Jonathan Grasse
+1,X,315183,Simon Mayer
+1,X,315209,Sofia Augustínová
+1,X,315165,Tamás Hegedus
+1,X,315271,Viktor Vegh
+1,X,315195,Vladimir Prodan
+1,Y,123456,Bob Bobson
+1,Z,123457,Carl Carlson

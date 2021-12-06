@@ -4,6 +4,7 @@ import utils.MyFileHandler;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.*;
 
@@ -55,6 +56,7 @@ public class ScheduleModelManager
         String name = tempArr[3];
 
         students.addStudent(new Student(id, name, Integer.parseInt(semester), group));
+
       }
     }
 
@@ -187,8 +189,9 @@ public class ScheduleModelManager
           {
             if(teachers.getAllTeachers().get(j).getId().equals(teacherId))
             {
-              teacher = new Teacher(teachers.getAllTeachers().get(j).getName(), teacherId);
+              teacher = new Teacher(teacherId, teachers.getAllTeachers().get(j).getName());
             }
+
           }
         String ects = tempArr[4];
 
@@ -198,7 +201,7 @@ public class ScheduleModelManager
 
     catch (FileNotFoundException e)
     {
-      System.out.println("File not found.");
+      System.out.println("File not found. reading courses");
     }
 
     catch (NullPointerException e)
@@ -385,7 +388,7 @@ public class ScheduleModelManager
     ArrayList<Classroom> classrooms = allClassrooms.getClassrooms(capacity);
     for (int i = 0; i < classrooms.size(); i++)
     {
-      if(classrooms.get(i).getCapacity() <= capacity)
+      if(classrooms.get(i).getCapacity() >= capacity)
       {
         newList.addClassroom(classrooms.get(i));
       }
@@ -454,7 +457,7 @@ public class ScheduleModelManager
     Course course = null;
     for (int i = 0; i < allCourses.getSize(); i++)
     {
-      if(allCourses.getAllCourses().get(i).equals(id))
+      if(allCourses.getAllCourses().get(i).getId().equals(id))
       {
         course = allCourses.getAllCourses().get(i);
         break;

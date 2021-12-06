@@ -1,8 +1,9 @@
 package module;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public abstract class Person
+public abstract class Person implements Serializable
 {
   private String name;
   private String id;
@@ -77,7 +78,7 @@ public abstract class Person
 
   public String toString()
   {
-    return "Name: "+name+" ID: "+id+" workingHours: "+workingHours;
+    return "Name: " + name + " ID: " + id;
   }
 
   public abstract Person copy();
