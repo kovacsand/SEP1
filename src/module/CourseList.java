@@ -89,7 +89,7 @@ public class CourseList implements Serializable
   public String toString(){
     String str="";
     for(int i=0;i<courses.size();i++){
-      str=str+courses.get(i).getName()+" "+courses.get(i).getSemester()+" "+courses.get(i).getGroup()+courses.get(i).getEcts()+" "+courses.get(i).getTeacher("")+" ";
+      str=str+courses.get(i).getName() + courses.get(i).getSemester() + courses.get(i).getGroup() + " " +courses.get(i).getEcts() + " " + courses.get(i).getAllTeachers();
     }
     return str;
   }

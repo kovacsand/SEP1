@@ -1,5 +1,7 @@
 package module;
 
+import java.io.Serializable;
+
 /**
  * A class for storing data about sessions, which are the individual lessons.
  * @author Hi-Phi
@@ -7,7 +9,7 @@ package module;
  */
 
 
-public class Session
+public class Session implements Serializable
 {
   /**
    * @param date The date of the session (example: 06/12/21)
@@ -21,7 +23,7 @@ public class Session
   private Course course;
 
   /**
-   * Four-argument constructor intializong the Session object with the given values.
+   * Four-argument constructor initializing the Session object with the given values.
    * @param date the date of the session.
    * @param interval the exact starting and ending time of the session.
    * @param room the classroom where the session is held.
@@ -93,7 +95,7 @@ public class Session
   public String getId()
   {
     return String.format("%02d%02d%02d%04d%04d%s%d%s",
-        date.getDay(), date.getMonth(), date.getYear(), interval.getStartTime(), interval.getEndTime(),
+        date.getDay(), date.getMonth(), date.getYear() % 100, interval.getStartTime(), interval.getEndTime(),
         course.getName(), course.getSemester(), course.getGroup());
   }
 

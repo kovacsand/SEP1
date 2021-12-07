@@ -7,9 +7,10 @@ package module;
  */
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Classroom
+public class Classroom implements Serializable
 {
 
   /**
@@ -60,7 +61,7 @@ public class Classroom
    */
   public boolean isFree(MyDate date, TimeInterval interval)
   {
-    String time = String.format("%02d%02d%02d%04d%04d", date.getDay(), date.getMonth(), date.getYear(), interval.getStartTime(), interval.getEndTime());
+    String time = String.format("%02d%02d%02d%04d%04d", date.getDay(), date.getMonth(), date.getYear() % 100, interval.getStartTime(), interval.getEndTime());
     for (int i = 0; i < occupiedHours.size(); i++)
     {
       if (occupiedHours.get(i).equals(time))
@@ -76,7 +77,7 @@ public class Classroom
    */
   public void addOccupiedHours(MyDate date, TimeInterval interval)
   {
-    String time = String.format("%02d%02d%02d%04d%04d", date.getDay(), date.getMonth(), date.getYear(), interval.getStartTime(), interval.getEndTime());
+    String time = String.format("%02d%02d%02d%04d%04d", date.getDay(), date.getMonth(), date.getYear() % 100, interval.getStartTime(), interval.getEndTime());
     occupiedHours.add(time);
   }
 
@@ -93,7 +94,7 @@ public class Classroom
    */
   public void removeOccupiedHours(MyDate date, TimeInterval interval)
   {
-    String time = String.format("%02d%02d%02d%04d%04d", date.getDay(), date.getMonth(), date.getYear(), interval.getStartTime(), interval.getEndTime());
+    String time = String.format("%02d%02d%02d%04d%04d", date.getDay(), date.getMonth(), date.getYear() % 100, interval.getStartTime(), interval.getEndTime());
     occupiedHours.remove(time);
   }
 

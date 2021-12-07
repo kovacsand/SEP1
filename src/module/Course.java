@@ -12,8 +12,8 @@ public class Course implements Serializable
   private StudentList studentList;
 
   /**
-   * Two-argument constructor initializing the name, semester, group, ects, studentList and teacherList. Adds the teacher to the teacher list.
-   * @param semester,group
+   * Five-argument constructor initializing the name, semester, group, ects, studentList and teacherList. Adds the teacher to the teacherList.
+   * @param name
    */
   public Course(String name,int semester,String group, int ects,Teacher teacher){
     this.name=name;
@@ -73,7 +73,7 @@ public class Course implements Serializable
   public Teacher getTeacher(String id){
     Teacher found=null;
     for(int i=0;i<teacherList.getSize();i++){
-      if(teacherList.getAllTeachers().get(i).id.equals(id)){
+      if(teacherList.getAllTeachers().get(i).getId().equals(id)){
         found=teacherList.getAllTeachers().get(i);
       }
     }
@@ -96,8 +96,8 @@ public class Course implements Serializable
   public Student getStudent(String id){
     Student found=null;
     for(int i=0;i<studentList.getSize();i++){
-      if(studentList.getStudent(id).equals(id)){
-        found=studentList.getStudent(id);
+      if(studentList.getAllStudents().get(i).getId().equals(id)){
+        found=studentList.getAllStudents().get(i);
       }
     }
     return found;
@@ -115,8 +115,9 @@ public class Course implements Serializable
    * Adds the given student to the studentList of the course.
    * @param student
    */
-  public void addStudent(Student student){
-    studentList.getAllStudents().add(student);
+  public void addStudent(Student student)
+  {
+    studentList.addStudent(student);
   }
 
   /**
@@ -124,7 +125,7 @@ public class Course implements Serializable
    * @param teacher
    */
   public void addTeacher(Teacher teacher){
-    teacherList.getAllTeachers().add(teacher);
+    teacherList.addTeacher(teacher);
   }
 
   /**
@@ -132,7 +133,7 @@ public class Course implements Serializable
    * @param student
    */
   public void removeStudent(Student student){
-    studentList.getAllStudents().remove(student);
+    studentList.removeStudent(student.getId());
   }
 
   /**
@@ -142,11 +143,11 @@ public class Course implements Serializable
   public void removeTeacher(Teacher teacher){
     if(teacherList.getSize()==1)
     {
-      teacherList.getAllTeachers().remove(teacher);
-      teacherList.addTeacher("-1");
+      teacherList.removeTeacher(teacher.getId());
+      teacherList.addTeacher(new Teacher("-1", "NO_TEACHER"));
     }
     else if(teacherList.getSize()>1){
-      teacherList.getAllTeachers().remove(teacher);
+      teacherList.removeTeacher(teacher.getId());
     }
   }
 
@@ -183,10 +184,10 @@ public class Course implements Serializable
     String studentsSTR="";
     String teachersSTR="";
     for(int i=0;i<studentList.getSize();i++){
-      studentsSTR=studentsSTR+studentList.getAllStudents().get(i)+"\n";
+      studentsSTR += studentList.getAllStudents().get(i)+"\n";
     }
     for(int i=0;i<teacherList.getSize();i++){
-      teachersSTR=teachersSTR+teacherList.getAllTeachers().get(i)+"\n";
+      teachersSTR += teacherList.getAllTeachers().get(i)+"\n";
     }
     return "Name: "+name+"\nECTS: "+ects+"\nSemester: "+semester+"\nGroup: "+group+"\nStudents: "+studentsSTR
         +"\nTeachers: "+teachersSTR;
@@ -198,7 +199,11 @@ public class Course implements Serializable
    * @return new Course(name, semester, group, ects, teacher)
    */
   public Course copy(){
-    return new Course(name,semester,group,ects,teacher);
+    Course temp = new Course(name,semester,group,ects, teacherList.getAllTeachers().get(0));
+    if (teacherList.getSize() > 1)
+      for (int i = 1; i < teacherList.getSize(); i++)
+        temp.addTeacher(teacherList.getAllTeachers().get(i));
+    return temp;
   }
 
 }

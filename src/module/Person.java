@@ -1,19 +1,20 @@
 package module;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public abstract class Person
+public abstract class Person implements Serializable
 {
   private String name;
   private String id;
-  private ArrayList workingHours;
+  private ArrayList<String> workingHours;
 
 
   public Person(String id, String name)
   {
     this.name=name;
     this.id=id;
-    ArrayList<String> workingHours = new ArrayList<>();
+    workingHours = new ArrayList<>();
   }
 
   public String getId()
@@ -25,7 +26,10 @@ public abstract class Person
     return name;
   }
 
-  public abstract void setName(String name);
+  public void setName(String name)
+  {
+    this.name = name;
+  }
 
   public boolean isFree(MyDate date, TimeInterval timeInterval)
   { boolean isFree=false;
@@ -74,12 +78,8 @@ public abstract class Person
 
   public String toString()
   {
-    return "Name: "+name+" ID: "+id+" workingHours: "+workingHours;
+    return "Name: " + name + " ID: " + id;
   }
 
   public abstract Person copy();
-
-
-
-
 }

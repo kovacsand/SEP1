@@ -1,6 +1,8 @@
 package module;
 
-public class Student extends Person
+import java.io.Serializable;
+
+public class Student extends Person implements Serializable
 {
   private int semester;
   private String group;
@@ -29,10 +31,7 @@ public class Student extends Person
   {
     this.semester=semester;
   }
-  public void setName(String name)
-  {
-    name=name;
-  }
+
   public boolean equals(Object obj)
   {
     if(!(obj instanceof Student))

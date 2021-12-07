@@ -1,12 +1,14 @@
 package module;
 
+import java.io.Serializable;
+
 /**
  * A class for storing time intervals.
  * @author Hi-Phi
  * @version 1.0
  */
 
-public class TimeInterval
+public class TimeInterval implements Serializable
 {
   /**
    * @param startTime The starting time of the interval (example: 800 or: 1630)

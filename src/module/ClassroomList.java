@@ -1,8 +1,9 @@
 package module;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class ClassroomList
+public class ClassroomList implements Serializable
 {
   private ArrayList<Classroom> classrooms;
 
@@ -25,10 +26,7 @@ public class ClassroomList
 
   public ArrayList<Classroom> getAllClassrooms()
   {
-    ArrayList<Classroom> temp = new ArrayList<>();
-    for (int i = 0; i < classrooms.size(); i++)
-      temp.add(classrooms.get(i).copy());
-    return temp;
+    return classrooms;
   }
 
   public ArrayList<Classroom> getClassrooms(int capacity)
