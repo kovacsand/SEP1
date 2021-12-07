@@ -92,31 +92,11 @@ public class Class implements Serializable
   }
 
   /**
-   * Adds the given list of students to the studentList of the class.
-   * @param students
-   */
-  public void addStudents(StudentList students){
-    for(int i=0;i<students.getSize();i++){
-      studentList.getAllStudents().add(students.getAllStudents().get(i));
-    }
-  }
-
-  /**
    * Adds the given course to the courseList of the class.
    * @param course
    */
   public void addCourse(Course course){
     courseList.getAllCourses().add(course);
-  }
-
-  /**
-   * Adds the given list of courses to the courseList of the class.
-   * @param courses
-   */
-  public void addCourses(CourseList courses){
-    for(int i=0;i<courses.getSize();i++){
-      courseList.getAllCourses().add(courses.getAllCourses().get(i));
-    }
   }
 
   /**
