@@ -48,4 +48,9 @@ public class Student extends Person implements Serializable
   }
 
 
+  public String toString()
+  {
+    return super.toString() + " Class: " + semester + group;
+  }
+
 }
