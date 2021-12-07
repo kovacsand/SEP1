@@ -34,6 +34,7 @@ public class ScheduleModelManager
     ClassroomList classrooms = new ClassroomList();
     TeacherList teachers = new TeacherList();
     CourseList courses = new CourseList();
+    ClassList classes = new ClassList();
 
     String[] studentArray = null;
     String[] classroomArray = null;
@@ -57,6 +58,18 @@ public class ScheduleModelManager
 
         students.addStudent(new Student(id, name, Integer.parseInt(semester), group));
 
+        //Creating new classes
+        boolean exists = false;
+        for (int j = 0; j < classes.getSize(); j++)
+          if ((classes.getAllClasses().get(j).getSemester() == Integer.parseInt(semester) && classes.getAllClasses().get(j).getGroup().equals(group)))
+            exists = true;
+        if (!exists)
+          classes.addClass(new Class(Integer.parseInt(semester), group));
+        for (int j = 0; j < classes.getSize(); j++)
+        {
+          if ((classes.getAllClasses().get(j).getSemester() == Integer.parseInt(semester) && classes.getAllClasses().get(j).getGroup().equals(group)))
+            classes.getAllClasses().get(j).addStudent(students.getStudent(id));
+        }
       }
     }
 
@@ -73,6 +86,7 @@ public class ScheduleModelManager
     try
     {
       MyFileHandler.writeToBinaryFile("students.bin", students);
+      MyFileHandler.writeToBinaryFile("classes.bin", classes);
     }
 
     catch (FileNotFoundException e)

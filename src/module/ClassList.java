@@ -88,7 +88,7 @@ public class ClassList implements Serializable
   public String toString(){
     String str="";
     for(int i=0;i<classes.size();i++){
-      str=str+classes.get(i).getSemester()+" "+classes.get(i).getGroup();
+      str=str+classes.get(i).getSemester()+classes.get(i).getGroup() + " ";
     }
     return str;
   }
