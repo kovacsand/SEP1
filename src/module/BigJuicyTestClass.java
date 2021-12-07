@@ -14,5 +14,7 @@ public class BigJuicyTestClass
     System.out.println(modelManager.getAllTeachers());
 //    System.out.println(modelManager.getCourse("SDJ1X"));
 
+    System.out.println(modelManager.getAllClasses());
+
   }
 }
