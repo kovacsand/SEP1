@@ -6,15 +6,15 @@ public class BigJuicyTestClass
   {
     ScheduleModelManager modelManager = new ScheduleModelManager();
     modelManager.importData();
-
-    System.out.println(modelManager.getAllTeachers());
-    modelManager.addTeacher(new Teacher("AK", "Andras Kovacs"));
-    System.out.println(modelManager.getAllTeachers());
-    modelManager.removeTeacher(modelManager.getTeacher("AK"));
-    System.out.println(modelManager.getAllTeachers());
-//    System.out.println(modelManager.getCourse("SDJ1X"));
+    Student student = new Student("123451", "Alley Heya", 1, "Y");
 
     System.out.println(modelManager.getAllClasses());
-
+    System.out.println(modelManager.getClassById("1Y"));
+    modelManager.addStudent(student);
+    System.out.println(modelManager.getClassById("1Y"));
+    System.out.println(modelManager.getAllStudents());
+    modelManager.removeStudentFromClass(student.getId());
+    System.out.println(modelManager.getClassById("1Y"));
+    System.out.println(modelManager.getAllStudents());
   }
 }
