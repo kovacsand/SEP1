@@ -1,8 +1,9 @@
 package module;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class TeacherList
+public class TeacherList implements Serializable
 {
   private ArrayList<Teacher> teachers;
 

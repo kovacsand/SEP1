@@ -7,9 +7,10 @@ package module;
  */
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Classroom
+public class Classroom implements Serializable
 {
 
   /**

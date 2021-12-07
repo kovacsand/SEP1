@@ -1,12 +1,14 @@
 package module;
 
+import java.io.Serializable;
+
 /**
  * A class for storing dates.
  * @author Hi-Phi
  * @version 1.0
  */
 
-public class MyDate
+public class MyDate implements Serializable
 {
   /**
    * @param day The day of the date.

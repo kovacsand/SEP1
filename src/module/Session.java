@@ -1,5 +1,7 @@
 package module;
 
+import java.io.Serializable;
+
 /**
  * A class for storing data about sessions, which are the individual lessons.
  * @author Hi-Phi
@@ -7,7 +9,7 @@ package module;
  */
 
 
-public class Session
+public class Session implements Serializable
 {
   /**
    * @param date The date of the session (example: 06/12/21)

@@ -1,8 +1,9 @@
 package module;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class SessionList
+public class SessionList implements Serializable
 {
   private ArrayList<Session> sessions;
 

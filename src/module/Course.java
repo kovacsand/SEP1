@@ -115,7 +115,8 @@ public class Course implements Serializable
    * Adds the given student to the studentList of the course.
    * @param student
    */
-  public void addStudent(Student student){
+  public void addStudent(Student student)
+  {
     studentList.addStudent(student);
   }
 
@@ -183,10 +184,10 @@ public class Course implements Serializable
     String studentsSTR="";
     String teachersSTR="";
     for(int i=0;i<studentList.getSize();i++){
-      studentsSTR=studentsSTR+studentList.getAllStudents().get(i)+"\n";
+      studentsSTR += studentList.getAllStudents().get(i)+"\n";
     }
     for(int i=0;i<teacherList.getSize();i++){
-      teachersSTR=teachersSTR+teacherList.getAllTeachers().get(i)+"\n";
+      teachersSTR += teacherList.getAllTeachers().get(i)+"\n";
     }
     return "Name: "+name+"\nECTS: "+ects+"\nSemester: "+semester+"\nGroup: "+group+"\nStudents: "+studentsSTR
         +"\nTeachers: "+teachersSTR;
