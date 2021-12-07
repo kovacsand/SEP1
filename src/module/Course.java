@@ -13,7 +13,11 @@ public class Course implements Serializable
 
   /**
    * Five-argument constructor initializing the name, semester, group, ects, studentList and teacherList. Adds the teacher to the teacherList.
-   * @param name
+   * @param name The name of the course
+   * @param semester The number of the semester of the course
+   * @param group The group name of the course
+   * @param ects The number of ECTS of the course
+   * @param teacher The name of the teacher of the course
    */
   public Course(String name,int semester,String group, int ects,Teacher teacher){
     this.name=name;
@@ -67,7 +71,7 @@ public class Course implements Serializable
 
   /**
    * Returns the teacher with the given id from the teacherList.
-   * @param id
+   * @param id The id of the teacher of the course
    * @return found
    */
   public Teacher getTeacher(String id){
@@ -90,7 +94,7 @@ public class Course implements Serializable
 
   /**
    * Returns the student with the given id from the studentList.
-   * @param id
+   * @param id The id of the student enrolled in the course
    * @return
    */
   public Student getStudent(String id){
@@ -105,7 +109,9 @@ public class Course implements Serializable
 
   /**
    * Returns the ID of the course.
-   * @return name, semester, group
+   * @return name
+   * @return semester
+   * @return group
    */
   public String getId(){
     return name+semester+group;
@@ -178,7 +184,12 @@ public class Course implements Serializable
 
   /**
    * Displays all the data stored in the course.
-   * @return name, ects, semester, group, studentList, teacherList
+   * @return name
+   * @return ects
+   * @return semester
+   * @return group
+   * @return studentList
+   * @return teacherList
    */
   public String toString(){
     String studentsSTR="";

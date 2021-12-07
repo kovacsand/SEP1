@@ -10,7 +10,8 @@ public class Class implements Serializable
   private CourseList courseList;
   /**
    * Two-argument constructor initializing the semester, group, studentList and courseList.
-   * @param semester,group
+   * @param semester
+   * @param group
    */
   public Class(int semester,String group){
     this.semester=semester;
@@ -131,7 +132,10 @@ public class Class implements Serializable
 
   /**
    * Displays all the data stored in the class.
-   * @return semester, group, studentList, courseList
+   * @return semester
+   * @return group
+   * @return studentList
+   * @return courseList
    */
   public String toString(){
     String studentsSTR="";

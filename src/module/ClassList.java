@@ -83,7 +83,8 @@ public class ClassList implements Serializable
   /**
    * Displays all the data stored in the class list.
    * Displays the semester and group of each class in the class list.
-   * @return classes.get(i).getSemester(), classes.get(i).getGroup()
+   * @return classes.get(i).getSemester()
+   * @return classes.get(i).getGroup()
    */
   public String toString(){
     String str="";
