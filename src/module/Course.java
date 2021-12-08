@@ -10,7 +10,7 @@ public class Course implements Serializable
   private int ects;
   private TeacherList teacherList;
   private StudentList studentList;
-
+  private String teachersId;
   /**
    * Five-argument constructor initializing the name, semester, group, ects, studentList and teacherList. Adds the teacher to the teacherList.
    * @param name
@@ -23,6 +23,7 @@ public class Course implements Serializable
     teacherList=new TeacherList();
     studentList=new StudentList();
     teacherList.addTeacher(teacher);
+    this.teachersId=teacher.getId();
   }
 
   /**
@@ -55,6 +56,11 @@ public class Course implements Serializable
    */
   public int getEcts(){
     return ects;
+  }
+
+  public String getTeachersId()
+  {
+    return teachersId;
   }
 
   /**
@@ -126,6 +132,11 @@ public class Course implements Serializable
    */
   public void addTeacher(Teacher teacher){
     teacherList.addTeacher(teacher);
+    teachersId="";
+    for (int i=0;i<teacherList.getSize();i++)
+    {
+      teachersId+=teacherList.getAllTeachers().get(i).getId()+" ";
+    }
   }
 
   /**
@@ -134,6 +145,7 @@ public class Course implements Serializable
    */
   public void removeStudent(Student student){
     studentList.removeStudent(student.getId());
+
   }
 
   /**
@@ -145,9 +157,15 @@ public class Course implements Serializable
     {
       teacherList.removeTeacher(teacher.getId());
       teacherList.addTeacher(new Teacher("-1", "NO_TEACHER"));
+
     }
     else if(teacherList.getSize()>1){
       teacherList.removeTeacher(teacher.getId());
+    }
+    teachersId="";
+    for (int i=0;i<teacherList.getSize();i++)
+    {
+      teachersId+=teacherList.getAllTeachers().get(i).getId()+" ";
     }
   }
 
