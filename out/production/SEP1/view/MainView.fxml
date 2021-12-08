@@ -45,18 +45,13 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="427.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="427.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MainViewController">
    <children>
       <MenuBar prefWidth="400.0">
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
               <MenuItem mnemonicParsing="false" text="Close" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
@@ -66,9 +61,9 @@
           </Menu>
         </menus>
       </MenuBar>
-      <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="400.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane fx:id="tabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="400.0" tabClosingPolicy="UNAVAILABLE">
          <tabs>
-            <Tab text="Sessions">
+            <Tab fx:id="sessionsTab" onSelectionChanged="#tabChanged" text="Sessions">
                <content>
                   <TableView prefHeight="200.0" prefWidth="200.0">
                     <columns>
@@ -114,7 +109,7 @@
                   </VBox>
                </content>
             </Tab>
-            <Tab text="Classes">
+            <Tab fx:id="classesTab" onSelectionChanged="#tabChanged" text="Classes">
                <content>
                   <VBox prefHeight="400.0" prefWidth="400.0">
                      <children>
@@ -152,7 +147,7 @@
                   </VBox>
                </content>
             </Tab>
-            <Tab text="Classrooms">
+            <Tab fx:id="classroomsTab" onSelectionChanged="#tabChanged" text="Classrooms">
                <content>
                   <VBox prefHeight="400.0" prefWidth="400.0">
                      <children>
@@ -188,7 +183,7 @@
                   </VBox>
                </content>
             </Tab>
-            <Tab text="Courses">
+            <Tab fx:id="coursesTab" onSelectionChanged="#tabChanged" text="Courses">
                <content>
                   <VBox prefHeight="400.0" prefWidth="400.0">
                      <children>
@@ -227,16 +222,16 @@
                   </VBox>
                </content>
             </Tab>
-            <Tab text="Students">
+            <Tab fx:id="studentsTab" onSelectionChanged="#tabChanged" text="Students">
                <content>
                   <VBox prefHeight="400.0" prefWidth="400.0">
                      <children>
-                        <TableView prefHeight="350.0" prefWidth="400.0">
+                        <TableView fx:id="studentsTable" prefHeight="350.0" prefWidth="400.0">
                            <columns>
-                              <TableColumn prefWidth="75.0" text="ID" />
-                              <TableColumn prefWidth="175.0" text="Name" />
-                              <TableColumn prefWidth="75.0" text="Semester" />
-                              <TableColumn prefWidth="75.0" text="Group" />
+                              <TableColumn fx:id="studentsIdColumn" prefWidth="75.0" text="ID" />
+                              <TableColumn fx:id="studentsNameColumn" prefWidth="175.0" text="Name" />
+                              <TableColumn fx:id="studentsSemesterColumn" prefWidth="75.0" text="Semester" />
+                              <TableColumn fx:id="studentsGroupColumn" prefWidth="75.0" text="Group" />
                            </columns>
                         </TableView>
                         <HBox alignment="CENTER" prefHeight="50.0" prefWidth="400.0">
@@ -265,15 +260,15 @@
                   </VBox>
                </content>
             </Tab>
-            <Tab text="Teachers">
+            <Tab fx:id="teachersTab" onSelectionChanged="#tabChanged" text="Teachers">
                <content>
                   <VBox prefHeight="400.0" prefWidth="400.0">
                      <children>
-                        <TableView prefHeight="350.0" prefWidth="400.0">
+                        <TableView fx:id="teachersTable" prefHeight="350.0" prefWidth="400.0">
                            <columns>
-                              <TableColumn prefWidth="50.0" text="ID" />
-                              <TableColumn prefWidth="175.0" text="Name" />
-                              <TableColumn prefWidth="175.0" text="Courses" />
+                              <TableColumn fx:id="teachersIdColumn" prefWidth="50.0" text="ID" />
+                              <TableColumn fx:id="teachersNameColumn" prefWidth="175.0" text="Name" />
+                              <TableColumn fx:id="teachersCoursesColumn" prefWidth="175.0" text="Courses" />
                            </columns>
                         </TableView>
                         <HBox alignment="CENTER" prefHeight="50.0" prefWidth="400.0">
