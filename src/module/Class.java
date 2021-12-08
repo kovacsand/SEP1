@@ -104,8 +104,9 @@ public class Class implements Serializable
    * Removes a student from the studentList of the class.
    * @param student
    */
-  public void removeStudent(Student student){
-    studentList.getAllStudents().remove(student);
+  public void removeStudent(Student student)
+  {
+    studentList.removeStudent(student.getId());
   }
 
   /**
