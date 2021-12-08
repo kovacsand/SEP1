@@ -84,7 +84,11 @@ public class CourseList implements Serializable
   /**
    * Displays all the data stored in the course list.
    * Displays the name,semester, group, ects and teacher of each course in the course list.
-   * @return courses.get(i).getName(), courses.get(i).getSemester(), courses.get(i).getGroup(), courses.get(i).getEcts(), courses.get(i).getTeacher("")
+   * @return courses.get(i).getName()
+   * @return courses.get(i).getSemester()
+   * @return courses.get(i).getGroup()
+   * @return courses.get(i).getEcts()
+   * @return courses.get(i).getAllTeachers()
    */
   public String toString(){
     String str="";
