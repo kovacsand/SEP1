@@ -9,6 +9,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import module.*;
 
+import java.util.ArrayList;
+
 public class MainViewController
 {
   //GENERAL TABS
@@ -20,12 +22,23 @@ public class MainViewController
   @FXML private Tab studentsTab;
   @FXML private Tab teachersTab;
 
+
+
+  //COURSES TABLE
+  @FXML private TableView<Course> coursesTable;
+  @FXML private TableColumn<Course, String> coursesNameColumn;
+  @FXML private TableColumn<Course, String> coursesSemesterColumn;
+  @FXML private TableColumn<Course, String> coursesGroupColumn;
+  @FXML private TableColumn<Course, String> coursesTeacherColumn;
+  @FXML private TableColumn<Course, String> coursesEctsColumn;
+
   //STUDENTS TABLE
   @FXML private TableView<Student> studentsTable;
   @FXML private TableColumn<Student, String> studentsIdColumn;
   @FXML private TableColumn<Student, String> studentsNameColumn;
   @FXML private TableColumn<Student, String> studentsSemesterColumn;
   @FXML private TableColumn<Student, String> studentsGroupColumn;
+
 
   //TEACHERS TABLE
   @FXML private TableView<Teacher> teachersTable;
@@ -51,7 +64,20 @@ public class MainViewController
     }
     else if (coursesTab.isSelected())
     {
-      sessionsTab.setText("angry");
+      coursesNameColumn.setCellValueFactory(new PropertyValueFactory<Course, String>("name"));
+      coursesSemesterColumn.setCellValueFactory(new PropertyValueFactory<Course, String>("semester"));
+      coursesGroupColumn.setCellValueFactory(new PropertyValueFactory<Course, String>("group"));
+      coursesTeacherColumn.setCellValueFactory(new PropertyValueFactory<Course, String>("teachersId"));
+      coursesEctsColumn.setCellValueFactory(new PropertyValueFactory<Course, String>("ects"));
+
+      coursesTable.getItems().clear();
+
+      CourseList courseList=scheduleModelManager.getAllCourses();
+      for(int i=0;i<courseList.getSize();i++)
+      {
+        coursesTable.getItems().add(courseList.getAllCourses().get(i));
+      }
+
     }
     else if (studentsTab.isSelected())
     {

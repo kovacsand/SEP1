@@ -930,6 +930,7 @@ public class ScheduleModelManager
             Course course = allCourses.getAllCourses().get(j);
             for (int k = 0; k < course.getAllTeachers().getSize(); k++)
             {
+              System.out.println(course.getAllTeachers().getSize());
               if (course.getAllTeachers().getAllTeachers().get(k).equals(teacher))
               {
                 course.removeTeacher(teacher);
