@@ -713,7 +713,10 @@ public class ScheduleModelManager
     StudentList allStudents = getAllStudents();
     ClassList allClasses = getAllClasses();
     Student temp = allStudents.getStudent(studentId);
+    System.out.println(getClassById(temp.getSemester() + temp.getGroup()).getAllStudents().getSize());
+    System.out.println(getClassById(temp.getSemester() + temp.getGroup()));
     getClassById(temp.getSemester() + temp.getGroup()).removeStudent(temp);
+    System.out.println(getClassById(temp.getSemester() + temp.getGroup()).getAllStudents().getSize());
 
     try
     {
