@@ -8,6 +8,7 @@ public class Class implements Serializable
   private String group;
   private StudentList studentList;
   private CourseList courseList;
+  private int studentCount;
   /**
    * Two-argument constructor initializing the semester, group, studentList and courseList.
    * @param semester
@@ -18,6 +19,12 @@ public class Class implements Serializable
     this.group=group;
     studentList=new StudentList();
     courseList=new CourseList();
+    this.studentCount=0;
+  }
+
+  public int getStudentCount(){
+    studentCount=studentList.getSize();
+    return studentCount;
   }
 
   /**

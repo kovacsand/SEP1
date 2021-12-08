@@ -9,6 +9,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import module.*;
 
+import java.lang.Class;
 import java.util.ArrayList;
 
 public class MainViewController
@@ -22,7 +23,17 @@ public class MainViewController
   @FXML private Tab studentsTab;
   @FXML private Tab teachersTab;
 
+  //CLASSES TABLE
+  @FXML private TableView<Class> classesTable;
+  @FXML private TableColumn<Class,String> classesSemesterColumn;
+  @FXML private TableColumn<Class,String> classesGroupColumn;
+  @FXML private TableColumn<Class,String> classesStudentCountColumn;
+  @FXML private TableColumn<Class,String> classesCoursesColumn;
 
+  //CLASSROOMS TABLE
+  @FXML private TableView<Classroom> classroomsTable;
+  @FXML private TableColumn<Classroom, String> classroomsNameColumn;
+  @FXML private TableColumn<Classroom, String> classroomsCapacityColumn;
 
   //COURSES TABLE
   @FXML private TableView<Course> coursesTable;
@@ -56,12 +67,27 @@ public class MainViewController
     }
     else if (classesTab.isSelected())
     {
-      sessionsTab.setText("happy");
+      classesSemesterColumn.setCellValueFactory(new PropertyValueFactory<Class,String>("semester"));
+      classesGroupColumn.setCellValueFactory(new PropertyValueFactory<Class,String>("group"));
+      classesStudentCountColumn.setCellValueFactory(new PropertyValueFactory<Class,String>("studentCount"));
+      classesCoursesColumn.setCellValueFactory(new PropertyValueFactory<Class,String>("courses"));
+      classesTable.getItems().clear();
+      ClassList classList=scheduleModelManager.getAllClasses();
+     /*for(int i=0;i<classList.getSize();i++){
+        classesTable.getItems().add(classList.getAllClasses().get(i));
+      }*/
     }
     else if (classroomsTab.isSelected())
     {
-      sessionsTab.setText("hungry");
+      classroomsNameColumn.setCellValueFactory(new PropertyValueFactory<Classroom, String>("name"));
+      classroomsCapacityColumn.setCellValueFactory(new PropertyValueFactory<Classroom, String>("capacity"));
+      classroomsTable.getItems().clear();
+      ClassroomList classroomList=scheduleModelManager.getAllClassrooms();
+      for(int i=0;i<classroomList.getSize();i++){
+        classroomsTable.getItems().add(classroomList.getAllClassrooms().get(i));
+      }
     }
+
     else if (coursesTab.isSelected())
     {
       coursesNameColumn.setCellValueFactory(new PropertyValueFactory<Course, String>("name"));
