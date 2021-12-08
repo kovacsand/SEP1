@@ -7,14 +7,14 @@ public abstract class Person implements Serializable
 {
   private String name;
   private String id;
-  private ArrayList<String> workingHours;
+  private ArrayList workingHours;
 
 
   public Person(String id, String name)
   {
     this.name=name;
     this.id=id;
-    workingHours = new ArrayList<>();
+    ArrayList<String> workingHours = new ArrayList<>();
   }
 
   public String getId()
@@ -26,10 +26,7 @@ public abstract class Person implements Serializable
     return name;
   }
 
-  public void setName(String name)
-  {
-    this.name = name;
-  }
+  public abstract void setName(String name);
 
   public boolean isFree(MyDate date, TimeInterval timeInterval)
   { boolean isFree=false;
@@ -78,8 +75,12 @@ public abstract class Person implements Serializable
 
   public String toString()
   {
-    return "Name: " + name + " ID: " + id;
+    return "Name: "+name+" ID: "+id+" workingHours: "+workingHours;
   }
 
   public abstract Person copy();
+
+
+
+
 }

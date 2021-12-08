@@ -187,13 +187,13 @@
                <content>
                   <VBox prefHeight="400.0" prefWidth="400.0">
                      <children>
-                        <TableView prefHeight="350.0" prefWidth="400.0">
+                        <TableView fx:id="coursesTable" prefHeight="350.0" prefWidth="400.0">
                            <columns>
-                              <TableColumn prefWidth="75.0" text="Name" />
-                              <TableColumn prefWidth="75.0" text="Semester" />
-                              <TableColumn prefWidth="50.0" text="Group" />
-                              <TableColumn prefWidth="125.0" text="Teacher(s)" />
-                              <TableColumn prefWidth="75.0" text="ECTS" />
+                              <TableColumn fx:id="coursesNameColumn" prefWidth="75.0" text="Name" />
+                              <TableColumn fx:id="coursesSemesterColumn" prefWidth="75.0" text="Semester" />
+                              <TableColumn fx:id="coursesGroupColumn" prefWidth="50.0" text="Group" />
+                              <TableColumn fx:id="coursesTeacherColumn" prefWidth="125.0" text="Teacher(s)" />
+                              <TableColumn fx:id="coursesEctsColumn" prefWidth="75.0" text="ECTS" />
                            </columns>
                         </TableView>
                         <HBox alignment="CENTER" prefHeight="50.0" prefWidth="400.0">
