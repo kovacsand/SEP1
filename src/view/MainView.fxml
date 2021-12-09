@@ -109,7 +109,7 @@
                   </VBox>
                </content>
             </Tab>
-            <Tab fx:id="classesTab" onSelectionChanged="#tabChanged" text="Class">
+            <Tab fx:id="classesTab" onSelectionChanged="#tabChanged" text="MyClass">
                <content>
                   <VBox prefHeight="400.0" prefWidth="400.0">
                      <children>
