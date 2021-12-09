@@ -99,6 +99,20 @@ public class Class implements Serializable
     }
     return found;
   }
+
+  public String getCourses()
+  {
+    String temp = "";
+    for (int i = 0; i < courseList.getSize(); i++)
+    {
+      if (i == courseList.getSize())
+        temp += courseList.getAllCourses().get(i).getId();
+      else
+        temp += courseList.getAllCourses().get(i).getId() + ", ";
+    }
+    return temp;
+  }
+
   /**
    * Adds the given student to the studentList of the class.
    * @param student
