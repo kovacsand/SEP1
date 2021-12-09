@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Copyright (c) 2015, 2019, Gluon and/or its affiliates.
+  All rights reserved. Use is subject to license terms.
+
+  This file is available and licensed under the following license:
+
+  Redistribution and use in source and binary forms, with or without
+  modification, are permitted provided that the following conditions
+  are met:
+
+  - Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+  - Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in
+    the documentation and/or other materials provided with the distribution.
+  - Neither the name of Oracle Corporation nor the names of its
+    contributors may be used to endorse or promote products derived
+    from this software without specific prior written permission.
+
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="427.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MainViewController">
+   <children>
+      <MenuBar prefWidth="400.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <TabPane fx:id="tabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="400.0" tabClosingPolicy="UNAVAILABLE">
+         <tabs>
+            <Tab fx:id="sessionsTab" onSelectionChanged="#tabChanged" text="Sessions">
+               <content>
+                  <TableView prefHeight="200.0" prefWidth="200.0">
+                    <columns>
+                      <TableColumn prefWidth="75.0" text="C1" />
+                      <TableColumn prefWidth="75.0" text="C2" />
+                    </columns>
+                  </TableView>
+               </content>
+               <content>
+                  <VBox prefHeight="400.0" prefWidth="400.0">
+                     <children>
+                        <TableView prefHeight="350.0" prefWidth="400.0">
+                          <columns>
+                            <TableColumn prefWidth="75.0" text="Course" />
+                            <TableColumn prefWidth="100.0" text="Date" />
+                              <TableColumn prefWidth="125.0" text="Time" />
+                              <TableColumn prefWidth="100.0" text="Classroom" />
+                          </columns>
+                        </TableView>
+                        <HBox alignment="CENTER" prefHeight="50.0" prefWidth="400.0">
+                           <children>
+                              <Button mnemonicParsing="false" prefWidth="60.0" text="Add">
+                                 <HBox.margin>
+                                    <Insets bottom="5.0" left="5.0" top="5.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button mnemonicParsing="false" prefWidth="60.0" text="Edit">
+                                 <HBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button mnemonicParsing="false" prefWidth="60.0" text="Remove">
+                                 <HBox.margin>
+                                    <Insets bottom="5.0" right="5.0" top="5.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </content>
+            </Tab>
+            <Tab fx:id="classesTab" onSelectionChanged="#tabChanged" text="MyClass">
+               <content>
+                  <VBox prefHeight="400.0" prefWidth="400.0">
+                     <children>
+                        <TableView fx:id="classesTable" prefHeight="350.0" prefWidth="400.0">
+                           <columns>
+                              <TableColumn fx:id="classesSemesterColumn" prefWidth="75.0" text="Semester" />
+                              <TableColumn fx:id="classesGroupColumn" prefWidth="50.0" text="Group" />
+                              <TableColumn fx:id="classesStudentCountColumn" prefWidth="100.0" text="Student count" />
+                              <TableColumn fx:id="classesCoursesColumn" prefWidth="175.0" text="Courses" />
+                           </columns>
+                        </TableView>
+                        <HBox alignment="CENTER" prefHeight="50.0" prefWidth="400.0">
+                           <children>
+                              <Button mnemonicParsing="false" prefWidth="60.0" text="Edit">
+                                 <HBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </content>
+            </Tab>
+            <Tab fx:id="classroomsTab" onSelectionChanged="#tabChanged" text="Classrooms">
+               <content>
+                  <VBox prefHeight="400.0" prefWidth="400.0">
+                     <children>
+                        <TableView fx:id="classroomsTable" prefHeight="350.0" prefWidth="400.0">
+                           <columns>
+                              <TableColumn fx:id="classroomsNameColumn" prefWidth="200.0" text="Name" />
+                              <TableColumn fx:id="classroomsCapacityColumn" prefWidth="200.0" text="Capacity" />
+                           </columns>
+                        </TableView>
+                        <HBox alignment="CENTER" prefHeight="50.0" prefWidth="400.0">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </content>
+            </Tab>
+            <Tab fx:id="coursesTab" onSelectionChanged="#tabChanged" text="Courses">
+               <content>
+                  <VBox prefHeight="400.0" prefWidth="400.0">
+                     <children>
+                        <TableView fx:id="coursesTable" prefHeight="350.0" prefWidth="400.0">
+                           <columns>
+                              <TableColumn fx:id="coursesNameColumn" prefWidth="75.0" text="Name" />
+                              <TableColumn fx:id="coursesSemesterColumn" prefWidth="75.0" text="Semester" />
+                              <TableColumn fx:id="coursesGroupColumn" prefWidth="50.0" text="Group" />
+                              <TableColumn fx:id="coursesTeacherColumn" prefWidth="125.0" text="Teacher(s)" />
+                              <TableColumn fx:id="coursesEctsColumn" prefWidth="75.0" text="ECTS" />
+                           </columns>
+                        </TableView>
+                        <HBox alignment="CENTER" prefHeight="50.0" prefWidth="400.0">
+                           <children>
+                              <Button mnemonicParsing="false" prefWidth="60.0" text="Edit">
+                                 <HBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </content>
+            </Tab>
+            <Tab fx:id="studentsTab" onSelectionChanged="#tabChanged" text="Students">
+               <content>
+                  <VBox prefHeight="400.0" prefWidth="400.0">
+                     <children>
+                        <TableView fx:id="studentsTable" prefHeight="350.0" prefWidth="400.0">
+                           <columns>
+                              <TableColumn fx:id="studentsIdColumn" prefWidth="75.0" text="ID" />
+                              <TableColumn fx:id="studentsNameColumn" prefWidth="175.0" text="Name" />
+                              <TableColumn fx:id="studentsSemesterColumn" prefWidth="75.0" text="Semester" />
+                              <TableColumn fx:id="studentsGroupColumn" prefWidth="75.0" text="Group" />
+                           </columns>
+                        </TableView>
+                        <HBox alignment="CENTER" prefHeight="50.0" prefWidth="400.0">
+                           <children>
+                              <Button mnemonicParsing="false" prefWidth="60.0" text="Add">
+                                 <HBox.margin>
+                                    <Insets bottom="5.0" left="5.0" top="5.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button mnemonicParsing="false" prefWidth="60.0" text="Edit">
+                                 <HBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button mnemonicParsing="false" prefWidth="60.0" text="Remove">
+                                 <HBox.margin>
+                                    <Insets bottom="5.0" right="5.0" top="5.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </content>
+            </Tab>
+            <Tab fx:id="teachersTab" onSelectionChanged="#tabChanged" text="Teachers">
+               <content>
+                  <VBox prefHeight="400.0" prefWidth="400.0">
+                     <children>
+                        <TableView fx:id="teachersTable" prefHeight="350.0" prefWidth="400.0">
+                           <columns>
+                              <TableColumn fx:id="teachersIdColumn" prefWidth="200.0" text="ID" />
+                              <TableColumn fx:id="teachersNameColumn" prefWidth="200.0" text="Name" />
+                           </columns>
+                        </TableView>
+                        <HBox alignment="CENTER" prefHeight="50.0" prefWidth="400.0">
+                           <children>
+                              <Button mnemonicParsing="false" prefWidth="60.0" text="Add">
+                                 <HBox.margin>
+                                    <Insets bottom="5.0" left="5.0" top="5.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button mnemonicParsing="false" prefWidth="60.0" text="Edit">
+                                 <HBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button mnemonicParsing="false" prefWidth="60.0" text="Remove">
+                                 <HBox.margin>
+                                    <Insets bottom="5.0" right="5.0" top="5.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </content>
+            </Tab>
+         </tabs>
+      </TabPane>
+   </children>
+</FlowPane>
