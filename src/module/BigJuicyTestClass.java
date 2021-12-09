@@ -21,6 +21,7 @@ public class BigJuicyTestClass
 //    System.out.println(modelManager.getCourse("SDJ1X"));
 //    System.out.println(modelManager.getClassById("1Y"));
 //    System.out.println(modelManager.getAllStudents());
+    modelManager.importData();
     System.out.println(modelManager.getCourse("SDJ1X").getTeachersId());
     modelManager.addTeacherToCourse("RIB","SDJ1X");
     System.out.println(modelManager.getCourse("SDJ1X").getTeachersId());
