@@ -23,6 +23,10 @@ public class MainViewController
 
   //SESSIONS TABLE
   @FXML private TableView<Session> sessionsTable;
+  @FXML private TableColumn<Session, String> sessionsCourseColumn;
+  @FXML private TableColumn<Session, String> sessionsDateColumn;
+  @FXML private TableColumn<Session, String> sessionsTimeColumn;
+  @FXML private TableColumn<Session, String> sessionsClassroomColumn;
 
   //CLASSES TABLE
   @FXML private TableView<Class> classesTable;
@@ -64,7 +68,16 @@ public class MainViewController
   {
     if (sessionsTab.isSelected())
     {
+      sessionsCourseColumn.setCellValueFactory(new PropertyValueFactory<Session, String>("courseString"));
+      sessionsDateColumn.setCellValueFactory(new PropertyValueFactory<Session, String>("dateString"));
+      sessionsTimeColumn.setCellValueFactory(new PropertyValueFactory<Session, String>("timeString"));
+      sessionsClassroomColumn.setCellValueFactory(new PropertyValueFactory<Session, String>("classroomString"));
 
+      sessionsTable.getItems().clear();
+
+      SessionList sessionList = scheduleModelManager.getAllSessions();
+      for (int i = 0; i < sessionList.getSize(); i++)
+        sessionsTable.getItems().add(sessionList.getAllSessions().get(i));
     }
     else if (classesTab.isSelected())
     {

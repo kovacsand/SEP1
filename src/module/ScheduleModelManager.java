@@ -329,7 +329,7 @@ public class ScheduleModelManager
     }
     catch (IOException e)
     {
-      System.out.println("IO Error reading file.");
+      System.out.println("IO Error reading file. (whilst reading sessions)");
     }
     catch (ClassNotFoundException e)
     {

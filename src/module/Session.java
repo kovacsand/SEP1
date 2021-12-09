@@ -99,6 +99,29 @@ public class Session implements Serializable
         course.getName(), course.getSemester(), course.getGroup());
   }
 
+
+  public String getCourseString()
+  {
+    return course.getId();
+  }
+
+  public String getDateString()
+  {
+    return date.toString();
+  }
+
+  public String getTimeString()
+  {
+    return interval.toString();
+  }
+
+  public String getClassroomString()
+  {
+    return room.getName();
+  }
+
+
+
   /**
    * Compares two Session objects.
    * @param obj the Session we want to compare with.
