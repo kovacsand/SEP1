@@ -8,15 +8,23 @@ public class Class implements Serializable
   private String group;
   private StudentList studentList;
   private CourseList courseList;
+  private int studentCount;
   /**
    * Two-argument constructor initializing the semester, group, studentList and courseList.
-   * @param semester,group
+   * @param semester
+   * @param group
    */
   public Class(int semester,String group){
     this.semester=semester;
     this.group=group;
     studentList=new StudentList();
     courseList=new CourseList();
+    this.studentCount=0;
+  }
+
+  public int getStudentCount(){
+    studentCount=studentList.getSize();
+    return studentCount;
   }
 
   /**
@@ -92,31 +100,11 @@ public class Class implements Serializable
   }
 
   /**
-   * Adds the given list of students to the studentList of the class.
-   * @param students
-   */
-  public void addStudents(StudentList students){
-    for(int i=0;i<students.getSize();i++){
-      studentList.getAllStudents().add(students.getAllStudents().get(i));
-    }
-  }
-
-  /**
    * Adds the given course to the courseList of the class.
    * @param course
    */
   public void addCourse(Course course){
     courseList.getAllCourses().add(course);
-  }
-
-  /**
-   * Adds the given list of courses to the courseList of the class.
-   * @param courses
-   */
-  public void addCourses(CourseList courses){
-    for(int i=0;i<courses.getSize();i++){
-      courseList.getAllCourses().add(courses.getAllCourses().get(i));
-    }
   }
 
   /**
@@ -152,7 +140,10 @@ public class Class implements Serializable
 
   /**
    * Displays all the data stored in the class.
-   * @return semester, group, studentList, courseList
+   * @return semester
+   * @return group
+   * @return studentList
+   * @return courseList
    */
   public String toString(){
     String studentsSTR="";

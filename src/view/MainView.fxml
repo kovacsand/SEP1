@@ -113,12 +113,12 @@
                <content>
                   <VBox prefHeight="400.0" prefWidth="400.0">
                      <children>
-                        <TableView prefHeight="350.0" prefWidth="400.0">
+                        <TableView fx:id="classesTable" prefHeight="350.0" prefWidth="400.0">
                            <columns>
-                              <TableColumn prefWidth="75.0" text="Semester" />
-                              <TableColumn prefWidth="50.0" text="Group" />
-                              <TableColumn prefWidth="100.0" text="Student count" />
-                              <TableColumn prefWidth="175.0" text="Courses" />
+                              <TableColumn fx:id="classesSemesterColumn" prefWidth="75.0" text="Semester" />
+                              <TableColumn fx:id="classesGroupColumn" prefWidth="50.0" text="Group" />
+                              <TableColumn fx:id="classesStudentCountColumn" prefWidth="100.0" text="Student count" />
+                              <TableColumn fx:id="classesCoursesColumn" prefWidth="175.0" text="Courses" />
                            </columns>
                         </TableView>
                         <HBox alignment="CENTER" prefHeight="50.0" prefWidth="400.0">
@@ -151,10 +151,10 @@
                <content>
                   <VBox prefHeight="400.0" prefWidth="400.0">
                      <children>
-                        <TableView prefHeight="350.0" prefWidth="400.0">
+                        <TableView fx:id="classroomsTable" prefHeight="350.0" prefWidth="400.0">
                            <columns>
-                              <TableColumn prefWidth="200.0" text="Name" />
-                              <TableColumn prefWidth="200.0" text="Capacity" />
+                              <TableColumn fx:id="classroomsNameColumn" prefWidth="200.0" text="Name" />
+                              <TableColumn fx:id="classroomsCapacityColumn" prefWidth="200.0" text="Capacity" />
                            </columns>
                         </TableView>
                         <HBox alignment="CENTER" prefHeight="50.0" prefWidth="400.0">
