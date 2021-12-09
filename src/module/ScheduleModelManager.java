@@ -214,6 +214,7 @@ public class ScheduleModelManager
 
         courses.addCourse(new Course(name, Integer.parseInt(semester), group,
             Integer.parseInt(ects), teacher));
+
       }
     }
 
