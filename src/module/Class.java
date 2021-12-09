@@ -110,6 +110,7 @@ public class Class implements Serializable
       else
         temp += courseList.getAllCourses().get(i).getId() + ", ";
     }
+
     return temp;
   }
 
