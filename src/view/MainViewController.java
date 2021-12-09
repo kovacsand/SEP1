@@ -21,6 +21,9 @@ public class MainViewController
   @FXML private Tab studentsTab;
   @FXML private Tab teachersTab;
 
+  //SESSIONS TABLE
+  @FXML private TableView<Session> sessionsTable;
+
   //CLASSES TABLE
   @FXML private TableView<Class> classesTable;
   @FXML private TableColumn<Class,String> classesSemesterColumn;
@@ -61,7 +64,7 @@ public class MainViewController
   {
     if (sessionsTab.isSelected())
     {
-      sessionsTab.setText("sad");
+
     }
     else if (classesTab.isSelected())
     {

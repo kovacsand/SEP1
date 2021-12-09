@@ -64,9 +64,19 @@ public class Classroom implements Serializable
     String time = String.format("%02d%02d%02d%04d%04d", date.getDay(), date.getMonth(), date.getYear() % 100, interval.getStartTime(), interval.getEndTime());
     for (int i = 0; i < occupiedHours.size(); i++)
     {
-      if (occupiedHours.get(i).equals(time))
-        return false;
+      String tempTime = occupiedHours.get(i);
+      String tempDateString = tempTime.substring(0, 5);
+      MyDate tempDate = new MyDate(Integer.parseInt(tempDateString.substring(0, 1)), Integer.parseInt(tempDateString.substring(2, 3)), Integer.parseInt(tempDateString.substring(4, 5)));
+
+      if (date.equals(tempDate))
+      {
+        //String tempStartTime
+      }
+
     }
+
+//      if (occupiedHours.get(i).equals(time))
+//        return false;
     return true;
   }
 
