@@ -75,7 +75,7 @@ public abstract class Person implements Serializable
 
   public String toString()
   {
-    return "Name: "+name+" ID: "+id+" workingHours: "+workingHours;
+    return "Name: "+name+" ID: "+id;
   }
 
   public abstract Person copy();

@@ -61,7 +61,8 @@ public class ScheduleModelManager
         //Creating new classes
         boolean exists = false;
         for (int j = 0; j < classes.getSize(); j++)
-          if ((classes.getAllClasses().get(j).getSemester() == Integer.parseInt(semester) && classes.getAllClasses().get(j).getGroup().equals(group)))
+          if ((classes.getAllClasses().get(j).getSemester() == Integer.parseInt(
+              semester) && classes.getAllClasses().get(j).getGroup().equals(group)))
           {
             exists = true;
           }
@@ -71,7 +72,8 @@ public class ScheduleModelManager
         }
         for (int j = 0; j < classes.getSize(); j++)
         {
-          if ((classes.getAllClasses().get(j).getSemester() == Integer.parseInt(semester) && classes.getAllClasses().get(j).getGroup().equals(group)))
+          if ((classes.getAllClasses().get(j).getSemester() == Integer.parseInt(
+              semester) && classes.getAllClasses().get(j).getGroup().equals(group)))
           {
             classes.getAllClasses().get(j).addStudent(students.getStudent(id));
           }
@@ -209,7 +211,8 @@ public class ScheduleModelManager
         {
           if (teachers.getAllTeachers().get(j).getId().equals(teacherId))
           {
-            teacher = new Teacher(teacherId, teachers.getAllTeachers().get(j).getName());
+            teacher = new Teacher(teacherId,
+                teachers.getAllTeachers().get(j).getName());
           }
 
         }
@@ -259,6 +262,7 @@ public class ScheduleModelManager
 
   /**
    * Get all sessions from .bin file.
+   *
    * @return the SessionList containing all the sessions
    */
   public SessionList getAllSessions()
@@ -288,6 +292,7 @@ public class ScheduleModelManager
 
   /**
    * Get one specific session that matches the id (Ex: 03122110001100SDJ1X)
+   *
    * @param id the id of the session
    * @return the Session that matches the id given
    */
@@ -301,6 +306,7 @@ public class ScheduleModelManager
 
   /**
    * Removing a session from the list
+   *
    * @param session matching the session that will be removed
    */
 
@@ -327,6 +333,7 @@ public class ScheduleModelManager
 
   /**
    * Removing all sessions from the list
+   *
    * @param sessionList matching the sessions that will be deleted
    */
   public void removeAllSessions(SessionList sessionList)
@@ -349,6 +356,7 @@ public class ScheduleModelManager
 
   /**
    * Adding one session to the SessionList
+   *
    * @param session object added to the SessionList
    */
   public void addSession(Session session)
@@ -372,6 +380,7 @@ public class ScheduleModelManager
 
   /**
    * Getting a classroom list
+   *
    * @return ClassroomList containing all classrooms
    */
   public ClassroomList getAllClassrooms()
@@ -400,6 +409,7 @@ public class ScheduleModelManager
 
   /**
    * Get all classrooms by its capacity
+   *
    * @param capacity takes into account the size of the people that must be assigned for the session
    * @return ClassroomList that contains all the classrooms that are larger or equal in size than the size of the students that are assigned to the course which is assigned to the classroom
    */
@@ -421,6 +431,7 @@ public class ScheduleModelManager
 
   /**
    * Removing the classroom from the ClassroomList
+   *
    * @param name removing the given classroom by its name
    */
   public void removeClassroom(String name)
@@ -444,6 +455,7 @@ public class ScheduleModelManager
 
   /**
    * Reading the courses from the file and storing them
+   *
    * @return CourseList object containing all the courses
    */
   public CourseList getAllCourses()
@@ -471,6 +483,7 @@ public class ScheduleModelManager
 
   /**
    * Get singular course by its id
+   *
    * @param id that matches the course you are looking for
    * @return Course object that contains the course the user searched for it
    */
@@ -491,6 +504,7 @@ public class ScheduleModelManager
 
   /**
    * Removes specific course from the CourseList
+   *
    * @param course name of the course that is being removed
    */
   public void removeCourse(Course course)
@@ -513,6 +527,7 @@ public class ScheduleModelManager
 
   /**
    * Adding a course to the CourseList
+   *
    * @param course which course is going to be added
    */
   public void addCourse(Course course)
@@ -536,6 +551,7 @@ public class ScheduleModelManager
 
   /**
    * Get ClassList of all classes
+   *
    * @return ClassList object of all classes
    */
   public ClassList getAllClasses()
@@ -568,7 +584,7 @@ public class ScheduleModelManager
     for (int i = 0; i < allClasses.getSize(); i++)
     {
       String classId = allClasses.getAllClasses().get(i).getSemester() + allClasses.getAllClasses().get(i).getGroup();
-      if(id.equals(classId))
+      if (id.equals(classId))
       {
         aClass = allClasses.getAllClasses().get(i);
       }
@@ -578,6 +594,7 @@ public class ScheduleModelManager
 
   /**
    * Get a ClassList classes by semester
+   *
    * @param semester which semester classes would like to be found
    * @return ClassList containing the classes of the given semester
    */
@@ -596,6 +613,7 @@ public class ScheduleModelManager
 
   /**
    * Remove the class from the ClassList
+   *
    * @param aClass remove the given class from the ClassList
    */
   public void removeClass(Class aClass)
@@ -621,6 +639,7 @@ public class ScheduleModelManager
 
   /**
    * Adding a class to the ClassList
+   *
    * @param aClass adding the specified class to the ClassList
    */
   public void addClass(Class aClass)
@@ -644,6 +663,7 @@ public class ScheduleModelManager
 
   /**
    * Get a StudentList of all students
+   *
    * @return StudentList of the students
    */
   public StudentList getAllStudents()
@@ -672,6 +692,7 @@ public class ScheduleModelManager
 
   /**
    * Get student by searching its ID
+   *
    * @param id of the student that needs to be found
    * @return student object that matches the ID
    */
@@ -683,6 +704,7 @@ public class ScheduleModelManager
 
   /**
    * Removing the student from the StudentList
+   *
    * @param student object that needs to be removed
    */
   public void removeStudent(Student student)
@@ -691,6 +713,7 @@ public class ScheduleModelManager
     ClassList allClasses = getAllClasses();
 
     allStudents.removeStudent(student.getId());
+    String classId = student.getSemester() + student.getGroup();
     removeStudentFromClass(student.getId());
 
     try
@@ -710,27 +733,44 @@ public class ScheduleModelManager
 
   public void removeStudentFromClass(String studentId)
   {
-    StudentList allStudents = getAllStudents();
+//    StudentList allStudents = getAllStudents();
     ClassList allClasses = getAllClasses();
-    Student temp = allStudents.getStudent(studentId);
-    System.out.println(getClassById(temp.getSemester() + temp.getGroup()).getAllStudents().getSize());
-    System.out.println(getClassById(temp.getSemester() + temp.getGroup()));
-    getClassById(temp.getSemester() + temp.getGroup()).removeStudent(temp);
-    System.out.println(getClassById(temp.getSemester() + temp.getGroup()).getAllStudents().getSize());
+//    Student student = null;
+//    for (int i = 0; i < allStudents.getSize(); i++)
+//    {
+//      if (allStudents.getAllStudents().get(i).getId().equals(studentId))
+//      {
+//        student = new Student(studentId,
+//            allStudents.getAllStudents().get(i).getName(),
+//            allStudents.getAllStudents().get(i).getSemester(),
+//            allStudents.getAllStudents().get(i).getGroup());
+//        allClasses.getAllClasses().get(i).removeStudent(student);
+//      }
+//    }
+    //    Student temp = allStudents.getStudent(studentId);
+    //
+    //    System.out.println(getClassById(temp.getSemester() + temp.getGroup()).getAllStudents().getSize());
+    //    System.out.println(getClassById(temp.getSemester() + temp.getGroup()));
+    //    getClassById(temp.getSemester() + temp.getGroup()).removeStudent(temp);
+    //    System.out.println(getClassById(temp.getSemester() + temp.getGroup()).getAllStudents().getSize());
 
     try
+
     {
       MyFileHandler.writeToBinaryFile("classes.bin", allClasses);
       MyFileHandler.writeToBinaryFile("students.bin", allStudents);
     }
     catch (FileNotFoundException e)
+
     {
       System.out.println("File not found");
     }
     catch (IOException e)
+
     {
       System.out.println("IO Error writing to file");
     }
+
   }
 
   /**
