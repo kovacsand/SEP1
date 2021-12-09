@@ -109,7 +109,7 @@
                   </VBox>
                </content>
             </Tab>
-            <Tab fx:id="classesTab" onSelectionChanged="#tabChanged" text="Classes">
+            <Tab fx:id="classesTab" onSelectionChanged="#tabChanged" text="Class">
                <content>
                   <VBox prefHeight="400.0" prefWidth="400.0">
                      <children>
@@ -123,19 +123,9 @@
                         </TableView>
                         <HBox alignment="CENTER" prefHeight="50.0" prefWidth="400.0">
                            <children>
-                              <Button mnemonicParsing="false" prefWidth="60.0" text="Add">
-                                 <HBox.margin>
-                                    <Insets bottom="5.0" left="5.0" top="5.0" />
-                                 </HBox.margin>
-                              </Button>
                               <Button mnemonicParsing="false" prefWidth="60.0" text="Edit">
                                  <HBox.margin>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </HBox.margin>
-                              </Button>
-                              <Button mnemonicParsing="false" prefWidth="60.0" text="Remove">
-                                 <HBox.margin>
-                                    <Insets bottom="5.0" right="5.0" top="5.0" />
                                  </HBox.margin>
                               </Button>
                            </children>
@@ -158,23 +148,6 @@
                            </columns>
                         </TableView>
                         <HBox alignment="CENTER" prefHeight="50.0" prefWidth="400.0">
-                           <children>
-                              <Button mnemonicParsing="false" prefWidth="60.0" text="Add">
-                                 <HBox.margin>
-                                    <Insets bottom="5.0" left="5.0" top="5.0" />
-                                 </HBox.margin>
-                              </Button>
-                              <Button mnemonicParsing="false" prefWidth="60.0" text="Edit">
-                                 <HBox.margin>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </HBox.margin>
-                              </Button>
-                              <Button mnemonicParsing="false" prefWidth="60.0" text="Remove">
-                                 <HBox.margin>
-                                    <Insets bottom="5.0" right="5.0" top="5.0" />
-                                 </HBox.margin>
-                              </Button>
-                           </children>
                            <VBox.margin>
                               <Insets />
                            </VBox.margin>
@@ -198,19 +171,9 @@
                         </TableView>
                         <HBox alignment="CENTER" prefHeight="50.0" prefWidth="400.0">
                            <children>
-                              <Button mnemonicParsing="false" prefWidth="60.0" text="Add">
-                                 <HBox.margin>
-                                    <Insets bottom="5.0" left="5.0" top="5.0" />
-                                 </HBox.margin>
-                              </Button>
                               <Button mnemonicParsing="false" prefWidth="60.0" text="Edit">
                                  <HBox.margin>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </HBox.margin>
-                              </Button>
-                              <Button mnemonicParsing="false" prefWidth="60.0" text="Remove">
-                                 <HBox.margin>
-                                    <Insets bottom="5.0" right="5.0" top="5.0" />
                                  </HBox.margin>
                               </Button>
                            </children>
@@ -266,9 +229,8 @@
                      <children>
                         <TableView fx:id="teachersTable" prefHeight="350.0" prefWidth="400.0">
                            <columns>
-                              <TableColumn fx:id="teachersIdColumn" prefWidth="50.0" text="ID" />
-                              <TableColumn fx:id="teachersNameColumn" prefWidth="175.0" text="Name" />
-                              <TableColumn fx:id="teachersCoursesColumn" prefWidth="175.0" text="Courses" />
+                              <TableColumn fx:id="teachersIdColumn" prefWidth="200.0" text="ID" />
+                              <TableColumn fx:id="teachersNameColumn" prefWidth="200.0" text="Name" />
                            </columns>
                         </TableView>
                         <HBox alignment="CENTER" prefHeight="50.0" prefWidth="400.0">

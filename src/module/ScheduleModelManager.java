@@ -1,11 +1,8 @@
 package module;
 import utils.MyFileHandler;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.Serializable;
-import java.lang.reflect.Array;
 import java.util.*;
 
 /**
@@ -584,12 +581,12 @@ public class ScheduleModelManager
   public ClassList getAllClassBySemester(int semester)
   {
     ClassList allClasses = getAllClasses();
-    ArrayList<Class> classes = allClasses.getAllClassesBySemester(semester);
+    ArrayList<Class> aClasses = allClasses.getAllClassesBySemester(semester);
     ClassList newList = new ClassList();
 
-    for (int i = 0; i < classes.size(); i++)
+    for (int i = 0; i < aClasses.size(); i++)
     {
-      newList.addClass(classes.get(i));
+      newList.addClass(aClasses.get(i));
     }
     return newList;
   }
