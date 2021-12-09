@@ -30,5 +30,7 @@ public class BigJuicyTestClass
     System.out.println(modelManager.getCourse("SDJ1X").getTeachersId());
     modelManager.addTeacherToCourse("ALHE","SDJ1X");
     System.out.println(modelManager.getCourse("SDJ1X").getTeachersId());
+
+    System.out.println(modelManager.getAllClasses().getAllClasses().get(0).getAllCourses());
   }
 }

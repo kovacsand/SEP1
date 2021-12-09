@@ -214,6 +214,19 @@ public class ScheduleModelManager
 
         courses.addCourse(new Course(name, Integer.parseInt(semester), group,
             Integer.parseInt(ects), teacher));
+
+        for (int j = 0; j < classes.getSize(); j++)
+        {
+          if (classes.getAllClasses().get(j).getSemester() == Integer.parseInt(semester) && classes.getAllClasses().get(j).getGroup().equals(group))
+          {
+            System.out.println(classes.getAllClasses().get(j).getAllCourses().getSize());
+            System.out.println("class found");
+            classes.getAllClasses().get(j).addCourse(new Course(name, Integer.parseInt(semester), group,
+                Integer.parseInt(ects), teacher));
+            System.out.println(classes.getAllClasses().get(j).getAllCourses().getSize());
+            System.out.println(classes.getAllClasses().get(j).getAllCourses().getAllCourses().get(0));
+          }
+        }
       }
     }
 
@@ -230,6 +243,7 @@ public class ScheduleModelManager
     try
     {
       MyFileHandler.writeToBinaryFile("courses.bin", courses);
+      MyFileHandler.writeToBinaryFile("classes.bin", classes);
     }
 
     catch (FileNotFoundException e)
