@@ -39,10 +39,28 @@ public class ClassList implements Serializable
    * Returns all elements of the classes list.
    * @return classes
    */
-  public ArrayList<Class> getAllClasses(){
+  public ArrayList<Class> getAllClasses()
+  {
     return aClasses;
   }
 
+  /**
+   * Returns a specific class the user is looking for
+   * @param classId ID of the class object you are looking for (Ex. 1X)
+   * @return the class object that matches the given classId
+   */
+  public Class getAClass(String classId)
+  {
+    Class temp = null;
+    for (int i = 0; i < aClasses.size(); i++)
+    {
+      if(aClasses.get(i).getId().equals(classId))
+      {
+        temp = aClasses.get(i);
+      }
+    }
+    return temp;
+  }
   /**
    * Returns a new list of classes of the class list which has the semester given as a parameter.
    * @param semester
@@ -62,7 +80,8 @@ public class ClassList implements Serializable
    * Returns the size of the class list
    * @return classes.size()
    */
-  public int getSize(){
+  public int getSize()
+  {
     return aClasses.size();
   }
 

@@ -44,6 +44,14 @@ public class Class implements Serializable
   }
 
   /**
+   * Returns the ID of the class (Ex. 1X)
+   * @return the semester and the group of the class added together
+   */
+  public String getId()
+  {
+    return semester + group;
+  }
+  /**
    * Returns the list of students of the class.
    * @return studentList
    */

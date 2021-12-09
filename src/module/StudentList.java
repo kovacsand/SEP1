@@ -24,7 +24,6 @@ public class StudentList implements Serializable
       Student student = students.get(i);
       if (student.getId().equals(id))
       {
-        System.out.println("remove");
         students.remove(student);
         break;
       }

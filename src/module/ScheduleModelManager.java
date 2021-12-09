@@ -686,9 +686,9 @@ public class ScheduleModelManager
   {
     StudentList allStudents = getAllStudents();
     ClassList allClasses = getAllClasses();
-
+    String classId = student.getSemester() + student.getGroup();
     allStudents.removeStudent(student.getId());
-    removeStudentFromClass(student.getId());
+    allClasses.getAClass(classId).removeStudent(student);
 
     try
     {
@@ -705,15 +705,16 @@ public class ScheduleModelManager
     }
   }
 
+  /**
+   * Removing the student object from the class that the object is attached to
+   * @param studentId ID of the student object that must be removed from the class it has been assigned to
+   */
   public void removeStudentFromClass(String studentId)
   {
     StudentList allStudents = getAllStudents();
     ClassList allClasses = getAllClasses();
-    Student temp = allStudents.getStudent(studentId);
-    System.out.println(getClassById(temp.getSemester() + temp.getGroup()).getAllStudents().getSize());
-    System.out.println(getClassById(temp.getSemester() + temp.getGroup()));
-    getClassById(temp.getSemester() + temp.getGroup()).removeStudent(temp);
-    System.out.println(getClassById(temp.getSemester() + temp.getGroup()).getAllStudents().getSize());
+    String temp = allStudents.getStudent(studentId).getSemester() + allStudents.getStudent(studentId).getGroup();
+    allClasses.getAClass(temp).removeStudent(allStudents.getStudent(studentId));
 
     try
     {
@@ -927,7 +928,6 @@ public class ScheduleModelManager
             Course course = allCourses.getAllCourses().get(j);
             for (int k = 0; k < course.getAllTeachers().getSize(); k++)
             {
-              System.out.println(course.getAllTeachers().getSize());
               if (course.getAllTeachers().getAllTeachers().get(k).equals(teacher))
               {
                 course.removeTeacher(teacher);
@@ -967,7 +967,7 @@ public class ScheduleModelManager
     {
       if (allStudents.getAllStudents().get(i).getId().equals(studentId))
       {
-        student = allStudents.getAllStudents().get(i).copy();
+        student = new Student(studentId, allStudents.getAllStudents().get(i).getName(), allStudents.getAllStudents().get(i).getSemester(), allStudents.getAllStudents().get(i).getGroup());
         for (int j = 0; j < allCourses.getSize(); j++)
         {
           if (allCourses.getAllCourses().get(j).getId().equals(courseId))
