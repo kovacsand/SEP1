@@ -8,9 +8,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import module.*;
-
-import java.lang.Class;
-import java.util.ArrayList;
+import module.Class;
 
 public class MainViewController
 {
@@ -73,9 +71,9 @@ public class MainViewController
       classesCoursesColumn.setCellValueFactory(new PropertyValueFactory<Class,String>("courses"));
       classesTable.getItems().clear();
       ClassList classList=scheduleModelManager.getAllClasses();
-     /*for(int i=0;i<classList.getSize();i++){
+      for(int i=0;i<classList.getSize();i++){
         classesTable.getItems().add(classList.getAllClasses().get(i));
-      }*/
+      }
     }
     else if (classroomsTab.isSelected())
     {

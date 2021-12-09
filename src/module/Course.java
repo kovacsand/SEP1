@@ -143,6 +143,8 @@ public class Course implements Serializable
     {
       teachersId+=teacherList.getAllTeachers().get(i).getId()+" ";
     }
+    if (teacherList.getAllTeachers().get(0).getId().equals("-1"))
+      removeTeacher(teacherList.getAllTeachers().get(0));
   }
 
   /**
@@ -163,7 +165,6 @@ public class Course implements Serializable
     {
       teacherList.removeTeacher(teacher.getId());
       teacherList.addTeacher(new Teacher("-1", "NO_TEACHER"));
-
     }
     else if(teacherList.getSize()>1){
       teacherList.removeTeacher(teacher.getId());
