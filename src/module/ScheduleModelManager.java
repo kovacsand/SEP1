@@ -442,10 +442,14 @@ public class ScheduleModelManager
   {
     SessionList allSessions = getAllSessions();
     allSessions.addSession(session);
+    ClassroomList classroomList = getAllClassrooms();
+
+    classroomList.getClassroom(session.getClassroomString()).addOccupiedHours(session.getDate(), session.getInterval());
 
     try
     {
       MyFileHandler.writeToBinaryFile("sessions.bin", allSessions);
+      MyFileHandler.writeToBinaryFile("classrooms.bin", classroomList);
     }
     catch (FileNotFoundException e)
     {

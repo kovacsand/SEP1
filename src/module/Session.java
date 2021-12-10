@@ -35,6 +35,8 @@ public class Session implements Serializable
     this.interval = interval;
     this.room = room;
     this.course = course;
+    ScheduleModelManager scheduleModelManager = new ScheduleModelManager();
+    scheduleModelManager.getAllClassrooms().getClassroom(room.getName()).addOccupiedHours(date, interval);
   }
 
   /**
