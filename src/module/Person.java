@@ -7,14 +7,14 @@ public abstract class Person implements Serializable
 {
   private String name;
   private String id;
-  private ArrayList workingHours;
+  private ArrayList<String> workingHours;
 
 
   public Person(String id, String name)
   {
     this.name=name;
     this.id=id;
-    ArrayList<String> workingHours = new ArrayList<>();
+    workingHours = new ArrayList<>();
   }
 
   public String getId()
@@ -71,11 +71,12 @@ public abstract class Person implements Serializable
     }
     Person other=(Person)obj;
     return id.equals(other.id) && name.equals(other.name) && workingHours.equals(other.workingHours);
+    //works without workinghours
   }
 
   public String toString()
   {
-    return "Name: "+name+" ID: "+id+" workingHours: "+workingHours;
+    return "Name: "+name+" ID: "+id;
   }
 
   public abstract Person copy();

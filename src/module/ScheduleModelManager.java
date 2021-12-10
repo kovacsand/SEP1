@@ -1,11 +1,10 @@
 package module;
 import utils.MyFileHandler;
 
-import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.Serializable;
-import java.lang.reflect.Array;
+import java.io.PrintWriter;
 import java.util.*;
 
 /**
@@ -197,26 +196,52 @@ public class ScheduleModelManager
 
       Teacher teacher = null;
 
+      boolean found = false;
+
       for (int i = 0; i < courseArray.length; i++)
       {
+        found = false;
         String temp = courseArray[i];
         String[] tempArr = temp.split(",");
         String semester = tempArr[0];
         String group = tempArr[1];
         String name = tempArr[2];
         String teacherId = tempArr[3];
-        for (int j = 0; j < teachers.getSize(); j++)
+
+        for (int j = 0; j < courses.getSize(); j++)
         {
-          if (teachers.getAllTeachers().get(j).getId().equals(teacherId))
+          if (courses.getAllCourses().get(j).getId().equals(name + semester + group))
           {
-            teacher = new Teacher(teacherId, teachers.getAllTeachers().get(j).getName());
+            courses.getAllCourses().get(j).addTeacher(getTeacher(teacherId));
+            found = true;
           }
-
         }
-        String ects = tempArr[4];
 
-        courses.addCourse(new Course(name, Integer.parseInt(semester), group,
-            Integer.parseInt(ects), teacher));
+        if (!found)
+        {
+          for (int j = 0; j < teachers.getSize(); j++)
+          {
+            if (teachers.getAllTeachers().get(j).getId().equals(teacherId))
+            {
+              teacher = new Teacher(teacherId, teachers.getAllTeachers().get(j).getName());
+            }
+
+          }
+          String ects = tempArr[4];
+
+          courses.addCourse(new Course(name, Integer.parseInt(semester), group,
+              Integer.parseInt(ects), teacher));
+
+          for (int j = 0; j < classes.getSize(); j++)
+          {
+            Class tempClass = classes.getAllClasses().get(j);
+            if (tempClass.getSemester() == Integer.parseInt(semester) && tempClass.getGroup().equals(group))
+            {
+              tempClass.addCourse(
+                  new Course(name, Integer.parseInt(semester), group, Integer.parseInt(ects), teacher));
+            }
+          }
+        }
       }
     }
 
@@ -233,6 +258,7 @@ public class ScheduleModelManager
     try
     {
       MyFileHandler.writeToBinaryFile("courses.bin", courses);
+      MyFileHandler.writeToBinaryFile("classes.bin", classes);
     }
 
     catch (FileNotFoundException e)
@@ -249,12 +275,73 @@ public class ScheduleModelManager
 
   }
 
+  public void assignStudentsToCourses()
+  {
+    CourseList courseList = getAllCourses();
+
+    for (int i = 0; i < courseList.getSize(); i++)
+    {
+      String tempClassId = courseList.getAllCourses().get(i).getSemester() + courseList.getAllCourses().get(i).getGroup();
+      for (int j = 0; j < getClassById(tempClassId).getStudentCount(); j++)
+      {
+        courseList.getAllCourses().get(i).addStudent(getClassById(tempClassId).getAllStudents().getAllStudents().get(j));
+      }
+    }
+
+    try
+    {
+      MyFileHandler.writeToBinaryFile("courses.bin", courseList);
+    }
+
+    catch (FileNotFoundException e)
+    {
+      System.out.println("File not found.");
+    }
+
+    catch (IOException e)
+    {
+      System.out.println("IO Error writing to file");
+    }
+  }
+
   /**
    * Export data as xml file.
    */
   public void export()
   {
-    //TODO!!!!!!!!!!!!!!!!!!!
+    SessionList allSessions = getAllSessions();
+    PrintWriter write = null;
+    try
+    {
+      FileOutputStream fileOut = new FileOutputStream("sessions.xml");
+      write = new PrintWriter(fileOut);
+    }
+    catch (FileNotFoundException ex)
+    {
+      System.out.println("File not found, or could not be opened");
+    }
+
+    System.out.println("Writing to a file");
+    write.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+    write.println("<sessions>");
+
+    for (int i = 0; i < allSessions.getSize(); i++)
+    {
+      write.println("<session>");
+      write.println("<course>" + allSessions.getAllSessions().get(i).getCourseString() + "</course>");
+      write.println("<date>" + allSessions.getAllSessions().get(i).getDate() + "</date>");
+      write.println("<time>" + allSessions.getAllSessions().get(i).getTimeString() + "</time>");
+      write.println("<room>" + allSessions.getAllSessions().get(i).getClassroomString() + "</room>");
+      write.println("<teacher>" + allSessions.getAllSessions().get(i).getCourse().getAllTeachers() + "</teacher>");
+      write.println("<ids>" + allSessions.getAllSessions().get(i).getCourse().getAllStudents() + " " + allSessions.getAllSessions().get(i).getCourse().getAllTeachers() + "</ids>");
+      write.println("</session>");
+    }
+
+    write.println("</sessions>");
+
+    write.close();
+
+    System.out.println("Done writing");
   }
 
   /**
@@ -276,7 +363,7 @@ public class ScheduleModelManager
     }
     catch (IOException e)
     {
-      System.out.println("IO Error reading file.");
+      System.out.println("IO Error reading file. (whilst reading sessions)");
     }
     catch (ClassNotFoundException e)
     {
@@ -355,10 +442,14 @@ public class ScheduleModelManager
   {
     SessionList allSessions = getAllSessions();
     allSessions.addSession(session);
+    ClassroomList classroomList = getAllClassrooms();
+
+    classroomList.getClassroom(session.getClassroomString()).addOccupiedHours(session.getDate(), session.getInterval());
 
     try
     {
       MyFileHandler.writeToBinaryFile("sessions.bin", allSessions);
+      MyFileHandler.writeToBinaryFile("classrooms.bin", classroomList);
     }
     catch (FileNotFoundException e)
     {
@@ -560,7 +651,11 @@ public class ScheduleModelManager
     }
     return allClasses;
   }
-
+  /**
+   * Get a class object by its ID
+   * @param id ID of the class that you are looking for
+   * @return ID of the found course if it matches the given ID
+   */
   public Class getClassById(String id)
   {
     ClassList allClasses = getAllClasses();
@@ -575,7 +670,6 @@ public class ScheduleModelManager
     }
     return aClass;
   }
-
   /**
    * Get a ClassList classes by semester
    * @param semester which semester classes would like to be found
@@ -584,16 +678,14 @@ public class ScheduleModelManager
   public ClassList getAllClassBySemester(int semester)
   {
     ClassList allClasses = getAllClasses();
-    ArrayList<Class> classes = allClasses.getAllClassesBySemester(semester);
+    ArrayList<Class> aClasses = allClasses.getAllClassesBySemester(semester);
     ClassList newList = new ClassList();
-
-    for (int i = 0; i < classes.size(); i++)
+    for (int i = 0; i < aClasses.size(); i++)
     {
-      newList.addClass(classes.get(i));
+      newList.addClass(aClasses.get(i));
     }
     return newList;
   }
-
   /**
    * Remove the class from the ClassList
    * @param aClass remove the given class from the ClassList
@@ -604,7 +696,6 @@ public class ScheduleModelManager
     String group = aClass.getGroup();
     int semester = aClass.getSemester();
     allClasses.removeClass(semester, group);
-
     try
     {
       MyFileHandler.writeToBinaryFile("classes.bin", allClasses);
@@ -618,7 +709,6 @@ public class ScheduleModelManager
       System.out.println("IO Error writing to a file");
     }
   }
-
   /**
    * Adding a class to the ClassList
    * @param aClass adding the specified class to the ClassList
@@ -627,7 +717,6 @@ public class ScheduleModelManager
   {
     ClassList allClasses = getAllClasses();
     allClasses.addClass(aClass);
-
     try
     {
       MyFileHandler.writeToBinaryFile("classes.bin", allClasses);
@@ -641,7 +730,6 @@ public class ScheduleModelManager
       System.out.println("IO Error writing to a file");
     }
   }
-
   /**
    * Get a StudentList of all students
    * @return StudentList of the students
@@ -669,7 +757,6 @@ public class ScheduleModelManager
     }
     return allStudents;
   }
-
   /**
    * Get student by searching its ID
    * @param id of the student that needs to be found
@@ -680,7 +767,6 @@ public class ScheduleModelManager
     StudentList allStudents = getAllStudents();
     return allStudents.getStudent(id);
   }
-
   /**
    * Removing the student from the StudentList
    * @param student object that needs to be removed
@@ -689,10 +775,9 @@ public class ScheduleModelManager
   {
     StudentList allStudents = getAllStudents();
     ClassList allClasses = getAllClasses();
-
+    String classId = student.getSemester() + student.getGroup();
     allStudents.removeStudent(student.getId());
-    removeStudentFromClass(student.getId());
-
+    allClasses.getAClass(classId).removeStudent(student);
     try
     {
       MyFileHandler.writeToBinaryFile("students.bin", allStudents);
@@ -707,16 +792,16 @@ public class ScheduleModelManager
       System.out.println("IO Error writing to a file");
     }
   }
-
+  /**
+   * Removing the student object from the class that the object is attached to
+   * @param studentId ID of the student object that must be removed from the class it has been assigned to
+   */
   public void removeStudentFromClass(String studentId)
   {
     StudentList allStudents = getAllStudents();
     ClassList allClasses = getAllClasses();
-    Student temp = allStudents.getStudent(studentId);
-    System.out.println(getClassById(temp.getSemester() + temp.getGroup()).getAllStudents().getSize());
-    System.out.println(getClassById(temp.getSemester() + temp.getGroup()));
-    getClassById(temp.getSemester() + temp.getGroup()).removeStudent(temp);
-    System.out.println(getClassById(temp.getSemester() + temp.getGroup()).getAllStudents().getSize());
+    String temp = allStudents.getStudent(studentId).getSemester() + allStudents.getStudent(studentId).getGroup();
+    allClasses.getAClass(temp).removeStudent(allStudents.getStudent(studentId));
 
     try
     {
@@ -732,7 +817,6 @@ public class ScheduleModelManager
       System.out.println("IO Error writing to file");
     }
   }
-
   /**
    * Adding the student to the StudentList
    * @param student student object that needs to be added
@@ -748,7 +832,6 @@ public class ScheduleModelManager
         allStudents.addStudent(student);
       }
     }
-
     for (int i = 0; i < allClasses.getSize(); i++)
     {
       if(student.getSemester() == allClasses.getAllClasses().get(i).getSemester() && student.getGroup().equals(allClasses.getAllClasses().get(i).getGroup()))
@@ -760,7 +843,6 @@ public class ScheduleModelManager
         }
       }
     }
-
     try
     {
       MyFileHandler.writeToBinaryFile("students.bin", allStudents);
@@ -775,7 +857,6 @@ public class ScheduleModelManager
       System.out.println("IO Error writing to a file");
     }
   }
-
   /**
    * Getting all the teachers in a TeacherList
    *
@@ -930,7 +1011,6 @@ public class ScheduleModelManager
             Course course = allCourses.getAllCourses().get(j);
             for (int k = 0; k < course.getAllTeachers().getSize(); k++)
             {
-              System.out.println(course.getAllTeachers().getSize());
               if (course.getAllTeachers().getAllTeachers().get(k).equals(teacher))
               {
                 course.removeTeacher(teacher);
@@ -970,7 +1050,7 @@ public class ScheduleModelManager
     {
       if (allStudents.getAllStudents().get(i).getId().equals(studentId))
       {
-        student = allStudents.getAllStudents().get(i).copy();
+        student = new Student(studentId, allStudents.getAllStudents().get(i).getName(), allStudents.getAllStudents().get(i).getSemester(), allStudents.getAllStudents().get(i).getGroup());
         for (int j = 0; j < allCourses.getSize(); j++)
         {
           if (allCourses.getAllCourses().get(j).getId().equals(courseId))
@@ -1045,5 +1125,4 @@ public class ScheduleModelManager
       System.out.println("IO Error writing to a file");
     }
   }
-
 }

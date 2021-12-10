@@ -8,9 +8,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import module.*;
-
-import java.lang.Class;
-import java.util.ArrayList;
+import module.Class;
 
 public class MainViewController
 {
@@ -22,6 +20,13 @@ public class MainViewController
   @FXML private Tab coursesTab;
   @FXML private Tab studentsTab;
   @FXML private Tab teachersTab;
+
+  //SESSIONS TABLE
+  @FXML private TableView<Session> sessionsTable;
+  @FXML private TableColumn<Session, String> sessionsCourseColumn;
+  @FXML private TableColumn<Session, String> sessionsDateColumn;
+  @FXML private TableColumn<Session, String> sessionsTimeColumn;
+  @FXML private TableColumn<Session, String> sessionsClassroomColumn;
 
   //CLASSES TABLE
   @FXML private TableView<Class> classesTable;
@@ -63,7 +68,16 @@ public class MainViewController
   {
     if (sessionsTab.isSelected())
     {
-      sessionsTab.setText("sad");
+      sessionsCourseColumn.setCellValueFactory(new PropertyValueFactory<Session, String>("courseString"));
+      sessionsDateColumn.setCellValueFactory(new PropertyValueFactory<Session, String>("dateString"));
+      sessionsTimeColumn.setCellValueFactory(new PropertyValueFactory<Session, String>("timeString"));
+      sessionsClassroomColumn.setCellValueFactory(new PropertyValueFactory<Session, String>("classroomString"));
+
+      sessionsTable.getItems().clear();
+
+      SessionList sessionList = scheduleModelManager.getAllSessions();
+      for (int i = 0; i < sessionList.getSize(); i++)
+        sessionsTable.getItems().add(sessionList.getAllSessions().get(i));
     }
     else if (classesTab.isSelected())
     {
@@ -73,9 +87,9 @@ public class MainViewController
       classesCoursesColumn.setCellValueFactory(new PropertyValueFactory<Class,String>("courses"));
       classesTable.getItems().clear();
       ClassList classList=scheduleModelManager.getAllClasses();
-     /*for(int i=0;i<classList.getSize();i++){
+      for(int i=0;i<classList.getSize();i++){
         classesTable.getItems().add(classList.getAllClasses().get(i));
-      }*/
+      }
     }
     else if (classroomsTab.isSelected())
     {

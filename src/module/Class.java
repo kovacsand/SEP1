@@ -44,6 +44,14 @@ public class Class implements Serializable
   }
 
   /**
+   * Returns the ID of the class (Ex. 1X)
+   * @return the semester and the group of the class added together
+   */
+  public String getId()
+  {
+    return semester + group;
+  }
+  /**
    * Returns the list of students of the class.
    * @return studentList
    */
@@ -91,6 +99,21 @@ public class Class implements Serializable
     }
     return found;
   }
+
+  public String getCourses()
+  {
+    String temp = "";
+    for (int i = 0; i < courseList.getSize(); i++)
+    {
+      if (i == courseList.getSize())
+        temp += courseList.getAllCourses().get(i).getId();
+      else
+        temp += courseList.getAllCourses().get(i).getId() + ", ";
+    }
+
+    return temp;
+  }
+
   /**
    * Adds the given student to the studentList of the class.
    * @param student

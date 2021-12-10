@@ -13,7 +13,7 @@ public class MyDate implements Serializable
   /**
    * @param day The day of the date.
    * @param month The month of the date.
-   * @param year The year of the date.
+   * @param year The last two digits of the year of the date.
    */
   private int day;
   private int month;
@@ -26,7 +26,7 @@ public class MyDate implements Serializable
   {
     this.day = day;
     this.month = month;
-    this.year = year;
+    this.year = year % 100;
   }
 
   /**
@@ -80,7 +80,7 @@ public class MyDate implements Serializable
    */
   public void setYear(int year)
   {
-    this.year = year;
+    this.year = year % 100;
   }
 
   /**

@@ -35,6 +35,8 @@ public class Session implements Serializable
     this.interval = interval;
     this.room = room;
     this.course = course;
+    ScheduleModelManager scheduleModelManager = new ScheduleModelManager();
+    scheduleModelManager.getAllClassrooms().getClassroom(room.getName()).addOccupiedHours(date, interval);
   }
 
   /**
@@ -98,6 +100,29 @@ public class Session implements Serializable
         date.getDay(), date.getMonth(), date.getYear() % 100, interval.getStartTime(), interval.getEndTime(),
         course.getName(), course.getSemester(), course.getGroup());
   }
+
+
+  public String getCourseString()
+  {
+    return course.getId();
+  }
+
+  public String getDateString()
+  {
+    return date.toString();
+  }
+
+  public String getTimeString()
+  {
+    return interval.toString();
+  }
+
+  public String getClassroomString()
+  {
+    return room.getName();
+  }
+
+
 
   /**
    * Compares two Session objects.
