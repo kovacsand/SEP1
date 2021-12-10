@@ -33,6 +33,11 @@ public class SessionList implements Serializable
     return session;
   }
 
+  public ArrayList<Session> getAllSessions()
+  {
+    return sessions;
+  }
+
   public ArrayList<Session> getAllSessionsByCourse(String id)
   {
     ArrayList<Session> foundSessions = new ArrayList<>();
