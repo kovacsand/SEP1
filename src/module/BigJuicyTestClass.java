@@ -13,5 +13,6 @@ public class BigJuicyTestClass
         new TimeInterval(820, 1150), modelManager.getAllClassrooms().getClassroom("C05.15"),
         modelManager.getCourse("SDJ1X")));
     System.out.println(modelManager.getAllSessions());
+    modelManager.export();
   }
 }
