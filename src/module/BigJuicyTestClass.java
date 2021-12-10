@@ -13,8 +13,6 @@ public class BigJuicyTestClass
     modelManager.addSession(new Session(new MyDate(10, 12, 2021),
         new TimeInterval(820, 1150), modelManager.getAllClassrooms().getClassroom("C05.15"),
         modelManager.getCourse("SDJ1X")));
-
-    System.out.println(modelManager.getAllClassrooms().getClassroom("C05.15").isFree(new MyDate(10, 12, 2021), new TimeInterval(800, 1250)));
-
+    modelManager.export();
   }
 }

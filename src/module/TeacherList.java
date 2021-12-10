@@ -54,6 +54,19 @@ public class TeacherList implements Serializable
     return getAllTeachers().size();
   }
 
+  public String getAllTeachersId()
+  {
+    String str = "";
+    for (int i = 0; i < teachers.size(); i++)
+    {
+      if(i == teachers.size() - 1)
+        str += teachers.get(i).getId();
+      else
+        str += teachers.get(i).getId() + ", ";
+    }
+    return str;
+  }
+
   public boolean equals(Object obj)
   {
     if(!(obj instanceof TeacherList))

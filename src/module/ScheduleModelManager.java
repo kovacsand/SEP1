@@ -332,8 +332,8 @@ public class ScheduleModelManager
       write.println("<date>" + allSessions.getAllSessions().get(i).getDate() + "</date>");
       write.println("<time>" + allSessions.getAllSessions().get(i).getTimeString() + "</time>");
       write.println("<room>" + allSessions.getAllSessions().get(i).getClassroomString() + "</room>");
-      write.println("<teacher>" + allSessions.getAllSessions().get(i).getCourse().getAllTeachers() + "</teacher>");
-      write.println("<ids>" + allSessions.getAllSessions().get(i).getCourse().getAllStudents() + " " + allSessions.getAllSessions().get(i).getCourse().getAllTeachers() + "</ids>");
+      write.println("<teacher>" + allSessions.getAllSessions().get(i).getCourse().getAllTeachers().getAllTeachersId() + "</teacher>");
+      write.println("<ids>" + allSessions.getAllSessions().get(i).getCourse().getAllStudents().getAllStudentIds() + ", " + allSessions.getAllSessions().get(i).getCourse().getAllTeachers().getAllTeachersId() + "</ids>");
       write.println("</session>");
     }
 
