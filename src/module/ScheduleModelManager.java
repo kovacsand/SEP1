@@ -194,34 +194,50 @@ public class ScheduleModelManager
 
       Teacher teacher = null;
 
+      boolean found = false;
+
       for (int i = 0; i < courseArray.length; i++)
       {
+        found = false;
         String temp = courseArray[i];
         String[] tempArr = temp.split(",");
         String semester = tempArr[0];
         String group = tempArr[1];
         String name = tempArr[2];
         String teacherId = tempArr[3];
-        for (int j = 0; j < teachers.getSize(); j++)
+
+        for (int j = 0; j < courses.getSize(); j++)
         {
-          if (teachers.getAllTeachers().get(j).getId().equals(teacherId))
+          if (courses.getAllCourses().get(j).getId().equals(name + semester + group))
           {
-            teacher = new Teacher(teacherId, teachers.getAllTeachers().get(j).getName());
+            courses.getAllCourses().get(j).addTeacher(getTeacher(teacherId));
+            found = true;
           }
-
         }
-        String ects = tempArr[4];
 
-        courses.addCourse(new Course(name, Integer.parseInt(semester), group,
-            Integer.parseInt(ects), teacher));
-
-        for (int j = 0; j < classes.getSize(); j++)
+        if (!found)
         {
-          if (classes.getAllClasses().get(j).getSemester() == Integer.parseInt(semester) && classes.getAllClasses().get(j).getGroup().equals(group))
+          for (int j = 0; j < teachers.getSize(); j++)
           {
-            classes.getAllClasses().get(j).addCourse(new Course(name, Integer.parseInt(semester), group,
-                Integer.parseInt(ects), teacher));
+            if (teachers.getAllTeachers().get(j).getId().equals(teacherId))
+            {
+              teacher = new Teacher(teacherId, teachers.getAllTeachers().get(j).getName());
+            }
 
+          }
+          String ects = tempArr[4];
+
+          courses.addCourse(new Course(name, Integer.parseInt(semester), group,
+              Integer.parseInt(ects), teacher));
+
+          for (int j = 0; j < classes.getSize(); j++)
+          {
+            Class tempClass = classes.getAllClasses().get(j);
+            if (tempClass.getSemester() == Integer.parseInt(semester) && tempClass.getGroup().equals(group))
+            {
+              tempClass.addCourse(
+                  new Course(name, Integer.parseInt(semester), group, Integer.parseInt(ects), teacher));
+            }
           }
         }
       }
@@ -257,6 +273,35 @@ public class ScheduleModelManager
 
   }
 
+  public void assignStudentsToCourses()
+  {
+    CourseList courseList = getAllCourses();
+
+    for (int i = 0; i < courseList.getSize(); i++)
+    {
+      String tempClassId = courseList.getAllCourses().get(i).getSemester() + courseList.getAllCourses().get(i).getGroup();
+      for (int j = 0; j < getClassById(tempClassId).getStudentCount(); j++)
+      {
+        courseList.getAllCourses().get(i).addStudent(getClassById(tempClassId).getAllStudents().getAllStudents().get(j));
+      }
+    }
+
+    try
+    {
+      MyFileHandler.writeToBinaryFile("courses.bin", courseList);
+    }
+
+    catch (FileNotFoundException e)
+    {
+      System.out.println("File not found.");
+    }
+
+    catch (IOException e)
+    {
+      System.out.println("IO Error writing to file");
+    }
+  }
+
   /**
    * Export data as xml file.
    */
@@ -284,7 +329,7 @@ public class ScheduleModelManager
     }
     catch (IOException e)
     {
-      System.out.println("IO Error reading file.");
+      System.out.println("IO Error reading file. (whilst reading sessions)");
     }
     catch (ClassNotFoundException e)
     {
