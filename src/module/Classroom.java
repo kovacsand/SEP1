@@ -61,24 +61,44 @@ public class Classroom implements Serializable
    */
   public boolean isFree(MyDate date, TimeInterval interval)
   {
-    String time = String.format("%02d%02d%02d%04d%04d", date.getDay(), date.getMonth(), date.getYear() % 100, interval.getStartTime(), interval.getEndTime());
+    //String time = String.format("%02d%02d%02d%04d%04d", date.getDay(), date.getMonth(), date.getYear() % 100, interval.getStartTime(), interval.getEndTime());
     for (int i = 0; i < occupiedHours.size(); i++)
     {
       String tempTime = occupiedHours.get(i);
-      String tempDateString = tempTime.substring(0, 5);
-      MyDate tempDate = new MyDate(Integer.parseInt(tempDateString.substring(0, 1)), Integer.parseInt(tempDateString.substring(2, 3)), Integer.parseInt(tempDateString.substring(4, 5)));
+      String tempDateString = tempTime.substring(0, 6);
+      String tempTimeIntervalString = tempTime.substring(6, 14);
 
-      System.out.println(tempDate);
+      MyDate tempDate = new MyDate(Integer.parseInt(tempDateString.substring(0, 2)),
+          Integer.parseInt(tempDateString.substring(2, 4)), Integer.parseInt(tempDateString.substring(4, 6)));
+      TimeInterval tempTimeInterval = new TimeInterval(Integer.parseInt(tempTimeIntervalString.substring(0, 4)),
+          Integer.parseInt(tempTimeIntervalString.substring(4, 8)));
 
       if (date.equals(tempDate))
       {
-        //String tempStartTime
+        //They are on the same day
+        if (tempTimeInterval.getStartTime() <= interval.getStartTime()
+            && interval.getStartTime() <= tempTimeInterval.getEndTime())
+        {
+          //New one starts during old one
+          return false;
+        }
+        if (tempTimeInterval.getStartTime() <= interval.getEndTime()
+            && interval.getEndTime() <= tempTimeInterval.getEndTime())
+        {
+          //New one ends during old one
+          return false;
+        }
+        if (((interval.getStartTime() <= tempTimeInterval.getStartTime()) && (
+            tempTimeInterval.getStartTime() <= interval.getEndTime())) &&
+            //start of new <= end of old <= end of new
+            ((interval.getStartTime() <= tempTimeInterval.getEndTime()) && (
+                tempTimeInterval.getEndTime() <= interval.getEndTime())))
+        {
+          //Old one starts and ends during new one
+          return false;
+        }
       }
-
     }
-
-//      if (occupiedHours.get(i).equals(time))
-//        return false;
     return true;
   }
 
