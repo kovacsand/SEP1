@@ -2,7 +2,9 @@ package module;
 import utils.MyFileHandler;
 
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.*;
 
 /**
@@ -307,7 +309,38 @@ public class ScheduleModelManager
    */
   public void export()
   {
-    //TODO!!!!!!!!!!!!!!!!!!!
+    SessionList allSessions = getAllSessions();
+    PrintWriter write = null;
+    try
+    {
+      FileOutputStream fileOut = new FileOutputStream("sessions.xml");
+      write = new PrintWriter(fileOut);
+    }
+    catch (FileNotFoundException ex)
+    {
+      System.out.println("File not found, or could not be opened");
+    }
+
+    System.out.println("Writing to a file");
+    write.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+    write.println("<sessions>");
+
+    for (int i = 0; i < allSessions.getSize(); i++)
+    {
+      write.println("<session>");
+      write.println("<course>" + allSessions.getAllSessions().get(i).getCourseString() + "</course>");
+      write.println("<date>" + allSessions.getAllSessions().get(i).getDate() + "</date>");
+      write.println("<time>" + allSessions.getAllSessions().get(i).getTimeString() + "</time>");
+      write.println("<room>" + allSessions.getAllSessions().get(i).getClassroomString() + "</room>");
+      write.println("<teacher>" + allSessions.getAllSessions().get(i).getCourse().getAllTeachers() + "</teacher>");
+      write.println("<ids>" + allSessions.getAllSessions().get(i).getCourse().getAllStudents() + " " + allSessions.getAllSessions().get(i).getCourse().getAllTeachers() + "</ids>");
+    }
+
+    write.println("</sessions>");
+
+    write.close();
+
+    System.out.println("Done writing");
   }
 
   /**
