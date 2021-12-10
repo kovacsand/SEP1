@@ -24,7 +24,7 @@ public class MainViewController
   @FXML private Button editStudentBtn;
   @FXML private Button removeStudentBtn;
   @FXML private Button addTeacherBtn;
-  @FXML private Button editTecherBtn;
+  @FXML private Button editTeacherBtn;
   @FXML private Button removeTeacherBtn;
 
   public void init(ViewHandler viewHandler, ScheduleModelManager scheduleModelManager, Region root)
@@ -81,7 +81,7 @@ else if (e.getSource() == addTeacherBtn)
 {
   viewHandler.openView("TeacherView");
 }
-else if (e.getSource() == editTecherBtn)
+else if (e.getSource() == editTeacherBtn)
 {
   Teacher selected = teachersTable.getSelectionModel().getSelectedItem();
   viewHandler.openView("TeacherView");
@@ -147,41 +147,50 @@ else if (e.getSource() == removeTeacherBtn)
 
   public void tabChanged(Event event)
   {
-    if (sessionsTab.isSelected())
-    {
-      sessionsCourseColumn.setCellValueFactory(new PropertyValueFactory<Session, String>("courseString"));
-      sessionsDateColumn.setCellValueFactory(new PropertyValueFactory<Session, String>("dateString"));
-      sessionsTimeColumn.setCellValueFactory(new PropertyValueFactory<Session, String>("timeString"));
-      sessionsClassroomColumn.setCellValueFactory(new PropertyValueFactory<Session, String>("classroomString"));
+   if(scheduleModelManager!= null)
+   {
+     if (sessionsTab.isSelected())
+     {
+       sessionsCourseColumn.setCellValueFactory(new PropertyValueFactory<Session, String>("courseString"));
+       sessionsDateColumn.setCellValueFactory(new PropertyValueFactory<Session, String>("dateString"));
+       sessionsTimeColumn.setCellValueFactory(new PropertyValueFactory<Session, String>("timeString"));
+       sessionsClassroomColumn.setCellValueFactory(new PropertyValueFactory<Session, String>("classroomString"));
 
-      sessionsTable.getItems().clear();
+       sessionsTable.getItems().clear();
 
-      SessionList sessionList = scheduleModelManager.getAllSessions();
-      for (int i = 0; i < sessionList.getSize(); i++)
-        sessionsTable.getItems().add(sessionList.getAllSessions().get(i));
-    }
-    else if (classesTab.isSelected())
-    {
-      classesSemesterColumn.setCellValueFactory(new PropertyValueFactory<Class,String>("semester"));
-      classesGroupColumn.setCellValueFactory(new PropertyValueFactory<Class,String>("group"));
-      classesStudentCountColumn.setCellValueFactory(new PropertyValueFactory<Class,String>("studentCount"));
-      classesCoursesColumn.setCellValueFactory(new PropertyValueFactory<Class,String>("courses"));
-      classesTable.getItems().clear();
-      ClassList classList=scheduleModelManager.getAllClasses();
-      for(int i=0;i<classList.getSize();i++){
-        classesTable.getItems().add(classList.getAllClasses().get(i));
-      }
-    }
-    else if (classroomsTab.isSelected())
-    {
-      classroomsNameColumn.setCellValueFactory(new PropertyValueFactory<Classroom, String>("name"));
-      classroomsCapacityColumn.setCellValueFactory(new PropertyValueFactory<Classroom, String>("capacity"));
-      classroomsTable.getItems().clear();
-      ClassroomList classroomList=scheduleModelManager.getAllClassrooms();
-      for(int i=0;i<classroomList.getSize();i++){
-        classroomsTable.getItems().add(classroomList.getAllClassrooms().get(i));
-      }
-    }
+       SessionList sessionList = scheduleModelManager.getAllSessions();
+       for (int i = 0; i < sessionList.getSize(); i++)
+         sessionsTable.getItems().add(sessionList.getAllSessions().get(i));
+     }
+     else if (classesTab.isSelected())
+     {
+       classesSemesterColumn.setCellValueFactory(
+           new PropertyValueFactory<Class, String>("semester"));
+       classesGroupColumn.setCellValueFactory(
+           new PropertyValueFactory<Class, String>("group"));
+       classesStudentCountColumn.setCellValueFactory(
+           new PropertyValueFactory<Class, String>("studentCount"));
+       classesCoursesColumn.setCellValueFactory(
+           new PropertyValueFactory<Class, String>("courses"));
+       classesTable.getItems().clear();
+       ClassList classList = scheduleModelManager.getAllClasses();
+       for (int i = 0; i < classList.getSize(); i++)
+       {
+         classesTable.getItems().add(classList.getAllClasses().get(i));
+       }
+     }
+     else if (classroomsTab.isSelected())
+     {
+       classroomsNameColumn.setCellValueFactory(new PropertyValueFactory<Classroom, String>("name"));
+       classroomsCapacityColumn.setCellValueFactory(new PropertyValueFactory<Classroom, String>("capacity"));
+       classroomsTable.getItems().clear();
+       ClassroomList classroomList = scheduleModelManager.getAllClassrooms();
+       for (int i = 0; i < classroomList.getSize(); i++)
+       {
+         classroomsTable.getItems().add(classroomList.getAllClassrooms().get(i));
+       }
+     }
+   }
 
     else if (coursesTab.isSelected())
     {

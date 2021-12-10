@@ -3,10 +3,13 @@ package view;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
 import module.ScheduleModelManager;
+import module.Student;
+import module.Teacher;
 
 public class CourseViewController {
   private Region root;
@@ -28,22 +31,12 @@ public class CourseViewController {
   Button closeButton;
 
   //FIELDS
-  @FXML
-  TextField courseName;
-  @FXML
-  TextField ectsText;
-  @FXML
-  TextField addTeacherId;
-  @FXML
-  TableColumn teachersIdColumn;
-  @FXML
-  TableColumn teachersNameColumn;
-  @FXML
-  TextField addStudentId;
-  @FXML
-  TableColumn studentsIdColumn;
-  @FXML
-  TableColumn studentsNameColumn;
+  @FXML TextField courseName;
+  @FXML TextField ectsText;
+  @FXML TextField addTeacherId;
+  @FXML ListView<Teacher> teachersList;
+  @FXML TextField addStudentId;
+  @FXML ListView<Student> studentsList;
 
   public CourseViewController() {
   }
@@ -59,6 +52,10 @@ public class CourseViewController {
     ectsText.setText("");
     addTeacherId.setText("");
     addStudentId.setText("");
+  }
+
+  public Region getRoot(){
+    return root;
   }
 
   public void handleActions(ActionEvent e) {

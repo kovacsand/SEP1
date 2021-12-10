@@ -1,6 +1,7 @@
 package view;
 
 import javafx.application.Application;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Tab;
@@ -13,6 +14,7 @@ import java.io.IOException;
 public class ViewHandler
 {
 
+  private Region root;
   private Scene scene;
   private Stage window;
   private MainViewController mainViewController;
@@ -139,7 +141,45 @@ public class ViewHandler
     return teacherViewController.getRoot();
   }
 
+  private Region loadViewCourse()
+  {
+    if (courseViewController == null)
+    {
+      try
+      {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("CourseView.fxml"));
+        Region root = loader.load();
+        courseViewController = loader.getController();
+        courseViewController.init(this, scheduleModelManager, root);
+      }
+      catch (IOException e)
+      {
+        e.printStackTrace();
+      }
+    }
+    return courseViewController.getRoot();
+  }
 
+  private Region loadViewSession()
+  {
+    if(sessionViewController == null)
+    {
+      try
+      {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("SessionView.fxml"));
+        Region root = loader.load();
+        sessionViewController = loader.getController();
+        sessionViewController.init(this, scheduleModelManager, root);
+      }
+      catch (IOException e)
+      {
+        e.printStackTrace();
+      }
+    }
+    return courseViewController.getRoot();
+  }
 
 
   public StudentViewController getStudentViewController(){
@@ -160,7 +200,7 @@ public class ViewHandler
     return mainViewController;
   }
 
-  public SessionsViewController getSessionViewController()
+  public SessionViewController getSessionViewController()
   {
     return sessionViewController;
   }
