@@ -334,6 +334,7 @@ public class ScheduleModelManager
       write.println("<room>" + allSessions.getAllSessions().get(i).getClassroomString() + "</room>");
       write.println("<teacher>" + allSessions.getAllSessions().get(i).getCourse().getAllTeachers() + "</teacher>");
       write.println("<ids>" + allSessions.getAllSessions().get(i).getCourse().getAllStudents() + " " + allSessions.getAllSessions().get(i).getCourse().getAllTeachers() + "</ids>");
+      write.println("</session>");
     }
 
     write.println("</sessions>");
