@@ -49,6 +49,19 @@ public class StudentList implements Serializable
     return studentsFromClass;
   }
 
+  public String getAllStudentIds()
+  {
+    String str = "";
+    for (int i = 0; i < students.size(); i++)
+    {
+      if(i == students.size() - 1)
+        str += students.get(i).getId();
+      else
+        str += students.get(i).getId() + ", ";
+    }
+    return str;
+  }
+
   public ArrayList<Student> getAllStudentsBySemester(int semester)
   {
     ArrayList<Student> studentsFromSemester = new ArrayList<Student>();
