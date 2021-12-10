@@ -19,7 +19,7 @@ public class ViewHandler
   private StudentViewController studentViewController;
   private TeacherViewController teacherViewController;
   private CourseViewController courseViewController;
-  private SessionsViewController sessionViewController;
+  private SessionViewController sessionViewController;
 
   private ScheduleModelManager scheduleModelManager;
 
@@ -56,7 +56,7 @@ public class ViewHandler
         root = loadViewCourse();
         break;
       case "SessionView":
-        root = loadViewSession;
+        root = loadViewSession();
         break;
     }
     scene.setRoot(root);
@@ -138,6 +138,8 @@ public class ViewHandler
     }
     return teacherViewController.getRoot();
   }
+
+
 
 
   public StudentViewController getStudentViewController(){

@@ -1,17 +1,100 @@
 package view;
 
+import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Region;
 import module.*;
 import module.Class;
 
 public class MainViewController
 {
+  private Region root;
+  private ScheduleModelManager scheduleModelManager;
+  private ViewHandler viewHandler;
+
+  //MAINVIEW BUTTONS
+  @FXML private Button addSessionBtn;
+  @FXML private Button editSessionBtn;
+  @FXML private Button removeSessionBtn;
+  @FXML private Button editCourseBtn;
+  @FXML private Button addStudentBtn;
+  @FXML private Button editStudentBtn;
+  @FXML private Button removeStudentBtn;
+  @FXML private Button addTeacherBtn;
+  @FXML private Button editTecherBtn;
+  @FXML private Button removeTeacherBtn;
+
+  public void init(ViewHandler viewHandler, ScheduleModelManager scheduleModelManager, Region root)
+  {
+this.viewHandler = viewHandler;
+this.scheduleModelManager = scheduleModelManager;
+this.root = root;
+  }
+
+public Region getRoot()
+{
+  return root;
+}
+
+public void reset(){
+
+}
+
+public void handleAction(ActionEvent e)
+{
+if(e.getSource() == addSessionBtn)
+{
+  viewHandler.openView("SessionView");
+}
+else if (e.getSource() == editSessionBtn)
+{
+  //ENTER THE FUNCTIONALITY HERE
+  viewHandler.openView("SessionView");
+}
+else if (e.getSource() == removeSessionBtn)
+{
+  //FUNCTIONALLY REMOVE SESSION
+  sessionsTable.refresh();
+}
+else if (e.getSource() == editCourseBtn)
+{
+  viewHandler.openView("CourseView");
+}
+else if (e.getSource() == addStudentBtn)
+{
+  viewHandler.openView("StudentView");
+}
+else if (e.getSource() == editStudentBtn)
+{
+  Student selected = studentsTable.getSelectionModel().getSelectedItem();
+  viewHandler.openView("StudentView");
+}
+else if (e.getSource() == removeStudentBtn)
+{
+  //REMOVE A STUDENT FUNCTION
+  studentsTable.refresh();
+}
+else if (e.getSource() == addTeacherBtn)
+{
+  viewHandler.openView("TeacherView");
+}
+else if (e.getSource() == editTecherBtn)
+{
+  Teacher selected = teachersTable.getSelectionModel().getSelectedItem();
+  viewHandler.openView("TeacherView");
+}
+else if (e.getSource() == removeTeacherBtn)
+{
+  //REMOVE A TEACHER FUNCTION
+  teachersTable.refresh();
+}
+
+}
+
+
   //GENERAL TABS
   @FXML private TabPane tabPane;
   @FXML private Tab sessionsTab;
@@ -60,9 +143,7 @@ public class MainViewController
   @FXML private TableView<Teacher> teachersTable;
   @FXML private TableColumn<Teacher, String> teachersIdColumn;
   @FXML private TableColumn<Teacher, String> teachersNameColumn;
-  @FXML private TableColumn<Teacher, String> teachersCoursesColumn;
 
-  private ScheduleModelManager scheduleModelManager = new ScheduleModelManager();
 
   public void tabChanged(Event event)
   {

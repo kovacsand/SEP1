@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="427.0" prefWidth="400.0" userData="Add/Edit Student" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.StudentViewController">
+<FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="427.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox alignment="CENTER" prefHeight="70.0" prefWidth="400.0">
          <children>
@@ -74,22 +74,22 @@
             </VBox>
             <VBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" prefHeight="301.0" prefWidth="191.0">
                <children>
-                  <TextField fx:id="studentName" promptText="First Last">
+                  <TextField promptText="First Last">
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>
                   </TextField>
-                  <TextField fx:id="studentId" promptText="123456">
+                  <TextField promptText="123456">
                      <VBox.margin>
                         <Insets top="12.0" />
                      </VBox.margin>
                   </TextField>
-                  <ChoiceBox fx:id="studentSemester" prefWidth="150.0">
+                  <ChoiceBox prefWidth="150.0">
                      <VBox.margin>
                         <Insets top="15.0" />
                      </VBox.margin>
                   </ChoiceBox>
-                  <ChoiceBox fx:id="studentGroup" prefWidth="150.0">
+                  <ChoiceBox prefWidth="150.0">
                      <VBox.margin>
                         <Insets top="13.0" />
                      </VBox.margin>
@@ -100,12 +100,12 @@
       </HBox>
       <HBox alignment="CENTER" prefHeight="82.0" prefWidth="400.0">
          <children>
-            <Button fx:id="saveStudent" mnemonicParsing="false" onAction="#handleActions" text="Save">
+            <Button mnemonicParsing="false" text="Save">
                <HBox.margin>
                   <Insets right="20.0" />
                </HBox.margin>
             </Button>
-            <Button fx:id="close" mnemonicParsing="false" onAction="#handleActions" text="Close" />
+            <Button mnemonicParsing="false" text="Close" />
          </children>
       </HBox>
    </children>

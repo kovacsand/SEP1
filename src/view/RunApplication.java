@@ -6,6 +6,6 @@ public class RunApplication
 {
   public static void main(String[] args)
   {
-    Application.launch(MainView.class);
+    Application.launch(StartGui.class);
   }
 }
