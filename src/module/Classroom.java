@@ -68,6 +68,8 @@ public class Classroom implements Serializable
       String tempDateString = tempTime.substring(0, 5);
       MyDate tempDate = new MyDate(Integer.parseInt(tempDateString.substring(0, 1)), Integer.parseInt(tempDateString.substring(2, 3)), Integer.parseInt(tempDateString.substring(4, 5)));
 
+      System.out.println(tempDate);
+
       if (date.equals(tempDate))
       {
         //String tempStartTime
