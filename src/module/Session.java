@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * A class for storing data about sessions, which are the individual lessons.
  * @author Hi-Phi
- * @version 1.0
+ * @version 1.2
  */
 
 
@@ -35,8 +35,6 @@ public class Session implements Serializable
     this.interval = interval;
     this.room = room;
     this.course = course;
-    ScheduleModelManager scheduleModelManager = new ScheduleModelManager();
-    scheduleModelManager.getAllClassrooms().getClassroom(room.getName()).addOccupiedHours(date, interval);
   }
 
   /**
