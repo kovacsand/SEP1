@@ -178,7 +178,7 @@ public class ViewHandler
         e.printStackTrace();
       }
     }
-    return courseViewController.getRoot();
+    return sessionViewController.getRoot();
   }
 
 
