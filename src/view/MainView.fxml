@@ -85,17 +85,17 @@
                         </TableView>
                         <HBox alignment="CENTER" prefHeight="50.0" prefWidth="400.0">
                            <children>
-                              <Button mnemonicParsing="false" prefWidth="60.0" text="Add">
+                              <Button fx:id="addSessionBtn" mnemonicParsing="false" onAction="#handleAction" prefWidth="60.0" text="Add">
                                  <HBox.margin>
                                     <Insets bottom="5.0" left="5.0" top="5.0" />
                                  </HBox.margin>
                               </Button>
-                              <Button mnemonicParsing="false" prefWidth="60.0" text="Edit">
+                              <Button fx:id="editSessionBtn" mnemonicParsing="false" onAction="#handleAction" prefWidth="60.0" text="Edit">
                                  <HBox.margin>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </HBox.margin>
                               </Button>
-                              <Button mnemonicParsing="false" prefWidth="60.0" text="Remove">
+                              <Button fx:id="removeSessionBtn" mnemonicParsing="false" onAction="#handleAction" prefWidth="60.0" text="Remove">
                                  <HBox.margin>
                                     <Insets bottom="5.0" right="5.0" top="5.0" />
                                  </HBox.margin>
@@ -164,7 +164,7 @@
                         </TableView>
                         <HBox alignment="CENTER" prefHeight="50.0" prefWidth="400.0">
                            <children>
-                              <Button mnemonicParsing="false" prefWidth="60.0" text="Edit">
+                              <Button fx:id="editCourseBtn" mnemonicParsing="false" onAction="#handleAction" prefWidth="60.0" text="Edit">
                                  <HBox.margin>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </HBox.margin>
@@ -192,17 +192,17 @@
                         </TableView>
                         <HBox alignment="CENTER" prefHeight="50.0" prefWidth="400.0">
                            <children>
-                              <Button mnemonicParsing="false" prefWidth="60.0" text="Add">
+                              <Button fx:id="addStudentBtn" mnemonicParsing="false" onAction="#handleAction" prefWidth="60.0" text="Add">
                                  <HBox.margin>
                                     <Insets bottom="5.0" left="5.0" top="5.0" />
                                  </HBox.margin>
                               </Button>
-                              <Button mnemonicParsing="false" prefWidth="60.0" text="Edit">
+                              <Button fx:id="editStudentBtn" mnemonicParsing="false" onAction="#handleAction" prefWidth="60.0" text="Edit">
                                  <HBox.margin>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </HBox.margin>
                               </Button>
-                              <Button mnemonicParsing="false" prefWidth="60.0" text="Remove">
+                              <Button fx:id="removeStudentBtn" mnemonicParsing="false" onAction="#handleAction" prefWidth="60.0" text="Remove">
                                  <HBox.margin>
                                     <Insets bottom="5.0" right="5.0" top="5.0" />
                                  </HBox.margin>
@@ -228,17 +228,17 @@
                         </TableView>
                         <HBox alignment="CENTER" prefHeight="50.0" prefWidth="400.0">
                            <children>
-                              <Button mnemonicParsing="false" prefWidth="60.0" text="Add">
+                              <Button fx:id="addTeacherBtn" mnemonicParsing="false" onAction="#handleAction" prefWidth="60.0" text="Add">
                                  <HBox.margin>
                                     <Insets bottom="5.0" left="5.0" top="5.0" />
                                  </HBox.margin>
                               </Button>
-                              <Button mnemonicParsing="false" prefWidth="60.0" text="Edit">
+                              <Button fx:id="editTeacherBtn" mnemonicParsing="false" onAction="#handleAction" prefWidth="60.0" text="Edit">
                                  <HBox.margin>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </HBox.margin>
                               </Button>
-                              <Button mnemonicParsing="false" prefWidth="60.0" text="Remove">
+                              <Button fx:id="removeTeacherBtn" mnemonicParsing="false" onAction="#handleAction" prefWidth="60.0" text="Remove">
                                  <HBox.margin>
                                     <Insets bottom="5.0" right="5.0" top="5.0" />
                                  </HBox.margin>
