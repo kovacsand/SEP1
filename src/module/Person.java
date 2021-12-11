@@ -28,22 +28,49 @@ public abstract class Person implements Serializable
 
   public abstract void setName(String name);
 
-  public boolean isFree(MyDate date, TimeInterval timeInterval)
-  { boolean isFree=false;
-    for(int i=0;i<workingHours.size();i++)
+  public boolean isFree(MyDate date, TimeInterval interval)
+  {
+    //String time = String.format("%02d%02d%02d%04d%04d", date.getDay(), date.getMonth(), date.getYear() % 100, interval.getStartTime(), interval.getEndTime());
+    for (int i = 0; i < workingHours.size(); i++)
     {
-      String time=String.format("%02d%02d%02d%04d%04d",date.getDay(),date.getMonth(),date.getYear()%100,timeInterval.getStartTime(),timeInterval.getEndTime());
-      if(workingHours.get(i).equals(time))
+      String tempTime = workingHours.get(i);
+      String tempDateString = tempTime.substring(0, 6);
+      String tempTimeIntervalString = tempTime.substring(6, 14);
+
+      MyDate tempDate = new MyDate(Integer.parseInt(tempDateString.substring(0, 2)),
+          Integer.parseInt(tempDateString.substring(2, 4)), Integer.parseInt(tempDateString.substring(4, 6)));
+      TimeInterval tempTimeInterval = new TimeInterval(Integer.parseInt(tempTimeIntervalString.substring(0, 4)),
+          Integer.parseInt(tempTimeIntervalString.substring(4, 8)));
+
+      if (date.equals(tempDate))
       {
-        isFree=false;
-      }
-      else
-      {
-        isFree=true;
+        //They are on the same day
+        if (tempTimeInterval.getStartTime() <= interval.getStartTime()
+            && interval.getStartTime() <= tempTimeInterval.getEndTime())
+        {
+          //New one starts during old one
+          return false;
+        }
+        if (tempTimeInterval.getStartTime() <= interval.getEndTime()
+            && interval.getEndTime() <= tempTimeInterval.getEndTime())
+        {
+          //New one ends during old one
+          return false;
+        }
+        if (((interval.getStartTime() <= tempTimeInterval.getStartTime()) && (
+            tempTimeInterval.getStartTime() <= interval.getEndTime())) &&
+            //start of new <= end of old <= end of new
+            ((interval.getStartTime() <= tempTimeInterval.getEndTime()) && (
+                tempTimeInterval.getEndTime() <= interval.getEndTime())))
+        {
+          //Old one starts and ends during new one
+          return false;
+        }
       }
     }
-    return isFree;
+    return true;
   }
+
 
   public void addWorkingHours(MyDate date,TimeInterval timeInterval)
   {
@@ -71,7 +98,6 @@ public abstract class Person implements Serializable
     }
     Person other=(Person)obj;
     return id.equals(other.id) && name.equals(other.name) && workingHours.equals(other.workingHours);
-    //works without workinghours
   }
 
   public String toString()
