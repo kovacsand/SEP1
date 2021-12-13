@@ -7,6 +7,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
 import module.ScheduleModelManager;
 import module.Teacher;
+import module.TeacherList;
 
 public class TeacherViewController {
   private Region root;
@@ -17,7 +18,8 @@ public class TeacherViewController {
   @FXML TextField teacherName;
   @FXML TextField teacherId;
 
-  public TeacherViewController() {
+  public TeacherViewController()
+  {
   }
 
   public void init(ViewHandler viewHandler, ScheduleModelManager scheduleModelManager, Region root)
@@ -37,15 +39,16 @@ public class TeacherViewController {
   {
     if (e.getSource() == saveTeacher)
     {
+      scheduleModelManager.editTeacher(teacherId.getText(), teacherName.getText());
       reset();
       viewHandler.openView("MainView");
+      viewHandler.getMainViewController().reset();
     }
     else if (e.getSource() == close)
     {
       reset();
       viewHandler.openView("MainView");
     }
-
   }
 
   public Region getRoot()
@@ -57,7 +60,5 @@ public class TeacherViewController {
   {
     teacherName.setText(teacher.getName());
     teacherId.setText(teacher.getId());
-    teacherId.setEditable(false);
-
   }
 }

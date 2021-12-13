@@ -8,10 +8,6 @@ public class Teacher extends Person implements Serializable
   {
     super(id,name);
   }
-  public void setName(String name)
-  {
-    name=name;
-  }
   public boolean equals(Object obj)
   {
     if(!(obj instanceof Teacher))
