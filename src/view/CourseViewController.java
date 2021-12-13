@@ -2,11 +2,10 @@ package view;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Region;
+import module.Course;
 import module.ScheduleModelManager;
 import module.Student;
 import module.Teacher;
@@ -17,26 +16,26 @@ public class CourseViewController {
   private ViewHandler viewHandler;
 
   //BUTTONS
-  @FXML
-  Button addTeacherBtn;
-  @FXML
-  Button removeTeacherBtn;
-  @FXML
-  Button addStudentBtn;
-  @FXML
-  Button removeStudentBtn;
-  @FXML
-  Button saveCourse;
-  @FXML
-  Button closeButton;
+  @FXML private Button addTeacherBtn;
+  @FXML private Button removeTeacherBtn;
+  @FXML private Button addStudentBtn;
+  @FXML private Button removeStudentBtn;
+  @FXML private Button saveCourse;
+  @FXML private Button closeButton;
 
   //FIELDS
-  @FXML TextField courseName;
-  @FXML TextField ectsText;
-  @FXML TextField addTeacherId;
-  @FXML ListView<Teacher> teachersList;
-  @FXML TextField addStudentId;
-  @FXML ListView<Student> studentsList;
+  @FXML private TextField courseName;
+  @FXML private TextField ectsText;
+  @FXML private TextField addTeacherId;
+  @FXML private TableView<Teacher> teachersList;
+  @FXML private TableColumn<Course, String> teacherId;
+  @FXML private TableColumn<Course, String> teacherName;
+  @FXML private TextField addStudentId;
+  @FXML private TableView<Student> studentsList;
+  @FXML private TableColumn<Course, String> studentId;
+  @FXML private TableColumn<Course, String> studentName;
+
+
 
   public CourseViewController() {
   }
@@ -75,7 +74,15 @@ public class CourseViewController {
 
   }
 
+  public void fillCourses(Course course){
+    courseName.setText(course.getName());
+    ectsText.setText(course.getEcts()+"");
+
+
+  }
   public void fillTeachersTable() {
+
+//teachersList.setCellFactory();
   }
 
   public void fillStudentsTable() {
