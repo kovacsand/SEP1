@@ -40,7 +40,7 @@ public Region getRoot()
 }
 
 public void reset(){
-
+tabChanged();
 }
 
 public void handleAction(ActionEvent e)
@@ -63,6 +63,7 @@ else if (e.getSource() == editCourseBtn)
 {
   viewHandler.openView("CourseView");
 }
+//STUDENT TAB BUTTONS
 else if (e.getSource() == addStudentBtn)
 {
   viewHandler.openView("StudentView");
@@ -80,9 +81,13 @@ else if (e.getSource() == editStudentBtn)
 else if (e.getSource() == removeStudentBtn)
 {
   Student temp = studentsTable.getSelectionModel().getSelectedItem();
+  if(temp != null)
+  {
   scheduleModelManager.removeStudent(temp);
-  studentsTable.refresh();
+  reset();
+  }
 }
+//TEACHER TAB BUTTONS
 else if (e.getSource() == addTeacherBtn)
 {
   viewHandler.openView("TeacherView");
@@ -95,7 +100,7 @@ else if (e.getSource() == editTeacherBtn)
 }
 else if (e.getSource() == removeTeacherBtn)
 {
-  //REMOVE A TEACHER FUNCTION
+
   teachersTable.refresh();
 }
 
@@ -152,7 +157,7 @@ else if (e.getSource() == removeTeacherBtn)
   @FXML private TableColumn<Teacher, String> teachersNameColumn;
 
 
-  public void tabChanged(Event event)
+  public void tabChanged()
   {
     if (scheduleModelManager != null)
     {
