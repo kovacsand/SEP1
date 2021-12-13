@@ -5,6 +5,9 @@ import java.util.ArrayList;
 
 public class ClassroomList implements Serializable
 {
+  /** A class for storing all the classrooms.
+   * @param classrooms An ArrayList containing all the classrooms.
+   */
   private ArrayList<Classroom> classrooms;
 
   public ClassroomList()
