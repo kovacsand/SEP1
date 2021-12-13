@@ -7,12 +7,10 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
-import module.Classroom;
-import module.ScheduleModelManager;
-import module.Session;
-import module.Teacher;
+import module.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class SessionViewController {
   private Region root;
@@ -21,13 +19,13 @@ public class SessionViewController {
 
   //SESSION BUTTONS
 
-  @FXML Button saveBtn;
-  @FXML Button closeBtn;
-  @FXML TextField startTimeField;
-  @FXML TextField endTimeField;
-  @FXML ChoiceBox<String> courseBox;
-  @FXML ChoiceBox<String> classroomBox;
-  @FXML DatePicker datePicker;
+  @FXML private Button saveBtn;
+  @FXML private Button closeBtn;
+  @FXML private TextField startTimeField;
+  @FXML private TextField endTimeField;
+  @FXML private ChoiceBox<String> courseBox;
+  @FXML private ChoiceBox<String> classroomBox;
+  @FXML private DatePicker datePicker;
 
   public SessionViewController() {
   }
@@ -36,12 +34,16 @@ public class SessionViewController {
     this.scheduleModelManager = scheduleModelManager;
     this.root = root;
     this.viewHandler = viewHandler;
+    reset();
   }
+
 
   public void reset() {
     startTimeField.setText("");
     endTimeField.setText("");
-    courseBox.setValue("");
+    String[] courses = {"SDJ1X", "SDJ1Y", "SDJ1Z", "SDJ1DK"};
+    this.courseBox.getItems().clear();
+    this.courseBox.getItems().addAll(courses);
     classroomBox.setValue("");
     datePicker.setValue(LocalDate.now());
   }
@@ -64,6 +66,7 @@ public class SessionViewController {
     return this.root;
   }
 
+  //THIS NEEDS UPDATING 13/12/2021
   public void fillSessionFields(Session session) {
     courseBox.setValue(session.getCourse().getId());
     courseBox.isDisabled();
