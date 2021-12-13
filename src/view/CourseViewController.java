@@ -26,9 +26,9 @@ public class CourseViewController {
   @FXML private TextField courseName;
   @FXML private TextField ectsText;
   @FXML private TextField addTeacherId;
-  @FXML private ListView<TeacherList> teachersList;
+  @FXML private ListView<Teacher> teachersList;
   @FXML private TextField addStudentId;
-  @FXML private ListView<StudentList> studentsList;
+  @FXML private ListView<Student> studentsList;
 
 
   public CourseViewController() {
@@ -52,6 +52,8 @@ public class CourseViewController {
     ectsText.setText("");
     addTeacherId.setText("");
     addStudentId.setText("");
+    teachersList.setItems(null);
+    studentsList.setItems(null);
   }
 
   public Region getRoot(){
@@ -68,7 +70,18 @@ public class CourseViewController {
     }
     else if(e.getSource() == addTeacherBtn)
     {
-     //scheduleModelManager.addTeacherToCourse(teacherId.getText(), courseName.getText());
+/*     scheduleModelManager.addTeacherToCourse(addTeacherId.getText(),courseName.getText());
+      System.out.println(addTeacherId.getText() + " ADD SELECTED");
+      Course temp = scheduleModelManager.getCourse(courseName.getText());
+      fillCourses(temp);
+      fillTeachersTable(scheduleModelManager.getCourse(courseName.getText()));*/
+    }
+   else if(e.getSource() == removeTeacherBtn)
+    {
+      Teacher selected = teachersList.getSelectionModel().getSelectedItem();
+      System.out.println(selected + " REMOVE SELECTED");
+      scheduleModelManager.removeTeacherFromCourse(selected.getId(), courseName.getText());
+      fillTeachersTable(scheduleModelManager.getCourse(courseName.getText()));
     }
 
   }
@@ -79,16 +92,15 @@ public class CourseViewController {
     ectsText.setText(course.getEcts()+"");
     fillTeachersTable(course);
     fillStudentsTable(course);
-
   }
   public void fillTeachersTable(Course course) {
-    ObservableList<TeacherList> teachers = FXCollections.observableArrayList(scheduleModelManager.getCourse(course.getId()).getAllTeachers());
+    ObservableList<Teacher> teachers = FXCollections.observableArrayList(course.getAllTeachers().getAllTeachers());
     teachersList.setItems(teachers);
 
   }
 
   public void fillStudentsTable(Course course) {
-ObservableList<StudentList> students = FXCollections.observableArrayList(scheduleModelManager.getCourse(course.getId()).getAllStudents());
+ObservableList<Student> students = FXCollections.observableArrayList(course.getAllStudents().getAllStudents());
 studentsList.setItems(students);
   }
 }
