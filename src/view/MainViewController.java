@@ -40,7 +40,7 @@ public Region getRoot()
 }
 
 public void reset(){
-
+tabChanged();
 }
 
 public void handleAction(ActionEvent e)
@@ -77,10 +77,15 @@ public void handleAction(ActionEvent e)
       }
     }
   else if (e.getSource() == removeStudentBtn)
-    {
-      //REMOVE A STUDENT FUNCTION
-      studentsTable.refresh();
-    }
+{
+  Student temp = studentsTable.getSelectionModel().getSelectedItem();
+  if(temp != null)
+  {
+  scheduleModelManager.removeStudent(temp);
+  reset();
+  }
+}
+  
   else if (e.getSource() == addTeacherBtn)
     {
       viewHandler.openView("TeacherView");
@@ -152,7 +157,7 @@ public void handleAction(ActionEvent e)
   @FXML private TableColumn<Teacher, String> teachersNameColumn;
 
 
-  public void tabChanged(Event event)
+  public void tabChanged()
   {
     if (scheduleModelManager != null)
     {
