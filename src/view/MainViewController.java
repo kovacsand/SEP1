@@ -45,52 +45,56 @@ public void reset(){
 
 public void handleAction(ActionEvent e)
 {
-if(e.getSource() == addSessionBtn)
-{
-  viewHandler.openView("SessionView");
-}
-else if (e.getSource() == editSessionBtn)
-{
-  //ENTER THE FUNCTIONALITY HERE
-  viewHandler.openView("SessionView");
-}
-else if (e.getSource() == removeSessionBtn)
-{
-  //FUNCTIONALLY REMOVE SESSION
-  sessionsTable.refresh();
-}
-else if (e.getSource() == editCourseBtn)
-{
-  viewHandler.openView("CourseView");
-}
-else if (e.getSource() == addStudentBtn)
-{
-  viewHandler.openView("StudentView");
-}
-else if (e.getSource() == editStudentBtn)
-{
-  Student selected = studentsTable.getSelectionModel().getSelectedItem();
-  viewHandler.openView("StudentView");
-}
-else if (e.getSource() == removeStudentBtn)
-{
-  //REMOVE A STUDENT FUNCTION
-  studentsTable.refresh();
-}
-else if (e.getSource() == addTeacherBtn)
-{
-  viewHandler.openView("TeacherView");
-}
-else if (e.getSource() == editTeacherBtn)
-{
-  Teacher selected = teachersTable.getSelectionModel().getSelectedItem();
-  viewHandler.openView("TeacherView");
-}
-else if (e.getSource() == removeTeacherBtn)
-{
-  //REMOVE A TEACHER FUNCTION
-  teachersTable.refresh();
-}
+  if(e.getSource() == addSessionBtn)
+    {
+      viewHandler.openView("SessionView");
+    }
+  else if (e.getSource() == editSessionBtn)
+    {
+      //ENTER THE FUNCTIONALITY HERE
+      viewHandler.openView("SessionView");
+    }
+  else if (e.getSource() == removeSessionBtn)
+    {
+      //FUNCTIONALLY REMOVE SESSION
+      sessionsTable.refresh();
+    }
+  else if (e.getSource() == editCourseBtn)
+    {
+      viewHandler.openView("CourseView");
+    }
+  else if (e.getSource() == addStudentBtn)
+    {
+      viewHandler.openView("StudentView");
+    }
+  else if (e.getSource() == editStudentBtn)
+    {
+      Student selected = studentsTable.getSelectionModel().getSelectedItem();
+      viewHandler.openView("StudentView");
+    }
+  else if (e.getSource() == removeStudentBtn)
+    {
+      //REMOVE A STUDENT FUNCTION
+      studentsTable.refresh();
+    }
+  else if (e.getSource() == addTeacherBtn)
+    {
+      viewHandler.openView("TeacherView");
+    }
+  else if (e.getSource() == editTeacherBtn)
+    {
+      Teacher selected = teachersTable.getSelectionModel().getSelectedItem();
+      viewHandler.openView("TeacherView");
+      if(selected != null)
+      {
+        viewHandler.getTeacherViewController().fillTeacherFields(selected);
+      }
+    }
+  else if (e.getSource() == removeTeacherBtn)
+    {
+      //REMOVE A TEACHER FUNCTION
+      teachersTable.refresh();
+    }
 
 }
 

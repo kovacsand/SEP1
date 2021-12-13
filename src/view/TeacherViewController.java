@@ -12,46 +12,51 @@ public class TeacherViewController {
   private Region root;
   private ScheduleModelManager scheduleModelManager;
   private ViewHandler viewHandler;
-  @FXML
-  Button saveTeacher;
-  @FXML
-  Button close;
-  @FXML
-  TextField teacherName;
-  @FXML
-  TextField teacherId;
+  @FXML Button saveTeacher;
+  @FXML Button close;
+  @FXML TextField teacherName;
+  @FXML TextField teacherId;
 
   public TeacherViewController() {
   }
 
-  public void init(ViewHandler viewHandler, ScheduleModelManager scheduleModelManager, Region root) {
+  public void init(ViewHandler viewHandler, ScheduleModelManager scheduleModelManager, Region root)
+  {
     this.scheduleModelManager = scheduleModelManager;
     this.root = root;
     this.viewHandler = viewHandler;
   }
 
-  public void reset() {
+  public void reset()
+  {
     this.teacherId.setText("");
     this.teacherName.setText("");
   }
 
-  public void handleActions(ActionEvent e) {
-    if (e.getSource() == this.saveTeacher) {
-      this.reset();
-      this.viewHandler.openView("MainView");
-    } else if (e.getSource() == this.close) {
-      this.reset();
-      this.viewHandler.openView("MainView");
+  public void handleActions(ActionEvent e)
+  {
+    if (e.getSource() == saveTeacher)
+    {
+      reset();
+      viewHandler.openView("MainView");
+    }
+    else if (e.getSource() == close)
+    {
+      reset();
+      viewHandler.openView("MainView");
     }
 
   }
 
-  public Region getRoot() {
+  public Region getRoot()
+  {
     return this.root;
   }
 
-  public void fillTeacherFields(Teacher teacher) {
-    this.teacherName.setText(teacher.getName());
-    this.teacherId.setText(teacher.getId());
+  public void fillTeacherFields(Teacher teacher)
+  {
+    teacherName.setText(teacher.getName());
+    teacherId.setText(teacher.getId());
+    teacherId.setEditable(false);
   }
 }
