@@ -1,14 +1,13 @@
 package view;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Region;
-import module.Course;
-import module.ScheduleModelManager;
-import module.Student;
-import module.Teacher;
+import module.*;
 
 public class CourseViewController {
   private Region root;
@@ -27,14 +26,9 @@ public class CourseViewController {
   @FXML private TextField courseName;
   @FXML private TextField ectsText;
   @FXML private TextField addTeacherId;
-  @FXML private TableView<Teacher> teachersList;
-  @FXML private TableColumn<Course, String> teacherId;
-  @FXML private TableColumn<Course, String> teacherName;
+  @FXML private ListView<TeacherList> teachersList;
   @FXML private TextField addStudentId;
-  @FXML private TableView<Student> studentsList;
-  @FXML private TableColumn<Course, String> studentId;
-  @FXML private TableColumn<Course, String> studentName;
-
+  @FXML private ListView<StudentList> studentsList;
 
 
   public CourseViewController() {
@@ -50,6 +44,7 @@ public class CourseViewController {
     this.scheduleModelManager = scheduleModelManager;
     this.root = root;
     this.viewHandler = viewHandler;
+
   }
 
   public void reset() {
@@ -71,20 +66,29 @@ public class CourseViewController {
     {
       viewHandler.openView("MainView");
     }
+    else if(e.getSource() == addTeacherBtn)
+    {
+     //scheduleModelManager.addTeacherToCourse(teacherId.getText(), courseName.getText());
+    }
 
   }
 
   public void fillCourses(Course course){
     courseName.setText(course.getName());
+    courseName.setEditable(false);
     ectsText.setText(course.getEcts()+"");
-
+    fillTeachersTable(course);
+    fillStudentsTable(course);
 
   }
-  public void fillTeachersTable() {
+  public void fillTeachersTable(Course course) {
+    ObservableList<TeacherList> teachers = FXCollections.observableArrayList(scheduleModelManager.getCourse(course.getId()).getAllTeachers());
+    teachersList.setItems(teachers);
 
-//teachersList.setCellFactory();
   }
 
-  public void fillStudentsTable() {
+  public void fillStudentsTable(Course course) {
+ObservableList<StudentList> students = FXCollections.observableArrayList(scheduleModelManager.getCourse(course.getId()).getAllStudents());
+studentsList.setItems(students);
   }
 }

@@ -43,8 +43,10 @@ public class StudentViewController {
     this.studentName.setText("");
     this.studentId.setText("");
     String[] groups = {"X", "Y", "Z", "DK"};
+    this.studentGroup.getItems().clear();
     this.studentGroup.getItems().addAll(groups);
     Integer[] semesters = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    this.studentSemester.getItems().clear();
     this.studentSemester.getItems().addAll(semesters);
     studentId.setEditable(true);
   }
@@ -54,20 +56,7 @@ public class StudentViewController {
   {
     //SAVE A STUDENT
     if (e.getSource() == saveStudent) {
-      Student temp = new Student(studentId.getText(), studentName.getText(), studentSemester.getValue(), studentGroup.getValue());
-      StudentList allStudents = scheduleModelManager.getAllStudents();
-     /*for (int i = 0; i < allStudents.getSize(); i++)
-      {
-        if(allStudents.getAllStudents().get(i).getId().equals(studentId.getText()))
-        {
-          //EDIT FUNCTIONALITY! COMING SOON! CHANGE YOUR NAME OR YOUR GROUP!
-        }
-        else
-        {
-          scheduleModelManager.addStudent(temp);
-        }
-      }*/
-      scheduleModelManager.addStudent(temp);
+      scheduleModelManager.editStudent(studentId.getText(), studentName.getText(), studentSemester.getValue(), studentGroup.getValue());
       reset();
       viewHandler.openView("MainView");
       viewHandler.getMainViewController().reset();

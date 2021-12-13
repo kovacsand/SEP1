@@ -33,6 +33,7 @@ public class TeacherViewController {
   {
     this.teacherId.setText("");
     this.teacherName.setText("");
+    teacherId.setEditable(true);
   }
 
   public void handleActions(ActionEvent e)
@@ -60,5 +61,6 @@ public class TeacherViewController {
   {
     teacherName.setText(teacher.getName());
     teacherId.setText(teacher.getId());
+    teacherId.setEditable(false);
   }
 }
