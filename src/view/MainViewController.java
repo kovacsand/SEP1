@@ -71,6 +71,10 @@ public void handleAction(ActionEvent e)
     {
       Student selected = studentsTable.getSelectionModel().getSelectedItem();
       viewHandler.openView("StudentView");
+      if (selected != null)
+      {
+        viewHandler.getStudentViewCntroller().fillStudentFields(Selected);
+      }
     }
   else if (e.getSource() == removeStudentBtn)
     {
@@ -95,7 +99,6 @@ public void handleAction(ActionEvent e)
       //REMOVE A TEACHER FUNCTION
       teachersTable.refresh();
     }
-
 }
 
 

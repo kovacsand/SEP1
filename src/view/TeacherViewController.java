@@ -58,5 +58,6 @@ public class TeacherViewController {
     teacherName.setText(teacher.getName());
     teacherId.setText(teacher.getId());
     teacherId.setEditable(false);
+
   }
 }
