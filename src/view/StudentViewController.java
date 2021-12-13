@@ -24,7 +24,8 @@ public class StudentViewController {
   public StudentViewController() {
   }
 
-  public void init(ViewHandler viewHandler, ScheduleModelManager scheduleModelManager, Region root) {
+  public void init(ViewHandler viewHandler, ScheduleModelManager scheduleModelManager, Region root)
+  {
     this.scheduleModelManager = scheduleModelManager;
     this.root = root;
     this.viewHandler = viewHandler;
@@ -32,7 +33,8 @@ public class StudentViewController {
   }
 
 
-  public void reset() {
+  public void reset()
+  {
     this.studentName.setText("");
     this.studentId.setText("");
     String[] groups = {"X", "Y", "Z", "DK"};
@@ -41,7 +43,8 @@ public class StudentViewController {
     this.studentSemester.getItems().addAll(semesters);
   }
 
-  public void handleActions(ActionEvent e) {
+  public void handleActions(ActionEvent e)
+  {
     if (e.getSource() == saveStudent) {
       reset();
       viewHandler.openView("MainView");
@@ -52,13 +55,13 @@ public class StudentViewController {
 
   }
 
-  public Region getRoot() {
+  public Region getRoot()
+  {
     return root;
   }
 
   public void fillStudentFields(Student student)
   {
-
     studentName.setText(student.getName());
     studentId.setText(student.getId());
     studentId.setEditable(false);

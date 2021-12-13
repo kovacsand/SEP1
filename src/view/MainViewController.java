@@ -39,8 +39,9 @@ public Region getRoot()
   return root;
 }
 
-public void reset(){
-
+public void reset()
+{
+  tabChanged();
 }
 
 public void handleAction(ActionEvent e)
@@ -79,7 +80,12 @@ public void handleAction(ActionEvent e)
   else if (e.getSource() == removeStudentBtn)
     {
       //REMOVE A STUDENT FUNCTION
-      studentsTable.refresh();
+      Student temp = studentsTable.getSelectionModel().getSelectedItem();
+      if(temp != null)
+      {
+        scheduleModelManager.removeStudent(temp);
+        reset();
+      }
     }
   else if (e.getSource() == addTeacherBtn)
     {
@@ -97,7 +103,12 @@ public void handleAction(ActionEvent e)
   else if (e.getSource() == removeTeacherBtn)
     {
       //REMOVE A TEACHER FUNCTION
-      teachersTable.refresh();
+      Teacher selected = teachersTable.getSelectionModel().getSelectedItem();
+      if(selected != null)
+      {
+        scheduleModelManager.removeTeacher(selected);
+        reset();
+      }
     }
 }
 
@@ -152,7 +163,7 @@ public void handleAction(ActionEvent e)
   @FXML private TableColumn<Teacher, String> teachersNameColumn;
 
 
-  public void tabChanged(Event event)
+  public void tabChanged()
   {
     if (scheduleModelManager != null)
     {

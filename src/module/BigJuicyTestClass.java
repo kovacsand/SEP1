@@ -16,8 +16,6 @@ public class BigJuicyTestClass
 
     modelManager.export();
 
-    //System.out.println(modelManager.getAllClassrooms().getClassroom("C05.15").isFree(new MyDate(10, 12, 2021), new TimeInterval(800, 1250)));
 
-    System.out.println(modelManager.getAllStudents());
   }
 }
