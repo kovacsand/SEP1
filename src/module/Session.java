@@ -99,28 +99,41 @@ public class Session implements Serializable
         course.getName(), course.getSemester(), course.getGroup());
   }
 
-
+  /**
+   * Gets the String representation of the Course (ex. SDJ1X)
+   * @return String format of Course
+   */
   public String getCourseString()
   {
     return course.getId();
   }
 
+  /**
+   * Gets the String representation of the Date (ex. 13/12/21)
+   * @return String format of Date
+   */
   public String getDateString()
   {
     return date.toString();
   }
 
+  /**
+   * Gets the String representation of the Time (ex. 08:20 - 11:45)
+   * @return String format of Time
+   */
   public String getTimeString()
   {
     return interval.toString();
   }
 
+  /**
+   * Gets the String representation of the Classroom (ex. C05.15)
+   * @return String format of Classroom
+   */
   public String getClassroomString()
   {
     return room.getName();
   }
-
-
 
   /**
    * Compares two Session objects.
