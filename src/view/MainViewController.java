@@ -52,8 +52,9 @@ public void handleAction(ActionEvent e)
     }
   else if (e.getSource() == editSessionBtn)
     {
-      //ENTER THE FUNCTIONALITY HERE
+      Session selected = sessionsTable.getSelectionModel().getSelectedItem();
       viewHandler.openView("SessionView");
+      viewHandler.getSessionViewController().fillSessionFields(selected);
     }
   else if (e.getSource() == removeSessionBtn)
     {
