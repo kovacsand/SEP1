@@ -9,11 +9,10 @@ public abstract class Person implements Serializable
   private String id;
   private ArrayList<String> workingHours;
 
-
   public Person(String id, String name)
   {
-    this.name=name;
-    this.id=id;
+    this.name = name;
+    this.id = id;
     workingHours = new ArrayList<>();
   }
 
@@ -21,12 +20,16 @@ public abstract class Person implements Serializable
   {
     return id;
   }
+
   public String getName()
   {
     return name;
   }
 
-  public abstract void setName(String name);
+  public void setName(String name)
+  {
+    this.name = name;
+  }
 
   public boolean isFree(MyDate date, TimeInterval interval)
   {

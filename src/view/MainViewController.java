@@ -39,8 +39,9 @@ public Region getRoot()
   return root;
 }
 
-public void reset(){
-tabChanged();
+public void reset()
+{
+  tabChanged();
 }
 
 public void handleAction(ActionEvent e)
@@ -77,15 +78,15 @@ public void handleAction(ActionEvent e)
       }
     }
   else if (e.getSource() == removeStudentBtn)
-{
-  Student temp = studentsTable.getSelectionModel().getSelectedItem();
-  if(temp != null)
-  {
-  scheduleModelManager.removeStudent(temp);
-  reset();
-  }
-}
-  
+    {
+      //REMOVE A STUDENT FUNCTION
+      Student temp = studentsTable.getSelectionModel().getSelectedItem();
+      if(temp != null)
+      {
+        scheduleModelManager.removeStudent(temp);
+        reset();
+      }
+    }
   else if (e.getSource() == addTeacherBtn)
     {
       viewHandler.openView("TeacherView");
@@ -102,7 +103,12 @@ public void handleAction(ActionEvent e)
   else if (e.getSource() == removeTeacherBtn)
     {
       //REMOVE A TEACHER FUNCTION
-      teachersTable.refresh();
+      Teacher selected = teachersTable.getSelectionModel().getSelectedItem();
+      if(selected != null)
+      {
+        scheduleModelManager.removeTeacher(selected);
+        reset();
+      }
     }
 }
 

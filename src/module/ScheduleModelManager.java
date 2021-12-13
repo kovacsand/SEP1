@@ -792,6 +792,45 @@ public class ScheduleModelManager
       System.out.println("IO Error writing to a file");
     }
   }
+  public void addStudentToClass(String studentId, String group)
+  {
+    ClassList allClasses = getAllClasses();
+    StudentList allStudents = getAllStudents();
+
+    Student student = null;
+
+    for (int i = 0; i < allStudents.getSize(); i++)
+    {
+      if (allStudents.getAllStudents().get(i).getId().equals(studentId))
+      {
+        student = new Student(studentId, allStudents.getAllStudents().get(i).getName(), allStudents.getAllStudents().get(i).getSemester(), allStudents.getAllStudents().get(i).getGroup());
+        for (int j = 0; j < allClasses.getSize(); j++)
+        {
+          if (allClasses.getAllClasses().get(j).getId().equals(group))
+          {
+            Class aClass = allClasses.getAllClasses().get(j);
+            if(aClass.getAllStudents().getStudent(studentId) == null)
+            {
+              aClass.addStudent(student);
+            }
+          }
+        }
+      }
+    }
+    try
+    {
+      MyFileHandler.writeToBinaryFile("courses.bin", allClasses);
+    }
+    catch (FileNotFoundException e)
+    {
+      System.out.println("File not found");
+    }
+    catch (IOException e)
+    {
+      System.out.println("IO Error writing to a file");
+    }
+  }
+
   /**
    * Removing the student object from the class that the object is attached to
    * @param studentId ID of the student object that must be removed from the class it has been assigned to
@@ -857,6 +896,44 @@ public class ScheduleModelManager
       System.out.println("IO Error writing to a file");
     }
   }
+
+  public void editStudent(String id, String name, int semester, String group)
+  {
+    Student student = new Student(id, name, semester, group);
+    StudentList allStudents = getAllStudents();
+    boolean temp = false;
+    for (int i = 0; i < allStudents.getSize(); i++)
+    {
+      if(allStudents.getAllStudents().get(i).getId().equals(id))
+      {
+        allStudents.getAllStudents().get(i).setName(name);
+        allStudents.getAllStudents().get(i).setSemester(semester);
+        temp = true;
+        if(!(allStudents.getAllStudents().get(i).getGroup().equals(group)))
+        {
+          removeStudentFromClass(id);
+          allStudents.getAllStudents().get(i).setGroup(group);
+          addStudentToClass(id, group);
+        }
+      }
+    }
+    if(temp == false)
+    {
+      allStudents.addStudent(student);
+    }
+    try
+    {
+      MyFileHandler.writeToBinaryFile("students.bin", allStudents);
+    }
+    catch (FileNotFoundException e)
+    {
+      System.out.println("File not found");
+    }
+    catch (IOException e)
+    {
+      System.out.println("IO Error writing to file");
+    }
+  }
   /**
    * Getting all the teachers in a TeacherList
    *
@@ -920,6 +997,39 @@ public class ScheduleModelManager
     }
   }
 
+  public void editTeacher(String id, String name)
+  {
+    TeacherList allTeachers = getAllTeachers();
+    Teacher teacher = new Teacher(id, name);
+
+    boolean temp = false;
+
+    for (int i = 0; i < allTeachers.getSize(); i++)
+    {
+      if(allTeachers.getAllTeachers().get(i).getId().equals(id))
+      {
+        allTeachers.getAllTeachers().get(i).setName(name);
+        temp = true;
+      }
+    }
+    if (temp == false)
+    {
+      allTeachers.addTeacher(teacher);
+    }
+
+    try
+    {
+      MyFileHandler.writeToBinaryFile("teachers.bin", allTeachers);
+    }
+    catch (FileNotFoundException e)
+    {
+      System.out.println("File not found");
+    }
+    catch (IOException e)
+    {
+      System.out.println("IO Error writing to a file");
+    }
+  }
   /**
    * Adding the Teacher object to the TeacherList
    * @param teacher object that needs to be added to the TeacherList
