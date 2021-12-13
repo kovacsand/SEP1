@@ -22,7 +22,6 @@ public class CourseViewController {
   @FXML private Button removeTeacherBtn;
   @FXML private Button addStudentBtn;
   @FXML private Button removeStudentBtn;
-  @FXML private Button saveCourse;
   @FXML private Button closeButton;
 
   //FIELDS
@@ -63,34 +62,56 @@ public class CourseViewController {
     return root;
   }
 
-  public void handleActions(ActionEvent e) {
-    if (e.getSource() == saveCourse) {
-      viewHandler.openView("MainView");
-    }
-    else if(e.getSource() == closeButton)
+  public void handleActions(ActionEvent e)
+  {
+    if(e.getSource() == closeButton)
     {
       viewHandler.openView("MainView");
     }
     else if(e.getSource() == addTeacherBtn)
     {
-     scheduleModelManager.addTeacherToCourse(addTeacherId.getText().toUpperCase(
-         Locale.ROOT),courseName.getText());
+      //CONFIRMATION
+      Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
+        "Add " + scheduleModelManager.getTeacher(addTeacherId.getText()).getName()
+          + " " + addTeacherId.getText() + "?",
+          ButtonType.YES, ButtonType.NO);
+
+      alert.showAndWait();
+      if (alert.getResult() == ButtonType.YES)
+      {
+      scheduleModelManager.addTeacherToCourse(addTeacherId.getText().toUpperCase(Locale.ROOT),
+          courseName.getText());
       System.out.println(addTeacherId.getText() + " ADD SELECTED");
       Course temp = scheduleModelManager.getCourse(courseName.getText());
       fillCourses(temp);
       fillTeachersTable(scheduleModelManager.getCourse(courseName.getText()));
       addTeacherId.setText("");
+      }
     }
    else if(e.getSource() == removeTeacherBtn)
     {
+
       Teacher selected = teachersList.getSelectionModel().getSelectedItem();
-      System.out.println(selected.getId() + " REMOVE SELECTED");
-      System.out.println(courseName.getText() + " This course");
+      //CONFIRMATION
+      Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
+          "Remove " + selected.getName() + " " + selected.getId() + "?",
+          ButtonType.YES, ButtonType.NO);
+
+      alert.showAndWait();
+      if (alert.getResult() == ButtonType.YES)
       scheduleModelManager.removeTeacherFromCourse(selected.getId(), courseName.getText());
       fillTeachersTable(scheduleModelManager.getCourse(courseName.getText()));
     }
     else if(e.getSource() == addStudentBtn)
     {
+      //CONFIRMATION
+      Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
+          "Add " +
+          scheduleModelManager.getStudent(addStudentId.getText()).getName() + " " + addStudentId.getText() + "?",
+          ButtonType.YES, ButtonType.NO);
+
+      alert.showAndWait();
+      if (alert.getResult() == ButtonType.YES)
       scheduleModelManager.addStudentToCourse(addStudentId.getText(),
           courseName.getText());
       System.out.println(addStudentId.getText() + " ADD SELECTED");
@@ -105,7 +126,13 @@ public class CourseViewController {
       Student selected = studentsList.getSelectionModel().getSelectedItem();
       if(selected != null)
       {
-        System.out.println(selected.getId() + " REMOVE SELECTED");
+        //CONFIRMATION
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
+            "Remove " + selected.getName() + " " + selected.getId() + "?",
+            ButtonType.YES, ButtonType.NO);
+
+        alert.showAndWait();
+        if (alert.getResult() == ButtonType.YES)
         scheduleModelManager.removeStudentFromCourse(selected.getId(),
             courseName.getText());
       }
