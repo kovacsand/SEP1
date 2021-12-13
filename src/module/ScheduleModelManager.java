@@ -274,7 +274,9 @@ public class ScheduleModelManager
     System.out.println("Data imported.");
 
   }
-
+  /**
+   * Assigning the students to the courses
+   */
   public void assignStudentsToCourses()
   {
     CourseList courseList = getAllCourses();
@@ -792,6 +794,12 @@ public class ScheduleModelManager
       System.out.println("IO Error writing to a file");
     }
   }
+
+  /**
+   * Adding the student to the class
+   * @param studentId ID of the student that must be added to the class
+   * @param group The name of the group where the student must be added
+   */
   public void addStudentToClass(String studentId, String group)
   {
     ClassList allClasses = getAllClasses();
@@ -896,7 +904,13 @@ public class ScheduleModelManager
       System.out.println("IO Error writing to a file");
     }
   }
-
+  /**
+   * Adding or editing student object details
+   * @param id ID of the student that will be added or matching for it to be edited
+   * @param name Name of the student that will be added or name to be edited
+   * @param semester Semester of the student that will be added or semester of the existing student to be edited
+   * @param group Group of the student that will be added or group it will be moved to
+   */
   public void editStudent(String id, String name, int semester, String group)
   {
     Student student = new Student(id, name, semester, group);
@@ -997,6 +1011,11 @@ public class ScheduleModelManager
     }
   }
 
+  /**
+   * Adding or editing a teacher
+   * @param id ID of the teacher that will be added or if the ID matches, teacher that will be edited
+   * @param name Name of the teacher that will be added or if the ID matches, the name of the teacher gets changed
+   */
   public void editTeacher(String id, String name)
   {
     TeacherList allTeachers = getAllTeachers();
