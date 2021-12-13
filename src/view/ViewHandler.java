@@ -182,11 +182,13 @@ public class ViewHandler
   }
 
 
-  public StudentViewController getStudentViewController(){
+  public StudentViewController getStudentViewController()
+  {
     return studentViewController;
   }
 
-  public TeacherViewController getTeacherViewController(){
+  public TeacherViewController getTeacherViewController()
+  {
     return teacherViewController;
   }
 
