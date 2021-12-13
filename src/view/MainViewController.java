@@ -101,8 +101,9 @@ public void handleAction(ActionEvent e)
     }
   else if (e.getSource() == removeTeacherBtn)
     {
-      //REMOVE A TEACHER FUNCTION
-      teachersTable.refresh();
+      Teacher selected = teachersTable.getSelectionModel().getSelectedItem();
+      scheduleModelManager.removeTeacher(selected);
+      reset();
     }
 }
 
