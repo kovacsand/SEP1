@@ -71,10 +71,16 @@ else if (e.getSource() == editStudentBtn)
 {
   Student selected = studentsTable.getSelectionModel().getSelectedItem();
   viewHandler.openView("StudentView");
+  if(selected != null)
+  {
+    viewHandler.getStudentViewController().fillStudentFields(selected);
+  }
+
 }
 else if (e.getSource() == removeStudentBtn)
 {
-  //REMOVE A STUDENT FUNCTION
+  Student temp = studentsTable.getSelectionModel().getSelectedItem();
+  scheduleModelManager.removeStudent(temp);
   studentsTable.refresh();
 }
 else if (e.getSource() == addTeacherBtn)
@@ -84,6 +90,7 @@ else if (e.getSource() == addTeacherBtn)
 else if (e.getSource() == editTeacherBtn)
 {
   Teacher selected = teachersTable.getSelectionModel().getSelectedItem();
+
   viewHandler.openView("TeacherView");
 }
 else if (e.getSource() == removeTeacherBtn)
