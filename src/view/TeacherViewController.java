@@ -51,7 +51,7 @@ public class TeacherViewController {
   }
 
   public void fillTeacherFields(Teacher teacher) {
-    this.teacherName.setText(teacher.getName());
-    this.teacherId.setText(teacher.getId());
+    teacherName.setText(teacher.getName());
+    teacherId.setText(teacher.getId());
   }
 }
