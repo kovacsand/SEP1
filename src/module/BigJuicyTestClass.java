@@ -15,7 +15,5 @@ public class BigJuicyTestClass
         modelManager.getCourse("SDJ1X")));
 
     modelManager.export();
-
-
   }
 }
