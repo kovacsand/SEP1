@@ -8,6 +8,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
 import module.ScheduleModelManager;
 import module.Student;
+import module.StudentList;
+import utils.MyFileHandler;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class StudentViewController {
   private Region root;
@@ -41,14 +46,34 @@ public class StudentViewController {
     this.studentGroup.getItems().addAll(groups);
     Integer[] semesters = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
     this.studentSemester.getItems().addAll(semesters);
+    studentId.setEditable(true);
   }
+
 
   public void handleActions(ActionEvent e)
   {
+    //SAVE A STUDENT
     if (e.getSource() == saveStudent) {
+      Student temp = new Student(studentId.getText(), studentName.getText(), studentSemester.getValue(), studentGroup.getValue());
+      StudentList allStudents = scheduleModelManager.getAllStudents();
+     /*for (int i = 0; i < allStudents.getSize(); i++)
+      {
+        if(allStudents.getAllStudents().get(i).getId().equals(studentId.getText()))
+        {
+          //EDIT FUNCTIONALITY! COMING SOON! CHANGE YOUR NAME OR YOUR GROUP!
+        }
+        else
+        {
+          scheduleModelManager.addStudent(temp);
+        }
+      }*/
+      scheduleModelManager.addStudent(temp);
       reset();
       viewHandler.openView("MainView");
-    } else if (e.getSource() == close) {
+      viewHandler.getMainViewController().reset();
+    } 
+    else if (e.getSource() == close)
+    {
       reset();
       viewHandler.openView("MainView");
     }
