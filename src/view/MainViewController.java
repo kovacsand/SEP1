@@ -73,7 +73,7 @@ public void handleAction(ActionEvent e)
       viewHandler.openView("StudentView");
       if (selected != null)
       {
-        viewHandler.getStudentViewCntroller().fillStudentFields(Selected);
+        viewHandler.getStudentViewController().fillStudentFields(selected);
       }
     }
   else if (e.getSource() == removeStudentBtn)
