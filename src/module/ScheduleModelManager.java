@@ -273,6 +273,7 @@ public class ScheduleModelManager
 
     System.out.println("Data imported.");
 
+    assignStudentsToCourses();
   }
   /**
    * Assigning the students to the courses
@@ -396,12 +397,16 @@ public class ScheduleModelManager
   public void removeSession(Session session)
   {
     SessionList allSessions = getAllSessions();
+    ClassroomList allClassrooms  = getAllClassrooms();
 
     allSessions.removeSession(session.getId());
+
+    allClassrooms.getClassroom(session.getRoom().getName()).removeOccupiedHours(session.getDate(), session.getInterval());
 
     try
     {
       MyFileHandler.writeToBinaryFile("sessions.bin", allSessions);
+      MyFileHandler.writeToBinaryFile("classrooms.bin", allClassrooms);
     }
 
     catch (FileNotFoundException e)
