@@ -8,14 +8,9 @@ public class BigJuicyTestClass
     modelManager.importData();
     modelManager.assignStudentsToCourses();
     Student student = new Student("123451", "Alley Heya", 1, "Y");
-    modelManager.addStudentToCourse("123451", "SDJ1X");
-    modelManager.addTeacherToCourse("RIB", "SDJ1X");
-    System.out.println(modelManager.getCourse("SDJ1X"));
-
-    modelManager.addSession(new Session(new MyDate(10, 12, 2021),
-        new TimeInterval(820, 1150), modelManager.getAllClassrooms().getClassroom("C05.15"),
-        modelManager.getCourse("SDJ1X")));
-
+    Student student2 = new Student("531552", "PPPP", 4, "X");
+    modelManager.addStudentToClass("531552", "4X");
+    System.out.println(modelManager.getClassById("4X"));
     modelManager.export();
   }
 }
