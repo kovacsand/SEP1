@@ -827,7 +827,7 @@ public class ScheduleModelManager
     }
     try
     {
-      MyFileHandler.writeToBinaryFile("courses.bin", allClasses);
+      MyFileHandler.writeToBinaryFile("classes.bin", allClasses);
     }
     catch (FileNotFoundException e)
     {
