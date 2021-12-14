@@ -47,6 +47,7 @@ public class StudentViewController {
     this.studentGroup.getItems().addAll(groups);
     Integer[] semesters = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
     this.studentSemester.getItems().clear();
+    this.studentSemester.setDisable(false);
     this.studentSemester.getItems().addAll(semesters);
     studentId.setEditable(true);
   }
@@ -80,6 +81,7 @@ public class StudentViewController {
     studentId.setText(student.getId());
     studentId.setEditable(false);
     studentSemester.getSelectionModel().select(student.getSemester());
+    studentSemester.setDisable(true);
     studentGroup.getSelectionModel().select(student.getGroup());
   }
 }
