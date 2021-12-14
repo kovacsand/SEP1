@@ -62,17 +62,12 @@ public class ViewHandler
         break;
     }
     scene.setRoot(root);
-    String title = "";
 
-    if (root.getUserData() != null)
-    {
-      title += root.getUserData();
-    }
-
-    window.setTitle(title);
+    window.setTitle("Scheduler");
     window.setScene(scene);
-    window.setWidth(450);
-    window.setHeight(480);
+    window.setWidth(420);
+    window.setHeight(465);
+    window.setResizable(false);
     window.show();
   }
 
