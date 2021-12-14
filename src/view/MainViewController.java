@@ -52,8 +52,9 @@ public void handleAction(ActionEvent e)
     }
   else if (e.getSource() == editSessionBtn)
     {
-      //ENTER THE FUNCTIONALITY HERE
+      Session selected = sessionsTable.getSelectionModel().getSelectedItem();
       viewHandler.openView("SessionView");
+      viewHandler.getSessionViewController().fillSessionFields(selected);
     }
   else if (e.getSource() == removeSessionBtn)
     {
@@ -62,7 +63,12 @@ public void handleAction(ActionEvent e)
     }
   else if (e.getSource() == editCourseBtn)
     {
-      viewHandler.openView("CourseView");
+      Course selected = coursesTable.getSelectionModel().getSelectedItem();
+      if (selected != null)
+      {
+        viewHandler.openView("CourseView");
+        viewHandler.getCourseViewController().fillCourses(selected);
+      }
     }
   else if (e.getSource() == addStudentBtn)
     {
@@ -71,9 +77,9 @@ public void handleAction(ActionEvent e)
   else if (e.getSource() == editStudentBtn)
     {
       Student selected = studentsTable.getSelectionModel().getSelectedItem();
-      viewHandler.openView("StudentView");
       if (selected != null)
       {
+        viewHandler.openView("StudentView");
         viewHandler.getStudentViewController().fillStudentFields(selected);
       }
     }
@@ -94,9 +100,9 @@ public void handleAction(ActionEvent e)
   else if (e.getSource() == editTeacherBtn)
     {
       Teacher selected = teachersTable.getSelectionModel().getSelectedItem();
-      viewHandler.openView("TeacherView");
       if(selected != null)
       {
+        viewHandler.openView("TeacherView");
         viewHandler.getTeacherViewController().fillTeacherFields(selected);
       }
     }
@@ -237,11 +243,8 @@ public void handleAction(ActionEvent e)
       }
       else if (teachersTab.isSelected())
       {
-        //do teachers stuff
         teachersIdColumn.setCellValueFactory(new PropertyValueFactory<Teacher, String>("id"));
         teachersNameColumn.setCellValueFactory(new PropertyValueFactory<Teacher, String>("name"));
-        //teachersCoursesColumn.setCellValueFactory(new PropertyValueFactory<Teacher, String>("courses"));
-        //getting taught courses later
 
         teachersTable.getItems().clear();
 

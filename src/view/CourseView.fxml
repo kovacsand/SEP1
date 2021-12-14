@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="427.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.CourseViewController">
+<FlowPane userData="COURSES" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="427.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.CourseViewController">
    <children>
       <HBox alignment="CENTER" prefHeight="70.0" prefWidth="400.0">
          <children>
@@ -93,7 +93,7 @@
                      </VBox.margin>
                   </Label>
                   <TextField fx:id="addStudentId" layoutX="10.0" layoutY="146.0" promptText="Student ID" />
-                  <Button fx:id="addStudentBtn" mnemonicParsing="false" text="Add" translateX="152.0">
+                  <Button fx:id="addStudentBtn" mnemonicParsing="false" onAction="#handleActions" text="Add" translateX="152.0">
                      <VBox.margin>
                         <Insets top="2.0" />
                      </VBox.margin>
@@ -115,12 +115,7 @@
       </HBox>
       <HBox alignment="CENTER" prefHeight="82.0" prefWidth="400.0">
          <children>
-            <Button fx:id="saveCourse" mnemonicParsing="false" onAction="#handleActions" text="Save">
-               <HBox.margin>
-                  <Insets right="20.0" />
-               </HBox.margin>
-            </Button>
-            <Button fx:id="closeButton" mnemonicParsing="false" onAction="#handleActions" text="Close" />
+            <Button fx:id="closeButton" mnemonicParsing="false" onAction="#handleActions" text="Back" />
          </children>
       </HBox>
    </children>
