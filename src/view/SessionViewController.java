@@ -7,15 +7,25 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
+import javafx.util.StringConverter;
 import module.*;
 
+import java.sql.Time;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class SessionViewController {
   private Region root;
   private ScheduleModelManager scheduleModelManager;
   private ViewHandler viewHandler;
+
+  private String dateData;
+  private MyDate date;
+  private ClassroomList classrooms;
+  private ArrayList<String> classes = new ArrayList<>();
+  private CourseList coursesList;
+  private ArrayList<String> courses = new ArrayList<>();
 
   //SESSION BUTTONS
 
@@ -27,6 +37,8 @@ public class SessionViewController {
   @FXML private ChoiceBox<String> classroomBox;
   @FXML private DatePicker datePicker;
 
+
+
   public SessionViewController() {
   }
 
@@ -35,16 +47,32 @@ public class SessionViewController {
     this.root = root;
     this.viewHandler = viewHandler;
     reset();
+    coursesList = scheduleModelManager.getAllCourses();
+    classrooms = scheduleModelManager.getAllClassrooms();
+    String pattern = "dd/MM/yy";
+    DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(pattern);
+    date = new MyDate(datePicker.getValue().getDayOfMonth(), datePicker.getValue().getMonthValue(), datePicker.getValue().getYear());
+    //dateData = datePicker.getValue().format(dateFormatter);
+    //date = new MyDate(Integer.parseInt(dateData.substring(0,1)),Integer.parseInt(dateData.substring(2,3)),Integer.parseInt(dateData.substring(4,5)));
+    for (int i = 0; i < classrooms.getSize(); i++)
+    {
+      classes.add(classrooms.getAllClassrooms().get(i).getName());
+    }
+    for (int i = 0; i < coursesList.getSize(); i++)
+    {
+      courses.add(coursesList.getAllCourses().get(i).getId());
+    }
+
   }
 
 
   public void reset() {
     startTimeField.setText("");
     endTimeField.setText("");
-    String[] courses = {"SDJ1X", "SDJ1Y", "SDJ1Z", "SDJ1DK"};
-    this.courseBox.getItems().clear();
-    this.courseBox.getItems().addAll(courses);
-    classroomBox.setValue("");
+    courseBox.getItems().clear();
+    courseBox.getItems().addAll(courses);
+    classroomBox.getItems().clear();
+    classroomBox.getItems().addAll(classes);
     datePicker.setValue(LocalDate.now());
   }
 
@@ -52,6 +80,11 @@ public class SessionViewController {
   {
     if (e.getSource() == saveBtn)
     {
+      Classroom selectedClassroom = scheduleModelManager.getAllClassrooms().getClassroom(classroomBox.getValue());
+      Course selectedCourse = scheduleModelManager.getCourse(courseBox.getValue());
+      //checkClassroom();
+      Session temp = new Session(date, new TimeInterval(Integer.parseInt(startTimeField.getText()),Integer.parseInt(endTimeField.getText())), selectedClassroom, selectedCourse);
+      scheduleModelManager.addSession(temp);
       reset();
       viewHandler.openView("MainView");
     }
@@ -62,11 +95,9 @@ public class SessionViewController {
     }
   }
 
-  public Region getRoot() {
-    return this.root;
-  }
+  public Region getRoot() { return root; }
 
-  //THIS NEEDS UPDATING 13/12/2021
+
   public void fillSessionFields(Session session) {
     courseBox.setValue(session.getCourse().getId());
     courseBox.isDisabled();
@@ -75,4 +106,5 @@ public class SessionViewController {
     endTimeField.setText(session.getInterval().getEndTime()+"");
     classroomBox.setValue(session.getClassroomString());
   }
+
 }

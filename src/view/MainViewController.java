@@ -26,6 +26,9 @@ public class MainViewController
   @FXML private Button addTeacherBtn;
   @FXML private Button editTeacherBtn;
   @FXML private Button removeTeacherBtn;
+  @FXML private MenuItem importData;
+  @FXML private MenuItem publishSchedule;
+  @FXML private MenuItem userGuide;
 
   public void init(ViewHandler viewHandler, ScheduleModelManager scheduleModelManager, Region root)
   {
@@ -49,6 +52,7 @@ public void handleAction(ActionEvent e)
   if(e.getSource() == addSessionBtn)
     {
       viewHandler.openView("SessionView");
+      reset();
     }
   else if (e.getSource() == editSessionBtn)
     {
@@ -116,6 +120,18 @@ public void handleAction(ActionEvent e)
         reset();
       }
     }
+  else if (e.getSource() == importData)
+  {
+    scheduleModelManager.importData();
+  }
+  else if (e.getSource() == publishSchedule)
+  {
+    scheduleModelManager.export();
+  }
+  else if (e.getSource() == userGuide)
+  {
+    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+  }
 }
 
 
