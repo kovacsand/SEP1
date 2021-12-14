@@ -2,12 +2,10 @@ package view;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.Region;
 import javafx.util.StringConverter;
+import javafx.util.converter.LocalDateStringConverter;
 import module.*;
 
 import java.sql.Time;
@@ -49,22 +47,25 @@ public class SessionViewController {
     this.root = root;
     this.viewHandler = viewHandler;
     reset();
-    coursesList = scheduleModelManager.getAllCourses();
-    courseBox.getItems().addAll(courses);
+
+    //FILLING CLASSROOMS
     classrooms = scheduleModelManager.getAllClassrooms();
-    classroomBox.getItems().addAll(classes);
-    //Setting Date
-    String pattern = "dd/MM/yy";
-    DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(pattern);
-    date = new MyDate(datePicker.getValue().getDayOfMonth(), datePicker.getValue().getMonthValue(), datePicker.getValue().getYear());
     for (int i = 0; i < classrooms.getSize(); i++)
     {
       classes.add(classrooms.getAllClassrooms().get(i).getName());
     }
+    classroomBox.getItems().addAll(classes);
+
+    //FILLING COURSES
+    coursesList = scheduleModelManager.getAllCourses();
     for (int i = 0; i < coursesList.getSize(); i++)
     {
       courses.add(coursesList.getAllCourses().get(i).getId());
     }
+    courseBox.getItems().addAll(courses);
+
+    //Setting Date
+    date = new MyDate(datePicker.getValue().getDayOfMonth(), datePicker.getValue().getMonthValue(), datePicker.getValue().getYear());
 
   }
 
@@ -81,28 +82,47 @@ public class SessionViewController {
     datePicker.setValue(LocalDate.now());
   }
 
-  /*public ArrayList<String> getFreeClassrooms()
+  public ArrayList<String> getFreeClassrooms()
   {
-    ArrayList<String> freeClasses = new ArrayList<>();
-    for (int i = 0; i < classrooms.getSize(); i++)
+    Course foundCourse = null;
+    for (int i = 0; i < coursesList.getSize(); i++)
     {
-      if(classrooms.getAllClassrooms().get(i).isFree(date, new TimeInterval(Integer.parseInt(startTimeField.getText()),Integer.parseInt(endTimeField.getText()))) &&  );
+      if(coursesList.getAllCourses().get(i).getId().equals(courseBox.getValue()))
+        foundCourse = scheduleModelManager.getCourse(courseBox.getValue());
+    }
+    ArrayList<String> freeClasses = new ArrayList<>();
+    ArrayList<Classroom> bigEnoughClassrooms = classrooms.getClassrooms(foundCourse.getAllStudents().getSize());
+    System.out.println(foundCourse.getAllStudents().getSize());
+    for (int i = 0; i < bigEnoughClassrooms.size(); i++)
+    {
+      if(bigEnoughClassrooms.get(i).isFree(date, new TimeInterval(Integer.parseInt(startTimeField.getText()),Integer.parseInt(endTimeField.getText()))));
       {
-        freeClasses.add(classrooms.getAllClassrooms().get(i).getName());
+        freeClasses.add(bigEnoughClassrooms.get(i).getName());
       }
     }
     return freeClasses;
-  }*/
+  }
 
   public void handleActions(ActionEvent e)
   {
     if (e.getSource() == saveBtn)
     {
+
+      date = new MyDate(datePicker.getValue().getDayOfMonth(), datePicker.getValue().getMonthValue(), datePicker.getValue().getYear());
       Classroom selectedClassroom = scheduleModelManager.getAllClassrooms().getClassroom(classroomBox.getValue());
       Course selectedCourse = scheduleModelManager.getCourse(courseBox.getValue());
-      Session temp = new Session(date, new TimeInterval(Integer.parseInt(startTimeField.getText()),Integer.parseInt(endTimeField.getText())), selectedClassroom, selectedCourse);
+      timeInterval = new TimeInterval(Integer.parseInt(startTimeField.getText()), Integer.parseInt(endTimeField.getText()));
+
+
+      Session temp = new Session(date, timeInterval, selectedClassroom, selectedCourse);
+
+
+      if (tempSesh != null)
+      {
+        scheduleModelManager.removeSession(tempSesh);
+      }
       scheduleModelManager.addSession(temp);
-      scheduleModelManager.removeSession(tempSesh);
+
       reset();
       viewHandler.openView("MainView");
     }
@@ -115,8 +135,9 @@ public class SessionViewController {
     else if (e.getSource() == checkBtn)
     if(!(courseBox.getValue().isBlank() && startTimeField.getText().isEmpty() && endTimeField.getText().isEmpty()))
       {
+        System.out.println(getFreeClassrooms());
         classroomBox.getItems().clear();
-        classroomBox.getItems().addAll(classes);
+        classroomBox.getItems().addAll(getFreeClassrooms());
         classroomBox.setDisable(false);
       }
 
@@ -126,9 +147,12 @@ public class SessionViewController {
 
 
   public void fillSessionFields(Session session) {
+    date = session.getDate();
+    String dateString = (2000 + date.getYear()) + "-" + date.getMonth() + "-" + date.getDay();
+    LocalDate localDate = LocalDate.parse(dateString);
     courseBox.setValue(session.getCourse().getId());
     courseBox.setDisable(true);
-    datePicker.setValue(LocalDate.now());
+    datePicker.setValue(localDate);
     startTimeField.setText(session.getInterval().getStartTime()+"");
     endTimeField.setText(session.getInterval().getEndTime()+"");
     classroomBox.setValue(session.getClassroomString());
