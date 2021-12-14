@@ -107,24 +107,35 @@ public class SessionViewController {
   {
     if (e.getSource() == saveBtn)
     {
-
-      date = new MyDate(datePicker.getValue().getDayOfMonth(), datePicker.getValue().getMonthValue(), datePicker.getValue().getYear());
-      Classroom selectedClassroom = scheduleModelManager.getAllClassrooms().getClassroom(classroomBox.getValue());
-      Course selectedCourse = scheduleModelManager.getCourse(courseBox.getValue());
-      timeInterval = new TimeInterval(Integer.parseInt(startTimeField.getText()), Integer.parseInt(endTimeField.getText()));
-
-
-      Session temp = new Session(date, timeInterval, selectedClassroom, selectedCourse);
-
-
-      if (tempSesh != null)
+      if(courseBox.getValue().isBlank() || startTimeField.getText().equals("") || endTimeField.getText().equals(""))
       {
-        scheduleModelManager.removeSession(tempSesh);
-      }
-      scheduleModelManager.addSession(temp);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION,
+            "Please fill in all areas first", ButtonType.OK);
 
-      reset();
-      viewHandler.openView("MainView");
+        alert.showAndWait();
+      }
+      else
+      {
+        date = new MyDate(datePicker.getValue().getDayOfMonth(),
+            datePicker.getValue().getMonthValue(),
+            datePicker.getValue().getYear());
+        Classroom selectedClassroom = scheduleModelManager.getAllClassrooms().getClassroom(classroomBox.getValue());
+        Course selectedCourse = scheduleModelManager.getCourse(courseBox.getValue());
+        timeInterval = new TimeInterval(Integer.parseInt(startTimeField.getText()),
+            Integer.parseInt(endTimeField.getText()));
+
+        Session temp = new Session(date, timeInterval, selectedClassroom,
+            selectedCourse);
+
+        if (tempSesh != null)
+        {
+          scheduleModelManager.removeSession(tempSesh);
+        }
+        scheduleModelManager.addSession(temp);
+
+        reset();
+        viewHandler.openView("MainView");
+      }
     }
     else if (e.getSource() == closeBtn)
     {
@@ -133,13 +144,23 @@ public class SessionViewController {
     }
 
     else if (e.getSource() == checkBtn)
-    if(!(courseBox.getValue().isBlank() && startTimeField.getText().isEmpty() && endTimeField.getText().isEmpty()))
+      if(courseBox.getValue().isBlank() || startTimeField.getText().equals("") || endTimeField.getText().equals(""))
+      {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION,
+            "Please fill in all areas first", ButtonType.OK);
+
+        alert.showAndWait();
+
+      }
+       else
       {
         System.out.println(getFreeClassrooms());
         classroomBox.getItems().clear();
         classroomBox.getItems().addAll(getFreeClassrooms());
         classroomBox.setDisable(false);
       }
+
+
 
   }
 
