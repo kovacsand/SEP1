@@ -921,12 +921,12 @@ public class ScheduleModelManager
       if(allStudents.getAllStudents().get(i).getId().equals(id))
       {
         allStudents.getAllStudents().get(i).setName(name);
-        allStudents.getAllStudents().get(i).setSemester(semester);
         temp = true;
-        if(!(allStudents.getAllStudents().get(i).getGroup().equals(group)))
+        if(!(allStudents.getAllStudents().get(i).getGroup().equals(group) || allStudents.getAllStudents().get(i).getSemester() == semester))
         {
           removeStudentFromClass(id);
           allStudents.getAllStudents().get(i).setGroup(group);
+          allStudents.getAllStudents().get(i).setSemester(semester);
           addStudentToClass(id, group);
         }
       }
