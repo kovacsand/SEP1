@@ -57,6 +57,7 @@ public class StudentViewController {
   {
     //SAVE A STUDENT
     if (e.getSource() == saveStudent) {
+      scheduleModelManager = new ScheduleModelManager();
       scheduleModelManager.editStudent(studentId.getText(), studentName.getText(), studentSemester.getValue(), studentGroup.getValue());
       reset();
       viewHandler.openView("MainView");
@@ -75,13 +76,18 @@ public class StudentViewController {
     return root;
   }
 
+  public void makeSemesterDisabled()
+  {
+    studentSemester.setDisable(true);
+  }
+
   public void fillStudentFields(Student student)
   {
     studentName.setText(student.getName());
     studentId.setText(student.getId());
     studentId.setEditable(false);
     studentSemester.getSelectionModel().select(student.getSemester());
-    studentSemester.setDisable(true);
+//    studentSemester.setDisable(true);
     studentGroup.getSelectionModel().select(student.getGroup());
   }
 }

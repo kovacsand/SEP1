@@ -81,6 +81,7 @@ public void handleAction(ActionEvent e)
       {
         viewHandler.openView("StudentView");
         viewHandler.getStudentViewController().fillStudentFields(selected);
+        viewHandler.getStudentViewController().makeSemesterDisabled();
       }
     }
   else if (e.getSource() == removeStudentBtn)

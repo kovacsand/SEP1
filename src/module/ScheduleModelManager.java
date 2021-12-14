@@ -778,8 +778,9 @@ public class ScheduleModelManager
     StudentList allStudents = getAllStudents();
     ClassList allClasses = getAllClasses();
     String classId = student.getSemester() + student.getGroup();
-    allStudents.removeStudent(student.getId());
     allClasses.getAClass(classId).removeStudent(student);
+
+    allStudents.removeStudent(student.getId());
     try
     {
       MyFileHandler.writeToBinaryFile("students.bin", allStudents);
@@ -811,31 +812,34 @@ public class ScheduleModelManager
     {
       if (allStudents.getAllStudents().get(i).getId().equals(studentId))
       {
-        student = new Student(studentId, allStudents.getAllStudents().get(i).getName(), allStudents.getAllStudents().get(i).getSemester(), allStudents.getAllStudents().get(i).getGroup());
+        student = new Student(studentId,
+            allStudents.getAllStudents().get(i).getName(),
+            allStudents.getAllStudents().get(i).getSemester(),
+            allStudents.getAllStudents().get(i).getGroup());
         for (int j = 0; j < allClasses.getSize(); j++)
         {
           if (allClasses.getAllClasses().get(j).getId().equals(group))
           {
             Class aClass = allClasses.getAllClasses().get(j);
-            if(aClass.getAllStudents().getStudent(studentId) == null)
+            if (aClass.getAllStudents().getStudent(studentId) == null)
             {
               aClass.addStudent(student);
             }
           }
         }
       }
-    }
-    try
-    {
-      MyFileHandler.writeToBinaryFile("courses.bin", allClasses);
-    }
-    catch (FileNotFoundException e)
-    {
-      System.out.println("File not found");
-    }
-    catch (IOException e)
-    {
-      System.out.println("IO Error writing to a file");
+      try
+      {
+        MyFileHandler.writeToBinaryFile("courses.bin", allClasses);
+      }
+      catch (FileNotFoundException e)
+      {
+        System.out.println("File not found");
+      }
+      catch (IOException e)
+      {
+        System.out.println("IO Error writing to a file");
+      }
     }
   }
 
@@ -914,39 +918,38 @@ public class ScheduleModelManager
   public void editStudent(String id, String name, int semester, String group)
   {
     Student student = new Student(id, name, semester, group);
+    ClassList allClasses = getAllClasses();
     StudentList allStudents = getAllStudents();
-    boolean temp = false;
-    for (int i = 0; i < allStudents.getSize(); i++)
+
+    //Removing student from the system (also removes from the class), if for some reason they were already there
+    //If they are a new student, then we do not remove them, so that is not a problem
+    if (allStudents.getStudent(student.getId()) != null)
+      removeStudent(allStudents.getStudent(student.getId()));
+
+    //Creating the new class, if necessary
+    boolean classAlreadyExists = false;
+    for (int i = 0; i < allClasses.getSize(); i++)
+      if ((allClasses.getAllClasses().get(i).getSemester() == semester && allClasses.getAllClasses().get(i).getGroup().equals(group)))
+        classAlreadyExists = true;
+    if (!classAlreadyExists)
     {
-      if(allStudents.getAllStudents().get(i).getId().equals(id))
+      allClasses.addClass(new Class(semester, group));
+      try
       {
-        allStudents.getAllStudents().get(i).setName(name);
-        allStudents.getAllStudents().get(i).setSemester(semester);
-        temp = true;
-        if(!(allStudents.getAllStudents().get(i).getGroup().equals(group)))
-        {
-          removeStudentFromClass(id);
-          allStudents.getAllStudents().get(i).setGroup(group);
-          addStudentToClass(id, group);
-        }
+        MyFileHandler.writeToBinaryFile("classes.bin", allClasses);
+      }
+      catch (FileNotFoundException e)
+      {
+        System.out.println("File not found");
+      }
+      catch (IOException e)
+      {
+        System.out.println("IO Error writing to a file");
       }
     }
-    if(temp == false)
-    {
-      allStudents.addStudent(student);
-    }
-    try
-    {
-      MyFileHandler.writeToBinaryFile("students.bin", allStudents);
-    }
-    catch (FileNotFoundException e)
-    {
-      System.out.println("File not found");
-    }
-    catch (IOException e)
-    {
-      System.out.println("IO Error writing to file");
-    }
+
+    //We create a new student, they are automatically assigned to their class
+    addStudent(student);
   }
   /**
    * Getting all the teachers in a TeacherList
