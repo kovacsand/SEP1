@@ -399,9 +399,8 @@ public class ScheduleModelManager
     SessionList allSessions = getAllSessions();
     ClassroomList allClassrooms  = getAllClassrooms();
 
-    allSessions.removeSession(session.getId());
-
     allClassrooms.getClassroom(session.getRoom().getName()).removeOccupiedHours(session.getDate(), session.getInterval());
+    allSessions.removeSession(session.getId());
 
     try
     {
@@ -448,15 +447,15 @@ public class ScheduleModelManager
   public void addSession(Session session)
   {
     SessionList allSessions = getAllSessions();
-    allSessions.addSession(session);
-    ClassroomList classroomList = getAllClassrooms();
+    ClassroomList allClassrooms = getAllClassrooms();
 
-    classroomList.getClassroom(session.getClassroomString()).addOccupiedHours(session.getDate(), session.getInterval());
+    allSessions.addSession(session);
+    allClassrooms.getClassroom(session.getRoom().getName()).addOccupiedHours(session.getDate(), session.getInterval());
 
     try
     {
       MyFileHandler.writeToBinaryFile("sessions.bin", allSessions);
-      MyFileHandler.writeToBinaryFile("classrooms.bin", classroomList);
+      MyFileHandler.writeToBinaryFile("classrooms.bin", allClassrooms);
     }
     catch (FileNotFoundException e)
     {
@@ -925,6 +924,7 @@ public class ScheduleModelManager
     Student student = new Student(id, name, semester, group);
     ClassList allClasses = getAllClasses();
     StudentList allStudents = getAllStudents();
+    CourseList allCourses = getAllCourses();
 
     //Removing student from the system (also removes from the class), if for some reason they were already there
     //If they are a new student, then we do not remove them, so that is not a problem
@@ -951,6 +951,30 @@ public class ScheduleModelManager
       {
         System.out.println("IO Error writing to a file");
       }
+    }
+
+    //We edit the student in their courses
+    for (int i = 0; i < allCourses.getSize(); i++)
+    {
+      if (allCourses.getAllCourses().get(i).getAllStudents().getStudent(student.getId()) != null)
+      {
+        allCourses.getAllCourses().get(i).getAllStudents().getStudent(student.getId()).setName(name);
+        allCourses.getAllCourses().get(i).getAllStudents().getStudent(student.getId()).setGroup(group);
+        allCourses.getAllCourses().get(i).getAllStudents().getStudent(student.getId()).setSemester(semester);
+      }
+    }
+
+    try
+    {
+      MyFileHandler.writeToBinaryFile("courses.bin", allCourses);
+    }
+    catch (FileNotFoundException e)
+    {
+      System.out.println("File not found");
+    }
+    catch (IOException e)
+    {
+      System.out.println("IO Error writing to a file");
     }
 
     //We create a new student, they are automatically assigned to their class
@@ -1026,6 +1050,7 @@ public class ScheduleModelManager
    */
   public void editTeacher(String id, String name)
   {
+    CourseList allCourses = getAllCourses();
     TeacherList allTeachers = getAllTeachers();
     Teacher teacher = new Teacher(id, name);
 
@@ -1044,9 +1069,17 @@ public class ScheduleModelManager
       allTeachers.addTeacher(teacher);
     }
 
+    //We edit the teacher in their courses
+    for (int i = 0; i < allCourses.getSize(); i++)
+    {
+      if (allCourses.getAllCourses().get(i).getAllTeachers().getTeacher(teacher.getId()) != null)
+        allCourses.getAllCourses().get(i).getAllTeachers().getTeacher(teacher.getId()).setName(name);
+    }
+
     try
     {
       MyFileHandler.writeToBinaryFile("teachers.bin", allTeachers);
+      MyFileHandler.writeToBinaryFile("courses.bin", allCourses);
     }
     catch (FileNotFoundException e)
     {

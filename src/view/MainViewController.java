@@ -9,6 +9,8 @@ import javafx.scene.layout.Region;
 import module.*;
 import module.Class;
 
+import javax.swing.*;
+
 public class MainViewController
 {
   private Region root;
@@ -28,13 +30,14 @@ public class MainViewController
   @FXML private Button removeTeacherBtn;
   @FXML private MenuItem importData;
   @FXML private MenuItem publishSchedule;
+  @FXML private MenuItem close;
   @FXML private MenuItem userGuide;
 
   public void init(ViewHandler viewHandler, ScheduleModelManager scheduleModelManager, Region root)
   {
-this.viewHandler = viewHandler;
-this.scheduleModelManager = scheduleModelManager;
-this.root = root;
+    this.viewHandler = viewHandler;
+    this.scheduleModelManager = scheduleModelManager;
+    this.root = root;
   }
 
 public Region getRoot()
@@ -50,10 +53,10 @@ public void reset()
 public void handleAction(ActionEvent e)
 {
   if(e.getSource() == addSessionBtn)
-    {
-      viewHandler.openView("SessionView");
-      reset();
-    }
+  {
+    viewHandler.openView("SessionView");
+    reset();
+  }
   else if (e.getSource() == editSessionBtn)
   {
     Session selected = sessionsTable.getSelectionModel().getSelectedItem();
@@ -67,7 +70,7 @@ public void handleAction(ActionEvent e)
     {
       Session selected = sessionsTable.getSelectionModel().getSelectedItem();
       scheduleModelManager.removeSession(selected);
-      reset();
+        reset();
     }
   else if (e.getSource() == editCourseBtn)
     {
@@ -127,14 +130,26 @@ public void handleAction(ActionEvent e)
   else if (e.getSource() == importData)
   {
     scheduleModelManager.importData();
+    Alert alert = new Alert(Alert.AlertType.INFORMATION,
+        "Importing the data was successful.", ButtonType.OK);
+    alert.showAndWait();
   }
   else if (e.getSource() == publishSchedule)
   {
     scheduleModelManager.export();
+    Alert alert = new Alert(Alert.AlertType.INFORMATION,
+        "Publishing the schedule was successful.", ButtonType.OK);
+    alert.showAndWait();
   }
   else if (e.getSource() == userGuide)
   {
     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+  }
+  else if (e.getSource() == close)
+  {
+    int exit = JOptionPane.showConfirmDialog (null, "Are you sure you want to close the application?\nAll changes were saved.","Close",JOptionPane.YES_NO_OPTION);
+    if(exit == JOptionPane.YES_OPTION)
+      System.exit(0);
   }
 }
 

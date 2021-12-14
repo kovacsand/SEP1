@@ -53,7 +53,7 @@
             <items>
                   <MenuItem fx:id="importData" mnemonicParsing="false" onAction="#handleAction" text="Import Data" />
                   <MenuItem fx:id="publishSchedule" mnemonicParsing="false" onAction="#handleAction" text="Publish Schedule" />
-              <MenuItem mnemonicParsing="false" text="Close" />
+              <MenuItem fx:id="close" mnemonicParsing="false" onAction="#handleAction" text="Close" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
