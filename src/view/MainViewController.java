@@ -55,15 +55,19 @@ public void handleAction(ActionEvent e)
       reset();
     }
   else if (e.getSource() == editSessionBtn)
+  {
+    Session selected = sessionsTable.getSelectionModel().getSelectedItem();
+    if (selected != null)
     {
-      Session selected = sessionsTable.getSelectionModel().getSelectedItem();
       viewHandler.openView("SessionView");
       viewHandler.getSessionViewController().fillSessionFields(selected);
     }
+  }
   else if (e.getSource() == removeSessionBtn)
     {
-      //FUNCTIONALLY REMOVE SESSION
-      sessionsTable.refresh();
+      Session selected = sessionsTable.getSelectionModel().getSelectedItem();
+      scheduleModelManager.removeSession(selected);
+      reset();
     }
   else if (e.getSource() == editCourseBtn)
     {
@@ -89,7 +93,6 @@ public void handleAction(ActionEvent e)
     }
   else if (e.getSource() == removeStudentBtn)
     {
-      //REMOVE A STUDENT FUNCTION
       Student temp = studentsTable.getSelectionModel().getSelectedItem();
       if(temp != null)
       {
