@@ -3,6 +3,12 @@ package module;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * Class to contain all the Course objects in one ArrayList
+ *
+ * @author Hi-Phi
+ * @version 1.0
+ */
 public class CourseList implements Serializable
 {
   private ArrayList<Course> courses;
@@ -10,27 +16,36 @@ public class CourseList implements Serializable
   /**
    * No-argument constructor initializing the courses ArrayList.
    */
-  public CourseList(){
-    courses=new ArrayList<>();
+  public CourseList()
+  {
+    courses = new ArrayList<>();
   }
 
   /**
    * Adds the course given as a parameter to the courses list.
-   * @param course
+   *
+   * @param course object that must be added to the ArrayList
    */
-  public void addCourse(Course course){
+  public void addCourse(Course course)
+  {
     courses.add(course);
   }
 
   /**
    * Removes the course which has the name, semester, group given as a parameter from the classes list.
-   * @param semester
-   * @param group
-   * @param name
+   *
+   * @param semester of the class
+   * @param group    of the class
+   * @param name     of the course
    */
-  public void removeCourse(String name,int semester,String group){
-    for(int i=0;i<courses.size();i++){
-      if(courses.get(i).getName().equals(name) && courses.get(i).getSemester()==semester && courses.get(i).getGroup().equals(group)){
+  public void removeCourse(String name, int semester, String group)
+  {
+    for (int i = 0; i < courses.size(); i++)
+    {
+      if (courses.get(i).getName().equals(name)
+          && courses.get(i).getSemester() == semester && courses.get(i)
+          .getGroup().equals(group))
+      {
         courses.remove(courses.get(i));
       }
     }
@@ -38,21 +53,27 @@ public class CourseList implements Serializable
 
   /**
    * Returns all elements of the courses list.
-   * @return courses
+   *
+   * @return ArrayList containing all courses
    */
-  public ArrayList<Course> getAllCourses(){
+  public ArrayList<Course> getAllCourses()
+  {
     return courses;
   }
 
   /**
    * Returns a new list of courses of the course list which has the semester given as a parameter.
-   * @param semester
-   * @return semesterClasses
+   *
+   * @param semester to find all courses for given semester
+   * @return ArrayList that contains all the courses for the semester given
    */
-  public ArrayList<Course> getAllCoursesBySemester(int semester){
-    ArrayList<Course> semesterCourses=new ArrayList<>();
-    for(int i=0;i<courses.size();i++){
-      if(courses.get(i).getSemester()==semester){
+  public ArrayList<Course> getAllCoursesBySemester(int semester)
+  {
+    ArrayList<Course> semesterCourses = new ArrayList<>();
+    for (int i = 0; i < courses.size(); i++)
+    {
+      if (courses.get(i).getSemester() == semester)
+      {
         semesterCourses.add(courses.get(i));
       }
     }
@@ -60,57 +81,59 @@ public class CourseList implements Serializable
   }
 
   /**
-   * Returns the size of the course list
-   * @return courses.size()
+   * Getting the size of the course list
+   *
+   * @return size of the ArrayList
    */
-  public int getSize(){
+  public int getSize()
+  {
     return courses.size();
   }
 
   /**
    * Checks if two courses lists are equal.
-   * Returns true if both class lists has the same elements, values and size.
-   * @param obj
-   * @return true or false
+   *
+   * @param obj to compare CourseList object we want to compare with
+   * @return true if they are equal, otherwise false
    */
-  public boolean equals(Object obj){
-    if(!(obj instanceof CourseList)){
+  public boolean equals(Object obj)
+  {
+    if (!(obj instanceof CourseList))
+    {
       return false;
     }
-    CourseList other=(CourseList) obj;
+    CourseList other = (CourseList) obj;
     return courses.equals(other);
   }
 
   /**
    * Displays all the data stored in the course list.
    * Displays the name,semester, group, ects and teacher of each course in the course list.
-   * @return courses.get(i).getName()
-   * @return courses.get(i).getSemester()
-   * @return courses.get(i).getGroup()
-   * @return courses.get(i).getEcts()
-   * @return courses.get(i).getAllTeachers()
+   *
+   * @return String that contains all the information abotu the coruse
    */
-  public String toString(){
-    String str="";
-    for(int i=0;i<courses.size();i++){
-      //str=str+courses.get(i).getName() + courses.get(i).getSemester() + courses.get(i).getGroup() + " " +courses.get(i).getEcts() + " " + courses.get(i).getAllTeachers();
+  public String toString()
+  {
+    String str = "";
+    for (int i = 0; i < courses.size(); i++)
+    {
       str += courses.get(i);
     }
     return str;
   }
 
   /**
-   * Creates a copy object of the CourseList object.
    * Creates a new object with the same values.
-   * @return temp
+   *
+   * @return newly created CourseList object
    */
-  public CourseList copy(){
-    CourseList temp=new CourseList();
-    for(int i=0;i<courses.size();i++)
+  public CourseList copy()
+  {
+    CourseList temp = new CourseList();
+    for (int i = 0; i < courses.size(); i++)
     {
       temp.addCourse(courses.get(i));
     }
-      return temp;
+    return temp;
   }
-
 }

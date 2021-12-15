@@ -2,6 +2,12 @@ package module;
 
 import java.io.Serializable;
 
+/**
+ * A class containing all the methods and the constructor for the classes
+ *
+ * @author Hi-Phi
+ * @version 1.0
+ */
 public class Class implements Serializable
 {
   private int semester;
@@ -9,66 +15,87 @@ public class Class implements Serializable
   private StudentList studentList;
   private CourseList courseList;
   private int studentCount;
+
   /**
    * Two-argument constructor initializing the semester, group, studentList and courseList.
-   * @param semester
-   * @param group
+   *
+   * @param semester semester of the class
+   * @param group    name of the group
    */
-  public Class(int semester,String group){
-    this.semester=semester;
-    this.group=group;
-    studentList=new StudentList();
-    courseList=new CourseList();
-    this.studentCount=0;
+  public Class(int semester, String group)
+  {
+    this.semester = semester;
+    this.group = group;
+    studentList = new StudentList();
+    courseList = new CourseList();
+    this.studentCount = 0;
   }
 
-  public int getStudentCount(){
-    studentCount=studentList.getSize();
+  /**
+   * Get student count of the class
+   *
+   * @return amount of student objects in class
+   */
+  public int getStudentCount()
+  {
+    studentCount = studentList.getSize();
     return studentCount;
   }
 
   /**
    * Returns the semester number of the class.
-   * @return semester
+   *
+   * @return semester of the class you are looking for
    */
-  public int getSemester(){
+  public int getSemester()
+  {
     return semester;
   }
 
   /**
    * Returns the group name of the class.
-   * @return group
+   *
+   * @return group of the class you are looking for
    */
-  public String getGroup(){
+  public String getGroup()
+  {
     return group;
   }
 
   /**
    * Returns the ID of the class (Ex. 1X)
+   *
    * @return the semester and the group of the class added together
    */
   public String getId()
   {
     return semester + group;
   }
+
   /**
    * Returns the list of students of the class.
-   * @return studentList
+   *
+   * @return studentList containing all the student objects that are within the list
    */
-  public StudentList getAllStudents(){
+  public StudentList getAllStudents()
+  {
     return studentList;
   }
 
   /**
    * Returns the student with the given id from the studentList.
-   * @param id
-   * @return found
+   *
+   * @param id ID of the student object to look for
+   * @return found Student object that is found that matches the ID.
    */
-  public Student getStudent(String id){
-    Student found=null;
-    for(int i=0;i<studentList.getSize();i++){
-      if(studentList.getAllStudents().get(i).getId().equals(id)){
-        found=studentList.getAllStudents().get(i);
+  public Student getStudent(String id)
+  {
+    Student found = null;
+    for (int i = 0; i < studentList.getSize(); i++)
+    {
+      if (studentList.getAllStudents().get(i).getId().equals(id))
+      {
+        found = studentList.getAllStudents().get(i);
       }
     }
     return found;
@@ -76,16 +103,19 @@ public class Class implements Serializable
 
   /**
    * Returns the list of courses of the class.
-   * @return courseList
+   *
+   * @return courseList all the course objects that are within the courseList
    */
-  public CourseList getAllCourses(){
+  public CourseList getAllCourses()
+  {
     return courseList;
   }
 
   /**
    * Returns the course with the given name from the courseList.
-   * @param id
-   * @return found
+   *
+   * @param id of the course the user is looking for
+   * @return course object that is found that matches the given id
    */
   public Course getCourse(String id)
   {
@@ -100,6 +130,11 @@ public class Class implements Serializable
     return found;
   }
 
+  /**
+   * Getting all the courses for GUI inside of classes tab
+   *
+   * @return String that contains all the courses
+   */
   public String getCourses()
   {
     String temp = "";
@@ -110,29 +145,33 @@ public class Class implements Serializable
       else
         temp += courseList.getAllCourses().get(i).getId() + ", ";
     }
-
     return temp;
   }
 
   /**
    * Adds the given student to the studentList of the class.
-   * @param student
+   *
+   * @param student student object that must be added to the studentList for the class
    */
-  public void addStudent(Student student){
+  public void addStudent(Student student)
+  {
     studentList.getAllStudents().add(student);
   }
 
   /**
    * Adds the given course to the courseList of the class.
-   * @param course
+   *
+   * @param course course object that must be added to the courseList for the class
    */
-  public void addCourse(Course course){
+  public void addCourse(Course course)
+  {
     courseList.getAllCourses().add(course);
   }
 
   /**
    * Removes a student from the studentList of the class.
-   * @param student
+   *
+   * @param student student object that must be removed
    */
   public void removeStudent(Student student)
   {
@@ -141,53 +180,54 @@ public class Class implements Serializable
 
   /**
    * Checks if two classes are the same.
-   * Returns true if every field and data of the given class is the same as every field and data of the original class.
-   * Returns false if the given object is an instance of the original class.
-   * Returns false if the size of the studentList of the given class does not equal to the size of the studentList of the original class.
-   * Returns false if the size of the courseList of the given class does not equal to the size of the courseList of the original class.
-   * Returns false if the semester of the given class does not equal to the semester of the original class.
-   * Returns false if the group of the given class does not equal to the group of the original class.
-   * @param obj
-   * @return true or false
+   * @param obj the Class we want to compare with
+   * @return true if they are equal, otherwise false
    */
-  public boolean equals(Object obj){
-    if(!(obj instanceof Class)){
+  public boolean equals(Object obj)
+  {
+    if (!(obj instanceof Class))
+    {
       return false;
     }
-    Class other=(Class) obj;
-    if(studentList.getSize()!=other.studentList.getSize()) return false;
-    if(courseList.getSize()!=other.courseList.getSize()) return false;
-    return semester==other.semester && group.equals(other.group) &&
-        studentList.equals(other.studentList) && courseList.equals(other.courseList);
+    Class other = (Class) obj;
+    if (studentList.getSize() != other.studentList.getSize())
+      return false;
+    if (courseList.getSize() != other.courseList.getSize())
+      return false;
+    return semester == other.semester && group.equals(other.group)
+        && studentList.equals(other.studentList) && courseList.equals(
+        other.courseList);
   }
 
   /**
    * Displays all the data stored in the class.
-   * @return semester
-   * @return group
-   * @return studentList
-   * @return courseList
+   *
+   * @return String that contains all the information about the class
    */
-  public String toString(){
-    String studentsSTR="";
-    String coursesSTR="";
-    for(int i=0;i<studentList.getSize();i++){
-      studentsSTR=studentsSTR+studentList.getAllStudents().get(i)+"\n";
+  public String toString()
+  {
+    String studentsSTR = "";
+    String coursesSTR = "";
+    for (int i = 0; i < studentList.getSize(); i++)
+    {
+      studentsSTR = studentsSTR + studentList.getAllStudents().get(i) + "\n";
     }
-    for(int i=0;i<courseList.getSize();i++){
-      coursesSTR=coursesSTR+courseList.getAllCourses().get(i)+"\n";
+    for (int i = 0; i < courseList.getSize(); i++)
+    {
+      coursesSTR = coursesSTR + courseList.getAllCourses().get(i) + "\n";
     }
-    return "Semester: "+semester+"\nGroup: "+group+"\nStudents: "+studentsSTR
-        +"\nCourses: "+coursesSTR;
+    return "Semester: " + semester + "\nGroup: " + group + "\nStudents: "
+        + studentsSTR + "\nCourses: " + coursesSTR;
   }
 
   /**
-   * Creates a copy object of the Class object.
-   * Creates a new object with the same values.
-   * @return new Class(semester, group)
+   * Creates a new Class object with the same values.
+   *
+   * @return newly created Class object
    */
-  public Class copy(){
-    Class temp = new Class(semester,group);
+  public Class copy()
+  {
+    Class temp = new Class(semester, group);
     for (int i = 0; i < studentList.getSize(); i++)
     {
       temp.addStudent(studentList.getAllStudents().get(i));
@@ -198,6 +238,5 @@ public class Class implements Serializable
     }
     return temp;
   }
-
 }
 

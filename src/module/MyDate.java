@@ -4,23 +4,22 @@ import java.io.Serializable;
 
 /**
  * A class for storing dates.
+ *
  * @author Hi-Phi
  * @version 1.0
  */
 
 public class MyDate implements Serializable
 {
-  /**
-   * @param day The day of the date.
-   * @param month The month of the date.
-   * @param year The last two digits of the year of the date.
-   */
   private int day;
   private int month;
   private int year;
 
   /**
    * Three-argument constructor initializing the MyDate object.
+   *  @param day The day of the date.
+   *  @param month The month of the date.
+   *  @param year The last two digits of the year of the date.
    */
   public MyDate(int day, int month, int year)
   {
@@ -31,6 +30,7 @@ public class MyDate implements Serializable
 
   /**
    * Gets the day from the date.
+   *
    * @return the day of the MyDate.
    */
   public int getDay()
@@ -40,6 +40,7 @@ public class MyDate implements Serializable
 
   /**
    * Sets the day to the date.
+   *
    * @param day the day to be set
    */
   public void setDay(int day)
@@ -49,6 +50,7 @@ public class MyDate implements Serializable
 
   /**
    * Gets the month from the date.
+   *
    * @return the month of the MyDate.
    */
   public int getMonth()
@@ -58,6 +60,7 @@ public class MyDate implements Serializable
 
   /**
    * Sets the month to the date.
+   *
    * @param month the month to be set
    */
   public void setMonth(int month)
@@ -67,6 +70,7 @@ public class MyDate implements Serializable
 
   /**
    * Gets the year from the date.
+   *
    * @return the year of the MyDate.
    */
   public int getYear()
@@ -76,6 +80,7 @@ public class MyDate implements Serializable
 
   /**
    * Sets the year to the date.
+   *
    * @param year the day to be set
    */
   public void setYear(int year)
@@ -85,6 +90,7 @@ public class MyDate implements Serializable
 
   /**
    * Compares two MyDate objects.
+   *
    * @param obj the MyDate we want to compare with.
    * @return true if they are equal, false otherwise.
    */
@@ -98,6 +104,7 @@ public class MyDate implements Serializable
 
   /**
    * Converts MyDate into a String
+   *
    * @return the String format (example: 24/12/21, or: 03/04/05)
    */
   public String toString()
@@ -107,6 +114,7 @@ public class MyDate implements Serializable
 
   /**
    * Copies a MyDate object
+   *
    * @return the newly created MyDate object, which has the same values
    */
   public MyDate copy()

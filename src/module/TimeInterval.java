@@ -4,16 +4,13 @@ import java.io.Serializable;
 
 /**
  * A class for storing time intervals.
+ *
  * @author Hi-Phi
  * @version 1.0
  */
 
 public class TimeInterval implements Serializable
 {
-  /**
-   * @param startTime The starting time of the interval (example: 800 or: 1630)
-   * @param endTime The ending time of the interval (example: 920 or: 17:45)
-   */
   private int startTime;
   private int endTime;
 
@@ -28,6 +25,7 @@ public class TimeInterval implements Serializable
 
   /**
    * Gets the starting time from the interval.
+   *
    * @return the startTime of the TimeInterval.
    */
   public int getStartTime()
@@ -37,6 +35,7 @@ public class TimeInterval implements Serializable
 
   /**
    * Gets the ending time from the interval.
+   *
    * @return the endTime of the TimeInterval.
    */
   public int getEndTime()
@@ -46,6 +45,7 @@ public class TimeInterval implements Serializable
 
   /**
    * Compares two TimeInterval objects.
+   *
    * @param obj the MyDate we want to compare with.
    * @return true if they are equal, false otherwise.
    */
@@ -59,6 +59,7 @@ public class TimeInterval implements Serializable
 
   /**
    * Converts TimeInterval into a String.
+   *
    * @return the String format (example: 08:00 - 09:20, or: 16:30 - 17:45)
    */
   public String toString()
@@ -67,11 +68,13 @@ public class TimeInterval implements Serializable
     int startHour = (startTime - startMinute) / 100;
     int endMinute = endTime % 100;
     int endHour = (endTime - endMinute) / 100;
-    return String.format("%02d:%02d - %02d:%02d", startHour, startMinute, endHour, endMinute);
+    return String.format("%02d:%02d - %02d:%02d", startHour, startMinute,
+        endHour, endMinute);
   }
 
   /**
    * Copies a TimeInterval object.
+   *
    * @return the newly created TimeInterval object, which has the same values
    */
   public TimeInterval copy()
