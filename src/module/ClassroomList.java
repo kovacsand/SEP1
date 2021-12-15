@@ -3,9 +3,17 @@ package module;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * Class containg all the classroom objects in one ArrayList
+ *
+ * @author Hi-Phi
+ * @version 1.0
+ */
 public class ClassroomList implements Serializable
 {
-  /** A class for storing all the classrooms.
+  /**
+   * A class for storing all the classrooms.
+   *
    * @param classrooms An ArrayList containing all the classrooms.
    */
   private ArrayList<Classroom> classrooms;
@@ -20,6 +28,7 @@ public class ClassroomList implements Serializable
 
   /**
    * Adds a classroom to the ArrayList.
+   *
    * @param classroom the classroom to be added.
    */
   public void addClassroom(Classroom classroom)
@@ -29,6 +38,7 @@ public class ClassroomList implements Serializable
 
   /**
    * Removes a classroom from the ArrayList.
+   *
    * @param name the name of the classroom to be removed.
    */
   public void removeClassroom(String name)
@@ -40,6 +50,7 @@ public class ClassroomList implements Serializable
 
   /**
    * Gets all the classrooms from the ArrayList.
+   *
    * @return the ArrayList containing all the classrooms.
    */
   public ArrayList<Classroom> getAllClassrooms()
@@ -49,6 +60,7 @@ public class ClassroomList implements Serializable
 
   /**
    * Gets all the classroom that have at least the specified capacity.
+   *
    * @param capacity the minimum capacity of the wanted classrooms.
    * @return All the classrooms that have at least the specified capacity.
    */
@@ -63,6 +75,7 @@ public class ClassroomList implements Serializable
 
   /**
    * Gets the classroom by name from the classrooms.
+   *
    * @param name the name of the wanted classroom.
    * @return the wanted Classroom object from the ArrayList.
    */
@@ -76,6 +89,7 @@ public class ClassroomList implements Serializable
 
   /**
    * Gets the number of classrooms.
+   *
    * @return the size of the ArrayList.
    */
   public int getSize()
@@ -85,6 +99,7 @@ public class ClassroomList implements Serializable
 
   /**
    * Compares two Classroom objects.
+   *
    * @param obj the Classroom we want to compare with.
    * @return true if they are equal, false otherwise.
    */
@@ -98,6 +113,7 @@ public class ClassroomList implements Serializable
 
   /**
    * Converts Classroom into a String.
+   *
    * @return the String format
    */
   public String toString()
@@ -110,6 +126,7 @@ public class ClassroomList implements Serializable
 
   /**
    * Copies a ClassroomList object.
+   *
    * @return the newly created ClassroomList object, which has the same values
    */
   public ClassroomList copy()

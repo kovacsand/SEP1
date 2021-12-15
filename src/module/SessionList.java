@@ -3,11 +3,14 @@ package module;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * A class for storing all the Session objects in an ArrayList
+ *
+ * @author Hi-Phi
+ * @version 1.0
+ */
 public class SessionList implements Serializable
 {
-  /** A class for storing all the sessions.
-   * @param sessions An ArrayList containing all the sessions
-   */
   private ArrayList<Session> sessions;
 
   /**
@@ -20,6 +23,7 @@ public class SessionList implements Serializable
 
   /**
    * Adds a session to the ArrayList.
+   *
    * @param session the sessions to be added.
    */
   public void addSession(Session session)
@@ -29,6 +33,7 @@ public class SessionList implements Serializable
 
   /**
    * Removes a session from the ArrayList.
+   *
    * @param id the id of the session to be removed.
    */
   public void removeSession(String id)
@@ -40,6 +45,7 @@ public class SessionList implements Serializable
 
   /**
    * Gets the session by id from the sessions.
+   *
    * @param id the id of the wanted session.
    * @return the wanted Session object from the ArrayList.
    */
@@ -54,6 +60,7 @@ public class SessionList implements Serializable
 
   /**
    * Gets all the sessions from the ArrayList.
+   *
    * @return the ArrayList containing all the sessions.
    */
   public ArrayList<Session> getAllSessions()
@@ -63,6 +70,7 @@ public class SessionList implements Serializable
 
   /**
    * Gets all the sessions of a course.
+   *
    * @param id the id of the course.
    * @return the sessions of the course.
    */
@@ -79,6 +87,7 @@ public class SessionList implements Serializable
 
   /**
    * Gets the number of sessions.
+   *
    * @return the size of the ArrayList.
    */
   public int getSize()
@@ -88,6 +97,7 @@ public class SessionList implements Serializable
 
   /**
    * Converts SessionList into a String.
+   *
    * @return the String format
    */
   public String toString()
