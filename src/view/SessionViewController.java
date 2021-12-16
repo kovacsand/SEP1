@@ -72,15 +72,12 @@ public class SessionViewController {
     for (int i = 0; i < coursesList.getSize(); i++)
       if (coursesList.getAllCourses().get(i).getId().equals(courseBox.getValue()))
         foundCourse = scheduleModelManager.getCourse(courseBox.getValue());
-
     ArrayList<String> freeClasses = new ArrayList<>();
     ArrayList<Classroom> bigEnoughClassrooms = classrooms.getClassrooms(foundCourse.getAllStudents().getSize());
-
     for (int i = 0; i < bigEnoughClassrooms.size(); i++)
       if (bigEnoughClassrooms.get(i).isFree(date, timeInterval))
         freeClasses.add(bigEnoughClassrooms.get(i).getName());
-
-      if (freeClasses.size() < 1)
+    if (freeClasses.size() < 1)
     {
       Alert alert = new Alert(Alert.AlertType.INFORMATION,
             "There are no available classrooms for this time or date.",
@@ -153,7 +150,8 @@ public class SessionViewController {
 
   public Region getRoot() { return root; }
 
-  public void fillSessionFields(Session session) {
+  public void fillSessionFields(Session session)
+  {
     date = session.getDate();
     String dateString = (2000 + date.getYear()) + "-" + date.getMonth() + "-" + date.getDay();
     LocalDate localDate = LocalDate.parse(dateString);
