@@ -4,18 +4,13 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * Class containg all the classroom objects in one ArrayList
+ * Class containing all the classroom objects in one ArrayList
  *
  * @author Hi-Phi
  * @version 1.0
  */
 public class ClassroomList implements Serializable
 {
-  /**
-   * A class for storing all the classrooms.
-   *
-   * @param classrooms An ArrayList containing all the classrooms.
-   */
   private ArrayList<Classroom> classrooms;
 
   /**

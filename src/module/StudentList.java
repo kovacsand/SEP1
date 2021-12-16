@@ -64,7 +64,7 @@ public class StudentList implements Serializable
    *
    * @param semester of the student that it is enrolled in
    * @param group    of the student that it is enrolled in
-   * @returne ArrayList of student objects that are enrolled in the given semester and the group (E.g. 1X)
+   * @return ArrayList of student objects that are enrolled in the given semester and the group (E.g. 1X)
    */
   public ArrayList<Student> getAllStudentsByClass(int semester, String group)
   {
