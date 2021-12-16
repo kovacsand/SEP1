@@ -627,24 +627,6 @@ public class ScheduleModelManager
   }
 
   /**
-   * Get a ClassList classes by semester
-   *
-   * @param semester which semester classes would like to be found
-   * @return ClassList containing the classes of the given semester
-   */
-  public ClassList getAllClassBySemester(int semester)
-  {
-    ClassList allClasses = getAllClasses();
-    ArrayList<Class> aClasses = allClasses.getAllClassesBySemester(semester);
-    ClassList newList = new ClassList();
-    for (int i = 0; i < aClasses.size(); i++)
-    {
-      newList.addClass(aClasses.get(i));
-    }
-    return newList;
-  }
-
-  /**
    * Adding a class to the ClassList
    *
    * @param aClass adding the specified class to the ClassList
