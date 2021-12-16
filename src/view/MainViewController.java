@@ -1,17 +1,22 @@
 package view;
 
+import javafx.application.Application;
+import javafx.application.HostServices;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Region;
+import javafx.stage.Stage;
 import module.*;
 import module.Class;
 
 import javax.swing.*;
 
-public class MainViewController
+
+public class MainViewController extends Application
 {
   private Region root;
   private ScheduleModelManager scheduleModelManager;
@@ -32,6 +37,7 @@ public class MainViewController
   @FXML private MenuItem publishSchedule;
   @FXML private MenuItem close;
   @FXML private MenuItem userGuide;
+  @FXML private MenuItem about;
 
   public void init(ViewHandler viewHandler, ScheduleModelManager scheduleModelManager, Region root)
   {
@@ -67,11 +73,11 @@ public void handleAction(ActionEvent e)
     }
   }
   else if (e.getSource() == removeSessionBtn)
-    {
-      Session selected = sessionsTable.getSelectionModel().getSelectedItem();
-      scheduleModelManager.removeSession(selected);
-        reset();
-    }
+  {
+    Session selected = sessionsTable.getSelectionModel().getSelectedItem();
+    scheduleModelManager.removeSession(selected);
+    reset();
+  }
   else if (e.getSource() == editCourseBtn)
     {
       Course selected = coursesTable.getSelectionModel().getSelectedItem();
@@ -143,7 +149,13 @@ public void handleAction(ActionEvent e)
   }
   else if (e.getSource() == userGuide)
   {
-    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+    HostServices hostServices = getHostServices();
+    hostServices.showDocument("https://drive.google.com/file/d/1BxqigerbMONSV5Dp5O1LdOZq1wTlt9kN/view");
+  }
+  else if (e.getSource() == about)
+  {
+    HostServices hostServices = getHostServices();
+    hostServices.showDocument("https://kovacsand.github.io/SEP1-Website/about-us.html");
   }
   else if (e.getSource() == close)
   {
@@ -305,5 +317,10 @@ public void handleAction(ActionEvent e)
           sessionsTable.getItems().add(sessionList.getAllSessions().get(i));
       }
     }
+  }
+
+  public void start(Stage stage) throws Exception
+  {
+    //Necessary because of opening browser window
   }
 }

@@ -59,20 +59,16 @@ public class Classroom implements Serializable
    */
   public boolean isFree(MyDate date, TimeInterval interval)
   {
-    //String time = String.format("%02d%02d%02d%04d%04d", date.getDay(), date.getMonth(), date.getYear() % 100, interval.getStartTime(), interval.getEndTime());
     for (int i = 0; i < occupiedHours.size(); i++)
     {
       String tempTime = occupiedHours.get(i);
       String tempDateString = tempTime.substring(0, 6);
       String tempTimeIntervalString = tempTime.substring(6, 14);
 
-      MyDate tempDate = new MyDate(
-          Integer.parseInt(tempDateString.substring(0, 2)),
-          Integer.parseInt(tempDateString.substring(2, 4)),
-          Integer.parseInt(tempDateString.substring(4, 6)));
+      MyDate tempDate = new MyDate(Integer.parseInt(tempDateString.substring(0, 2)),
+          Integer.parseInt(tempDateString.substring(2, 4)), Integer.parseInt(tempDateString.substring(4, 6)));
       TimeInterval tempTimeInterval = new TimeInterval(
-          Integer.parseInt(tempTimeIntervalString.substring(0, 4)),
-          Integer.parseInt(tempTimeIntervalString.substring(4, 8)));
+          Integer.parseInt(tempTimeIntervalString.substring(0, 4)), Integer.parseInt(tempTimeIntervalString.substring(4, 8)));
 
       if (date.equals(tempDate))
       {
