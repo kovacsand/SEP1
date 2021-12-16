@@ -717,8 +717,13 @@ public class ScheduleModelManager
   {
     StudentList allStudents = getAllStudents();
     ClassList allClasses = getAllClasses();
+    CourseList allCourses = getAllCourses();
     String classId = student.getSemester() + student.getGroup();
     allClasses.getAClass(classId).removeStudent(student);
+
+    for (int i = 0; i < allCourses.getSize(); i++)
+      if (allCourses.getAllCourses().get(i).getAllStudents().getStudent(student.getId()) != null)
+        removeStudentFromCourse(student.getId(), allCourses.getAllCourses().get(i).getId());
 
     allStudents.removeStudent(student.getId());
     try
@@ -979,7 +984,13 @@ public class ScheduleModelManager
   public void removeTeacher(Teacher teacher)
   {
     TeacherList allTeachers = getAllTeachers();
+    CourseList allCourses = getAllCourses();
     allTeachers.removeTeacher(teacher.getId());
+
+    for (int i = 0; i < allCourses.getSize(); i++)
+      if (allCourses.getAllCourses().get(i).getAllTeachers().getTeacher(teacher.getId()) != null)
+        removeTeacherFromCourse(teacher.getId(), allCourses.getAllCourses().get(i).getId());
+
     try
     {
       MyFileHandler.writeToBinaryFile("teachers.bin", allTeachers);
@@ -1077,31 +1088,48 @@ public class ScheduleModelManager
    */
   public void addTeacherToCourse(String teacherId, String courseId)
   {
+    //This method is used several times, for example when we add a new teacher to a specific course in our CourseView
+    //Unfortunately, we do not have anything too exciting in our code, like divide and conquer algorithms, we mostly used iterative loops
+    //This makes our program slower, than it could be, but since we are working with little amount of data, this is considered acceptable
+    //We are working with binary files, but when calculating time complexity, we do not take into account the possible exceptions caused by this
+    //T(3 + n + 3 + m + 9 * m + 9 * n + 44 + 1 + 3 * m) = T(10 * n + 13 * m + 51)
+    //After ignoring constants and coefficients: O(n + m)
+    //We would consider this surprising, because at first, two nested loops would imply O(n * m)
+    //But the code analysis proves, that our code is in fact not so inefficient, thanks to our carefully designed condition statements
+
+    //The getAllCourses()'s complexity is T(3 + n), where n is the number of Course objects in courses.bin
     CourseList allCourses = getAllCourses();
+    //The getAllTeachers()'s complexity is T(3 + m), where m is the number of Teacher objects in teachers.bin
     TeacherList allTeachers = getAllTeachers();
 
-    Teacher teacher = null;
-
-    for (int i = 0; i < allTeachers.getSize(); i++)
+    //This for cycle iterates through all the Teacher objects, so it runs m times
+    //Everything in the cycle is T(m * (5 + 4 + 1/m * (4 + 9 * n + 40)) = T(9 * m + 9 * n + 44)
+    for (int i = 0; i < allTeachers.getSize(); i++) //T(5)
     {
-      if (allTeachers.getAllTeachers().get(i).getId().equals(teacherId))
+      //This condition is only true 1/m times at most, because Teacher objects cannot have the same teacherId
+      //If no Teacher has the same teacherId as the argument, it will not be true
+      if (allTeachers.getAllTeachers().get(i).getId().equals(teacherId)) //T(4)
       {
-        teacher = new Teacher(teacherId,
-            allTeachers.getAllTeachers().get(i).getName());
-        for (int j = 0; j < allCourses.getSize(); j++)
+        Teacher teacher = new Teacher(teacherId, allTeachers.getAllTeachers().get(i).getName()); //T(4)
+        //This for cycle iterates through all the Course objects, so it runs n times
+        //Everything in the cycle is T(n * (5 + 4 + 1/n * 40) = T(9 * n + 40)
+        for (int j = 0; j < allCourses.getSize(); j++) //T(5)
         {
-          if (allCourses.getAllCourses().get(j).getId().equals(courseId))
+          //This condition is only true 1/n times at most, because Course objects cannot have the same courseId
+          //If no Course has the same courseId as the argument, it will not be true
+          if (allCourses.getAllCourses().get(j).getId().equals(courseId)) //T(4)
           {
-            Course course = allCourses.getAllCourses().get(j);
-            if (course.getAllTeachers().getTeacher(teacherId) == null)
+            Course course = allCourses.getAllCourses().get(j); //T(3)
+            //This is true is the user wants to add a new teacher to the course
+            if (course.getAllTeachers().getTeacher(teacherId) == null) //T(17)
             {
-              course.addTeacher(teacher);
+              course.addTeacher(teacher); //T(20)
             }
           }
         }
       }
     }
-    try
+    try //1 + 3 * m
     {
       MyFileHandler.writeToBinaryFile("courses.bin", allCourses);
     }
@@ -1221,35 +1249,57 @@ public class ScheduleModelManager
    */
   public void removeStudentFromCourse(String studentId, String courseId)
   {
+    //This method is used in CourseView times, when we remove a new student from a specific course
+    //Unfortunately, we do not have anything too exciting in our code, like divide and conquer algorithms, we mostly used iterative loops
+    //This makes our program slower, than it could be, but since we are working with little amount of data, this is considered acceptable
+    //We are working with binary files, but when calculating time complexity, we do not take into account the possible exceptions caused by this
+    //T(3 + n + 3 + m + 9 * m + 12 * n + 15 * k + 4 + 1 + 3 * m) = T(10 * n + 13 * m + 15 * k + 11)
+    //Worst time complexity case is when all the students are enrolled to the same course, then k = m -> T(10 * n + 28 * m + 11)
+    //After ignoring constants and coefficients: O(n + m)
+    //We would consider this surprising, because at first, three nested loops would imply O(n * m * k)
+    //But the code analysis proves, that our code is in fact not so inefficient, thanks to our carefully designed condition statements
+
+    //The getAllCourses()'s complexity is T(3 + n), where n is the number of Course objects in courses.bin
     CourseList allCourses = getAllCourses();
+    //The getAllStudents()'s complexity is T(3 + m), where m is the number of Student objects in students.bin
     StudentList allStudents = getAllStudents();
 
-    Student student = null;
-
-    for (int i = 0; i < allStudents.getSize(); i++)
+    //This for cycle iterates through all the Student objects, so it runs m times
+    //Everything in the cycle is T(m * (5 + 4 + 1/m * (12 * n + 15 * k + 4)) = T(9 * m + 12 * n + 15 * k + 4)
+    for (int i = 0; i < allStudents.getSize(); i++) //T(5)
     {
-      if (allStudents.getAllStudents().get(i).getId().equals(studentId))
+      //This condition is only true 1/m times at most, because Student objects cannot have the same studentId
+      //If no Student has the same studentId as the argument, it will not be true
+      if (allStudents.getAllStudents().get(i).getId().equals(studentId)) //T(4)
       {
-        student = allStudents.getAllStudents().get(i).copy();
-        for (int j = 0; j < allCourses.getSize(); j++)
+        Student student = allStudents.getAllStudents().get(i).copy(); //T(4)
+        //This for cycle iterates through all the Course objects, so it runs n times
+        //Everything in the cycle is T(n * (5 + 4 + 3 + 1/n * (15 * k + 4))) = T(12 * n + 15 * k + 4)
+        for (int j = 0; j < allCourses.getSize(); j++) //T(5)
         {
-          if (allCourses.getAllCourses().get(j).getId().equals(courseId))
+          //This condition is only true 1/n times at most, because Course objects cannot have the same courseId
+          //If no Course has the same courseId as the argument, it will not be true
+          if (allCourses.getAllCourses().get(j).getId().equals(courseId)) //T(4)
           {
-            Course course = allCourses.getAllCourses().get(j);
-            for (int k = 0; k < course.getAllStudents().getSize(); k++)
-            {
+            Course course = allCourses.getAllCourses().get(j); //T(3)
 
-              if (course.getAllStudents().getAllStudents().get(k)
-                  .equals(student))
+            //This for cycle iterates through all the Student objects, that are in the Course's StudentList
+            //It runs n times at most, if all the existing Student objects are assigned to the same Course
+            //Everything in the cycle is T(k * (5 + 10 + 1/k * 4)) = T(15 * k + 4)
+            for (int k = 0; k < course.getAllStudents().getSize(); k++) //T(5)
+            {
+              //This is true if the Student is in the StudentList of the Course
+              //It is true 1/k times at most, where k is the size of number of Students in StudentList
+              if (course.getAllStudents().getAllStudents().get(k).equals(student)) //T(10)
               {
-                course.removeStudent(student);
+                course.removeStudent(student); //T(4)
               }
             }
           }
         }
       }
     }
-    try
+    try //T(1 + 3 * m)
     {
       MyFileHandler.writeToBinaryFile("courses.bin", allCourses);
     }

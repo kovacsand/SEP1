@@ -64,7 +64,6 @@ public class SessionViewController {
     courseBox.setDisable(false);
     classroomBox.getItems().clear();
     datePicker.setValue(LocalDate.now());
-    tempOldSesh = null;
   }
 
   public ArrayList<String> getFreeClassrooms()
