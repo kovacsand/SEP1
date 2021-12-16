@@ -16,6 +16,8 @@ public class TimeInterval implements Serializable
 
   /**
    * Two-argument constructor initializing the MyDate object.
+   * @param startTime to define the start time of the time interval object
+   * @param endTime to define the end time of the time interval object
    */
   public TimeInterval(int startTime, int endTime)
   {

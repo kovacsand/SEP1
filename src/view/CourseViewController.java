@@ -33,16 +33,12 @@ public class CourseViewController {
   @FXML private ListView<Student> studentsList;
 
 
-  public CourseViewController() {
+  public CourseViewController()
+  {
   }
 
-  /**
-   * Initialising view
-   * @param viewHandler
-   * @param scheduleModelManager
-   * @param root
-   */
-  public void init(ViewHandler viewHandler, ScheduleModelManager scheduleModelManager, Region root) {
+  public void init(ViewHandler viewHandler, ScheduleModelManager scheduleModelManager, Region root)
+  {
     this.scheduleModelManager = scheduleModelManager;
     this.root = root;
     this.viewHandler = viewHandler;
